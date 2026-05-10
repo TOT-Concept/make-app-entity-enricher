@@ -1,0 +1,11 @@
+{
+  "url": "{{connection.baseUrl}}/api/enrichment/options",
+  "method": "GET",
+  "response": {
+    "iterate": "{{body.strategies}}",
+    "output": {
+      "label": "{{item.name}} — {{item.description}}",
+      "value": "{{item.name}}"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "url": "{{connection.baseUrl}}/api/enrichment/options",
+  "method": "GET",
+  "response": {
+    "iterate": {
+      "container": "{{keys(body.languages)}}"
+    },
+    "output": {
+      "label": "{{get(body.languages, item)}}",
+      "value": "{{item}}"
+    }
+  }
+}

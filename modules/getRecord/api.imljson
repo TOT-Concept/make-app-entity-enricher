@@ -1,0 +1,7 @@
+{
+  "url": "{{connection.baseUrl}}/api/records/{{parameters.recordId}}",
+  "method": "GET",
+  "response": {
+    "output": "{{body}}"
+  }
+}

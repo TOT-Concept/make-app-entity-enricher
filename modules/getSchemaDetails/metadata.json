@@ -1,0 +1,8 @@
+{
+  "name": "getSchemaDetails",
+  "label": "Get Schema Details",
+  "description": "Returns the full content of a saved schema including its expertise domains, properties, and search keys.",
+  "connection": "apiKey",
+  "typeId": 4,
+  "actionType": "read"
+}

@@ -1,0 +1,5 @@
+{
+  "name": "apiKey",
+  "label": "Entity Enricher API Key",
+  "type": "basic"
+}

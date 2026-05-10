@@ -1,0 +1,6 @@
+{
+  "name": "getSchemas",
+  "label": "List saved schemas",
+  "description": "Returns the org's saved enrichment schemas, pinned ones first.",
+  "connection": "apiKey"
+}

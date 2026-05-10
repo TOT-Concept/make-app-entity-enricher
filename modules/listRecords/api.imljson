@@ -1,0 +1,14 @@
+{
+  "url": "{{connection.baseUrl}}/api/records",
+  "method": "GET",
+  "qs": {
+    "limit": "{{ifempty(parameters.limit, 20)}}",
+    "type": "{{if(eq(parameters.recordType, 'any'), null, parameters.recordType)}}",
+    "success": "{{if(parameters.successOnly, true, null)}}",
+    "search": "{{parameters.search}}"
+  },
+  "response": {
+    "iterate": "{{body.records}}",
+    "output": "{{item}}"
+  }
+}

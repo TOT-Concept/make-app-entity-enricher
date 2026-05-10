@@ -1,0 +1,14 @@
+{
+  "url": "{{connection.baseUrl}}/api/enrichment/options",
+  "method": "GET",
+  "response": {
+    "iterate": {
+      "container": "{{body.models}}",
+      "condition": "{{item.is_available && (!item.processing_disabled || !item.processing_disabled.enrichment)}}"
+    },
+    "output": {
+      "label": "{{item.display_name}}{{if(item.input_price, ' (in $' + item.input_price + '/M, out $' + item.output_price + '/M)', '')}}",
+      "value": "{{item.key}}"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "url": "{{connection.baseUrl}}/api/fusion/merge",
+  "method": "POST",
+  "body": {
+    "result_ids": "{{parameters.resultIds}}",
+    "arbitration_model": "{{parameters.arbitrationModel}}"
+  },
+  "response": {
+    "output": "{{body}}"
+  }
+}

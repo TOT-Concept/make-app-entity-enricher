@@ -1,0 +1,8 @@
+{
+  "name": "mergeResults",
+  "label": "Merge Results",
+  "description": "Re-merge multiple existing enrichment results, optionally with a different LLM arbitration model. Useful when you want to compare arbitration strategies after the fact.",
+  "connection": "apiKey",
+  "typeId": 4,
+  "actionType": "create"
+}

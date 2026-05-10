@@ -1,0 +1,6 @@
+{
+  "name": "getLanguages",
+  "label": "List languages",
+  "description": "Returns the languages available for multilingual enrichment.",
+  "connection": "apiKey"
+}

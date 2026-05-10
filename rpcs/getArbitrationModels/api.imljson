@@ -1,0 +1,14 @@
+{
+  "url": "{{connection.baseUrl}}/api/enrichment/options",
+  "method": "GET",
+  "response": {
+    "iterate": {
+      "container": "{{body.models}}",
+      "condition": "{{item.is_available && (!item.processing_disabled || !item.processing_disabled.arbitration)}}"
+    },
+    "output": {
+      "label": "{{item.display_name}}",
+      "value": "{{item.key}}"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "url": "{{connection.baseUrl}}/api/schema/saved",
+  "method": "GET",
+  "response": {
+    "iterate": "{{body.schemas}}",
+    "output": {
+      "label": "{{if(item.is_pinned, '📌 ' + item.name, item.name)}}",
+      "value": "{{item.id}}"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "getArbitrationModels",
+  "label": "List arbitration models",
+  "description": "Returns models available for fusion arbitration (excludes models with processing_disabled.arbitration).",
+  "connection": "apiKey"
+}

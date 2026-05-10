@@ -1,0 +1,9 @@
+[
+  { "name": "models", "type": "any", "label": "Models" },
+  { "name": "languages", "type": "any", "label": "Languages" },
+  { "name": "strategies", "type": "any", "label": "Strategies" },
+  { "name": "organization_name", "type": "text", "label": "Organization name" },
+  { "name": "api_key_name", "type": "text", "label": "API key name" },
+  { "name": "profile_limits", "type": "any", "label": "Profile limits" },
+  { "name": "processing_type_models", "type": "any", "label": "Processing type models" }
+]

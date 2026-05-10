@@ -1,0 +1,24 @@
+{
+  "url": "{{parameters.baseUrl}}/api/enrichment/options",
+  "method": "GET",
+  "headers": {
+    "X-API-Key": "{{parameters.apiKey}}"
+  },
+  "response": {
+    "valid": {
+      "condition": "{{statusCode === 200}}",
+      "type": "Success"
+    },
+    "error": {
+      "401": {
+        "type": "InvalidCredentials",
+        "message": "Invalid API key. Make sure the key starts with 'ent_' and was copied correctly from Entity Enricher → Settings → API Keys."
+      },
+      "403": {
+        "type": "AccessDeniedError",
+        "message": "API key is valid but lacks the required permissions to call /api/enrichment/options."
+      },
+      "message": "Connection test failed [{{statusCode}}]: {{ifempty(body.detail, body)}}"
+    }
+  }
+}

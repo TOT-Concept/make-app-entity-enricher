@@ -1,0 +1,7 @@
+{
+  "url": "{{connection.baseUrl}}/api/enrichment/options",
+  "method": "GET",
+  "response": {
+    "output": "{{body}}"
+  }
+}

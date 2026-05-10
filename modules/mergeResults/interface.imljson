@@ -1,0 +1,19 @@
+[
+  { "name": "success", "type": "boolean", "label": "Success" },
+  { "name": "merged_result", "type": "any", "label": "Merged result" },
+  { "name": "record_id", "type": "uuid", "label": "Arbitration record ID" },
+  { "name": "cost_usd", "type": "number", "label": "Cost (USD)" },
+  { "name": "input_tokens", "type": "uinteger", "label": "Input tokens" },
+  { "name": "output_tokens", "type": "uinteger", "label": "Output tokens" },
+  {
+    "name": "conflict_report",
+    "type": "collection",
+    "label": "Conflict report",
+    "spec": [
+      { "name": "agreed_fields", "type": "uinteger", "label": "Agreed fields" },
+      { "name": "conflicted_fields", "type": "uinteger", "label": "Conflicted fields" },
+      { "name": "total_fields", "type": "uinteger", "label": "Total fields" }
+    ]
+  },
+  { "name": "error_message", "type": "text", "label": "Error message (if failed)" }
+]

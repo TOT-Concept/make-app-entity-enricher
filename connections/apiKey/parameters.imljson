@@ -1,0 +1,19 @@
+[
+  {
+    "name": "apiKey",
+    "type": "password",
+    "label": "API Key",
+    "help": "Need a key? [Create one in Entity Enricher](https://entityenricher.ai/api-keys/app-access?origin=make) — the page will walk you through it. Format: ent_XXXXXXXXXXXX. Use an Organization Access Key for service-to-service integrations (acts independently of any user).",
+    "required": true,
+    "advanced": false
+  },
+  {
+    "name": "baseUrl",
+    "type": "url",
+    "label": "Base URL",
+    "help": "Defaults to the Entity Enricher production cloud. Override only if you self-host (e.g. https://entity-enricher.your-domain.com).",
+    "default": "https://entityenricher.ai",
+    "required": true,
+    "advanced": true
+  }
+]

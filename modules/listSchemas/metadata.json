@@ -1,0 +1,7 @@
+{
+  "name": "listSchemas",
+  "label": "List Schemas",
+  "description": "Returns all saved enrichment schemas for the connected organization. Outputs one bundle per schema.",
+  "connection": "apiKey",
+  "typeId": 9
+}

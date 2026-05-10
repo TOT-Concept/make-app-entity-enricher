@@ -1,0 +1,59 @@
+{
+  "baseUrl": "{{connection.baseUrl}}",
+  "headers": {
+    "X-API-Key": "{{connection.apiKey}}",
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  },
+  "response": {
+    "error": {
+      "400": {
+        "type": "DataError",
+        "message": "Bad request: {{ifempty(parseError(body.detail), body.detail)}}"
+      },
+      "401": {
+        "type": "InvalidCredentials",
+        "message": "Authentication failed: invalid or missing X-API-Key. Verify the key in the Entity Enricher web app under Settings → API Keys."
+      },
+      "402": {
+        "type": "OutOfMoneyError",
+        "message": "{{ifempty(body.detail.detail, 'Plan or credit limit reached. Check Entity Enricher → Settings → Billing.')}} (code: {{ifempty(body.detail.code, 'payment_required')}})"
+      },
+      "403": {
+        "type": "AccessDeniedError",
+        "message": "Forbidden: {{ifempty(body.detail, statusCode)}}"
+      },
+      "404": {
+        "type": "InvalidConfigurationError",
+        "message": "Not found: {{ifempty(body.detail, statusCode)}}"
+      },
+      "422": {
+        "type": "DataError",
+        "message": "Validation failed: {{ifempty(body.detail.message, body.detail)}}"
+      },
+      "429": {
+        "type": "RateLimitError",
+        "message": "Rate limit exceeded; please retry after a backoff."
+      },
+      "499": {
+        "type": "RuntimeError",
+        "message": "Job cancelled: {{ifempty(body.detail.message, statusCode)}}"
+      },
+      "502": {
+        "type": "ConnectionError",
+        "message": "Enrichment failed upstream: {{ifempty(body.detail.message, statusCode)}}"
+      },
+      "504": {
+        "type": "ConnectionError",
+        "message": "Enrichment timed out after the requested timeout_seconds. The job was cancelled server-side."
+      },
+      "message": "Entity Enricher API error [{{statusCode}}]: {{ifempty(body.detail, body)}}"
+    }
+  },
+  "log": {
+    "sanitize": [
+      "request.headers.x-api-key",
+      "response.body.api_key"
+    ]
+  }
+}

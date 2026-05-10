@@ -1,0 +1,8 @@
+{
+  "name": "getOptions",
+  "label": "Get Options",
+  "description": "Returns the org's available models, languages, strategies, and profile_limits. Use this for diagnostics or to branch your scenario based on what's available.",
+  "connection": "apiKey",
+  "typeId": 4,
+  "actionType": "read"
+}

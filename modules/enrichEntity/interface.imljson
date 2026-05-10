@@ -1,0 +1,79 @@
+[
+  {
+    "name": "job_id",
+    "type": "uuid",
+    "label": "Job ID"
+  },
+  {
+    "name": "success",
+    "type": "boolean",
+    "label": "Success"
+  },
+  {
+    "name": "is_fused",
+    "type": "boolean",
+    "label": "Is fused result"
+  },
+  {
+    "name": "result",
+    "type": "any",
+    "label": "Enriched result (JSON)"
+  },
+  {
+    "name": "record_id",
+    "type": "uuid",
+    "label": "Record ID"
+  },
+  {
+    "name": "model",
+    "type": "text",
+    "label": "Model (single-model only)"
+  },
+  {
+    "name": "source_models",
+    "type": "array",
+    "label": "Source models (fused only)",
+    "spec": { "type": "text" }
+  },
+  {
+    "name": "cost_usd",
+    "type": "number",
+    "label": "Cost (USD)"
+  },
+  {
+    "name": "input_tokens",
+    "type": "uinteger",
+    "label": "Input tokens"
+  },
+  {
+    "name": "output_tokens",
+    "type": "uinteger",
+    "label": "Output tokens"
+  },
+  {
+    "name": "processing_time_ms",
+    "type": "uinteger",
+    "label": "Processing time (ms)"
+  },
+  {
+    "name": "fusion",
+    "type": "collection",
+    "label": "Fusion summary (fused only)",
+    "spec": [
+      { "name": "agreed_fields", "type": "uinteger", "label": "Agreed fields" },
+      { "name": "conflicted_fields", "type": "uinteger", "label": "Conflicted fields" },
+      { "name": "total_fields", "type": "uinteger", "label": "Total fields" }
+    ]
+  },
+  {
+    "name": "per_model_results",
+    "type": "array",
+    "label": "Per-model results (when requested)",
+    "spec": { "type": "any" }
+  },
+  {
+    "name": "profile_limits",
+    "type": "any",
+    "label": "Profile limits (when requested)"
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "name": "enrichEntity",
+  "label": "Enrich Entity",
+  "description": "Enrich a single entity against a JSON schema using one or more LLM models. Multi-model results are auto-fused. The module blocks until the enrichment completes or times out.",
+  "connection": "apiKey",
+  "typeId": 4,
+  "actionType": "create"
+}

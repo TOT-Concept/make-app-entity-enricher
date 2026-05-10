@@ -1,0 +1,12 @@
+[
+  { "name": "id", "type": "uuid", "label": "Record ID" },
+  { "name": "type", "type": "text", "label": "Type" },
+  { "name": "model_composite_key", "type": "text", "label": "Model" },
+  { "name": "structured_output", "type": "any", "label": "Structured output" },
+  { "name": "saved_schema_id", "type": "uuid", "label": "Schema ID" },
+  { "name": "strategy", "type": "text", "label": "Strategy" },
+  { "name": "prompts", "type": "any", "label": "Per-prompt metrics" },
+  { "name": "metrics", "type": "any", "label": "Aggregated metrics" },
+  { "name": "validation_errors", "type": "any", "label": "Validation errors" },
+  { "name": "created_at", "type": "date", "label": "Created at" }
+]

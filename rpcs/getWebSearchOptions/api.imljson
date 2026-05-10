@@ -1,0 +1,21 @@
+{
+  "url": "{{connection.baseUrl}}/api/enrichment/options",
+  "method": "GET",
+  "response": {
+    "temp": {
+      "selectedModels": "{{ifempty(parameters.models, emptyarray)}}",
+      "selectedSet": "{{join(ifempty(parameters.models, emptyarray), ',')}}",
+      "anyWebSearch": "{{contains(map(filter(body.models, 'key', 'in', parameters.models), 'supports_web_search'), true)}}"
+    },
+    "output": [
+      {
+        "label": "Off",
+        "value": "off"
+      },
+      {
+        "label": "{{if(temp.anyWebSearch, 'On — server-side web search', 'On — no selected model supports web search')}}",
+        "value": "on"
+      }
+    ]
+  }
+}

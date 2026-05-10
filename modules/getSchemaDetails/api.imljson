@@ -1,0 +1,7 @@
+{
+  "url": "{{connection.baseUrl}}/api/schema/saved/{{parameters.schemaId}}",
+  "method": "GET",
+  "response": {
+    "output": "{{body}}"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "url": "{{connection.baseUrl}}/api/schema/saved",
+  "method": "GET",
+  "response": {
+    "iterate": "{{body.schemas}}",
+    "output": "{{item}}"
+  }
+}

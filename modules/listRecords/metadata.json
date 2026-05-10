@@ -1,0 +1,7 @@
+{
+  "name": "listRecords",
+  "label": "List Records",
+  "description": "Returns enrichment records, most recent first. Supports filtering by type, success, and search query.",
+  "connection": "apiKey",
+  "typeId": 9
+}
