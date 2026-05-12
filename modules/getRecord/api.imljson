@@ -1,5 +1,8 @@
 {
-  "url": "{{connection.baseUrl}}/api/records/{{parameters.recordId}}",
+  "url": "api/records/{{parameters.recordId}}",
+  "headers": {
+    "x-api-key": "{{connection.apiKey}}"
+  },
   "method": "GET",
   "response": {
     "output": "{{body}}"

@@ -1,10 +1,16 @@
 {
-  "url": "{{connection.baseUrl}}/api/enrichment/options",
+  "url": "api/enrichment/options",
+  "headers": {
+    "x-api-key": "{{connection.apiKey}}"
+  },
   "method": "GET",
   "response": {
-    "output": "{{item}}",
     "iterate": {
-      "container": "{{map(keys(body.languages), 'code', 'label', body.languages)}}"
+      "container": "{{keys(body.languages)}}"
+    },
+    "output": {
+      "code": "{{item}}",
+      "label": "{{get(body.languages, item)}}"
     }
   }
 }

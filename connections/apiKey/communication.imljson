@@ -5,6 +5,10 @@
     "x-api-key": "{{parameters.apiKey}}"
   },
   "response": {
+    "data": {
+      "apiKey": "{{parameters.apiKey}}",
+      "baseUrl": "{{parameters.baseUrl}}"
+    },
     "metadata": {
       "type": "text",
       "value": "{{ifempty(body.api_key_name, body.organization_name)}}"

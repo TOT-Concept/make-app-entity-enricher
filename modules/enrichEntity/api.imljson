@@ -1,20 +1,21 @@
 {
-  "url": "{{connection.baseUrl}}/api/single/enrich/sync",
+  "url": "api/single/enrich/sync",
   "method": "POST",
+  "headers": {
+    "x-api-key": "{{connection.apiKey}}"
+  },
   "body": {
-    "entity_data": "{{parameters.entityData}}",
+    "entity_data": "{{parseJSON(parameters.entityData)}}",
     "schema_id": "{{parameters.schemaId}}",
     "models": "{{parameters.models}}",
-    "languages": "{{ifempty(parameters.languages, parsedate('en'))}}",
+    "languages": "{{ifempty(parameters.languages, array('en'))}}",
     "strategy": "{{ifempty(parameters.strategy, 'single_pass')}}",
     "classification_model": "{{parameters.classificationModel}}",
     "arbitration_model": "{{parameters.arbitrationModel}}",
-    "enable_web_search": "{{eq(parameters.enableWebSearch, 'on')}}",
-    "timeout_seconds": "{{ifempty(parameters.timeoutSeconds, 300)}}",
-    "include_per_model_results": "{{ifempty(parameters.includePerModelResults, false)}}",
-    "include_profile_limits": "{{ifempty(parameters.includeProfileLimits, false)}}"
-  },
-  "response": {
-    "output": "{{body}}"
+    "enable_web_search": "{{ifempty(parameters.enableWebSearch, 'off') = 'on'}}",
+    "timeout_seconds": "{{ifempty(parameters.timeoutSeconds, 300)}}"
+    // "include_per_model_results": "{{ifempty(parameters.includePerModelResults, false)}}",
+    // "include_profile_limits": "{{ifempty(parameters.includeProfileLimits, false)}}"
   }
 }
+

@@ -1,5 +1,12 @@
 [
   {
+    "name": "entityData",
+    "type": "text",
+    "label": "Entity data (JSON)", 
+    "help": "Enter a valid JSON object, for example: {\"title\":\"Fight Club\"}. You can also map a JSON string from a previous module.",
+    "required": true
+  },
+  {
     "name": "schemaId",
     "type": "select",
     "label": "Schema",
@@ -7,8 +14,9 @@
     "required": true,
     "options": {
       "store": "rpc://getSchemas",
-      "label": "{{if(item.is_pinned, '\ud83d\udccc ' + item.name, item.name)}}",
-      "value": "{{item.id}}"
+      "label": "name",
+      "value": "id",
+      "placeholder": "Select a schema"
     }
   },
   {
@@ -21,8 +29,8 @@
       "type": "select",
       "options": {
         "store": "rpc://getModels",
-        "label": "{{item.display_name}}{{if(item.input_price, ' (in $' + item.input_price + '/M, out $' + item.output_price + '/M)', '')}}",
-        "value": "{{item.key}}"
+        "label": "label",
+        "value": "key"
       }
     }
   },
@@ -38,8 +46,8 @@
       "type": "select",
       "options": {
         "store": "rpc://getLanguages",
-        "label": "{{item.label}}",
-        "value": "{{item.code}}"
+        "label": "label",
+        "value": "code"
       }
     }
   },
@@ -51,16 +59,9 @@
     "default": "single_pass",
     "options": {
       "store": "rpc://getStrategies",
-      "label": "{{item.name}} \u2014 {{item.description}}",
-      "value": "{{item.name}}"
+      "label": "label",
+      "value": "value"
     }
-  },
-  {
-    "name": "entityData",
-    "type": "any",
-    "label": "Entity data (JSON)",
-    "help": "The entity to enrich. Map a previous module's output here, or pass an object literal. Must contain at least one of the schema's search-key properties (the API returns 400 with a hint if not).",
-    "required": true
   },
   {
     "name": "classificationModel",
@@ -69,8 +70,8 @@
     "help": "Run a fast pre-flight classification to detect entity-type mismatches before enrichment. If the entity is mismatched/unknown/ambiguous, the module fails with a 'classification_warning' DataError instead of producing hallucinated data.",
     "options": {
       "store": "rpc://getClassificationModels",
-      "label": "{{item.display_name}}",
-      "value": "{{item.key}}"
+      "label": "label",
+      "value": "key"
     }
   },
   {
@@ -80,8 +81,8 @@
     "help": "Used to LLM-arbitrate field conflicts during fusion. Leave empty for deterministic rule-based merging.",
     "options": {
       "store": "rpc://getArbitrationModels",
-      "label": "{{item.display_name}}",
-      "value": "{{item.key}}"
+      "label": "label",
+      "value": "key"
     }
   },
   {
@@ -89,15 +90,18 @@
     "type": "select",
     "label": "Web search",
     "help": "Enable provider-builtin web search for selected models that support it. Disabled if no selected model declares supports_web_search.",
+    "required": false,
     "default": "off",
-    "options": {
-      "store": "rpc://getWebSearchOptions",
-      "label": "{{item.label}}",
-      "parameters": [
-        "models"
-      ],
-      "value": "{{item.value}}"
-    }
+    "options": [
+      {
+        "label": "Off",
+        "value": "off"
+      },
+      {
+        "label": "On — if supported by selected model(s) 🌍",
+        "value": "on"
+      }
+    ]
   },
   {
     "name": "timeoutSeconds",
@@ -126,5 +130,5 @@
     "help": "When true, the response includes the org's profile_limits \u2014 useful for downstream branching on remaining quota.",
     "default": false,
     "advanced": true
-  }
+  } 
 ]

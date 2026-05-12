@@ -1,15 +1,15 @@
 {
   "baseUrl": "{{connection.baseUrl}}",
   "headers": {
-    "X-API-Key": "{{connection.apiKey}}",
-    "Content-Type": "application/json",
-    "Accept": "application/json"
+    "x-api-key": "{{parameters.apiKey}}",
+    "content-type": "application/json",
+    "accept": "application/json"
   },
   "response": {
     "error": {
       "400": {
         "type": "DataError",
-        "message": "Bad request: {{ifempty(parseError(body.detail), body.detail)}}"
+        "message": "Bad request: {{body.detail}}"
       },
       "401": {
         "type": "InvalidCredentials",

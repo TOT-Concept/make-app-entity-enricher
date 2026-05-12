@@ -1,5 +1,8 @@
 {
-  "url": "{{connection.baseUrl}}/api/fusion/merge",
+  "url": "api/fusion/merge",
+  "headers": {
+    "x-api-key": "{{connection.apiKey}}"
+  },
   "method": "POST",
   "body": {
     "result_ids": "{{parameters.resultIds}}",

@@ -1,8 +1,14 @@
 {
-  "url": "{{connection.baseUrl}}/api/enrichment/options",
+  "url": "api/enrichment/options",
+  "headers": {
+    "x-api-key": "{{connection.apiKey}}"
+  },
   "method": "GET",
   "response": {
-    "output": "{{item}}",
+    "output": {
+      "label": "{{item.description}}",
+      "value": "{{item.name}}"
+    },
     "iterate": {
       "container": "{{body.strategies}}"
     }
