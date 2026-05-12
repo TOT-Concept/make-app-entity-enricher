@@ -2,12 +2,12 @@
   "url": "{{parameters.baseUrl}}/api/enrichment/options",
   "method": "GET",
   "headers": {
-    "X-API-Key": "{{parameters.apiKey}}"
+    "x-api-key": "{{parameters.apiKey}}"
   },
   "response": {
-    "valid": {
-      "condition": "{{statusCode === 200}}",
-      "type": "Success"
+    "metadata": {
+      "type": "text",
+      "value": "{{ifempty(body.api_key_name, body.organization_name)}}"
     },
     "error": {
       "401": {

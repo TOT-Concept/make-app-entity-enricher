@@ -2,12 +2,9 @@
   "url": "{{connection.baseUrl}}/api/enrichment/options",
   "method": "GET",
   "response": {
+    "output": "{{item}}",
     "iterate": {
-      "container": "{{keys(body.languages)}}"
-    },
-    "output": {
-      "label": "{{get(body.languages, item)}}",
-      "value": "{{item}}"
+      "container": "{{map(keys(body.languages), 'code', 'label', body.languages)}}"
     }
   }
 }

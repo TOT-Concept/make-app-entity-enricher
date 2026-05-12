@@ -5,9 +5,10 @@
     "label": "Schema",
     "help": "The schema to retrieve.",
     "required": true,
-    "rpc": {
-      "label": "Saved schemas",
-      "url": "rpc://getSchemas"
+    "options": {
+      "store": "rpc://getSchemas",
+      "label": "{{if(item.is_pinned, '\ud83d\udccc ' + item.name, item.name)}}",
+      "value": "{{item.id}}"
     }
   }
 ]

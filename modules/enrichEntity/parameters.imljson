@@ -5,9 +5,10 @@
     "label": "Schema",
     "help": "Saved schema that defines the enrichment output structure.",
     "required": true,
-    "rpc": {
-      "label": "Saved schemas",
-      "url": "rpc://getSchemas"
+    "options": {
+      "store": "rpc://getSchemas",
+      "label": "{{if(item.is_pinned, '\ud83d\udccc ' + item.name, item.name)}}",
+      "value": "{{item.id}}"
     }
   },
   {
@@ -18,9 +19,10 @@
     "required": true,
     "spec": {
       "type": "select",
-      "rpc": {
-        "label": "Available models",
-        "url": "rpc://getModels"
+      "options": {
+        "store": "rpc://getModels",
+        "label": "{{item.display_name}}{{if(item.input_price, ' (in $' + item.input_price + '/M, out $' + item.output_price + '/M)', '')}}",
+        "value": "{{item.key}}"
       }
     }
   },
@@ -29,12 +31,15 @@
     "type": "array",
     "label": "Languages",
     "help": "Languages to populate for multilingual fields. Defaults to English only.",
-    "default": ["en"],
+    "default": [
+      "en"
+    ],
     "spec": {
       "type": "select",
-      "rpc": {
-        "label": "Languages",
-        "url": "rpc://getLanguages"
+      "options": {
+        "store": "rpc://getLanguages",
+        "label": "{{item.label}}",
+        "value": "{{item.code}}"
       }
     }
   },
@@ -44,9 +49,10 @@
     "label": "Strategy",
     "help": "How the LLM is prompted: single_pass (one call), expert_domains (one call grouped by expertise), multi_expertise (parallel calls per expertise).",
     "default": "single_pass",
-    "rpc": {
-      "label": "Strategies",
-      "url": "rpc://getStrategies"
+    "options": {
+      "store": "rpc://getStrategies",
+      "label": "{{item.name}} \u2014 {{item.description}}",
+      "value": "{{item.name}}"
     }
   },
   {
@@ -61,9 +67,10 @@
     "type": "select",
     "label": "Classification model (optional)",
     "help": "Run a fast pre-flight classification to detect entity-type mismatches before enrichment. If the entity is mismatched/unknown/ambiguous, the module fails with a 'classification_warning' DataError instead of producing hallucinated data.",
-    "rpc": {
-      "label": "Classification models",
-      "url": "rpc://getClassificationModels"
+    "options": {
+      "store": "rpc://getClassificationModels",
+      "label": "{{item.display_name}}",
+      "value": "{{item.key}}"
     }
   },
   {
@@ -71,9 +78,10 @@
     "type": "select",
     "label": "Arbitration model (optional)",
     "help": "Used to LLM-arbitrate field conflicts during fusion. Leave empty for deterministic rule-based merging.",
-    "rpc": {
-      "label": "Arbitration models",
-      "url": "rpc://getArbitrationModels"
+    "options": {
+      "store": "rpc://getArbitrationModels",
+      "label": "{{item.display_name}}",
+      "value": "{{item.key}}"
     }
   },
   {
@@ -82,10 +90,13 @@
     "label": "Web search",
     "help": "Enable provider-builtin web search for selected models that support it. Disabled if no selected model declares supports_web_search.",
     "default": "off",
-    "rpc": {
-      "label": "Web search availability",
-      "url": "rpc://getWebSearchOptions",
-      "parameters": ["models"]
+    "options": {
+      "store": "rpc://getWebSearchOptions",
+      "label": "{{item.label}}",
+      "parameters": [
+        "models"
+      ],
+      "value": "{{item.value}}"
     }
   },
   {
@@ -112,7 +123,7 @@
     "name": "includeProfileLimits",
     "type": "boolean",
     "label": "Include profile limits",
-    "help": "When true, the response includes the org's profile_limits — useful for downstream branching on remaining quota.",
+    "help": "When true, the response includes the org's profile_limits \u2014 useful for downstream branching on remaining quota.",
     "default": false,
     "advanced": true
   }

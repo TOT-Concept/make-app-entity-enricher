@@ -1,6 +1,9 @@
 {
   "url": "{{connection.baseUrl}}/api/enrichment/options",
   "method": "GET",
+  "headers": {
+    "X-API-Key": "{{connection.apiKey}}"
+  },
   "response": {
     "temp": {
       "selectedModels": "{{ifempty(parameters.models, emptyarray)}}",

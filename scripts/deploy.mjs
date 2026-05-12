@@ -293,6 +293,30 @@ for (const dirName of listSubdirs(join(ROOT, "rpcs"))) {
     console.log(`  · "${meta.name}" exists`);
   }
 
+  // Wire RPC → connection. Same reasoning as modules: `sdk-rpcs create`
+  // doesn't take a --connection flag, only `update` does. Without this the
+  // RPC fires at scenario-config time without the connection context, so
+  // `{{connection.baseUrl}}` and `{{connection.apiKey}}` resolve to empty
+  // strings and the dropdown silently returns no results.
+  if (meta.connection) {
+    const makeConnName = connectionNameMap[meta.connection];
+    if (!makeConnName) {
+      console.error(
+        `  ✗ rpc "${meta.name}" declares connection="${meta.connection}" ` +
+          `but no local connection with that name was deployed`,
+      );
+      process.exit(1);
+    }
+    mk([
+      "sdk-rpcs",
+      "update",
+      `--app-name=${APP_NAME}`,
+      `--app-version=${APP_VERSION}`,
+      `--rpc-name=${meta.name}`,
+      `--connection=${makeConnName}`,
+    ]);
+  }
+
   const apiPath = join(dir, "api.imljson");
   if (existsSync(apiPath)) {
     mk([

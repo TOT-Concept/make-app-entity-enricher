@@ -14,9 +14,10 @@
     "type": "select",
     "label": "Arbitration model (optional)",
     "help": "Use an LLM to arbitrate field conflicts. Leave empty for deterministic rule-based merging.",
-    "rpc": {
-      "label": "Arbitration models",
-      "url": "rpc://getArbitrationModels"
+    "options": {
+      "store": "rpc://getArbitrationModels",
+      "label": "{{item.display_name}}",
+      "value": "{{item.key}}"
     }
   }
 ]
