@@ -1,8 +1,5 @@
 {
   "url": "api/records",
-  "headers": {
-    "x-api-key": "{{connection.apiKey}}"
-  },
   "method": "GET",
   "qs": {
     "limit": "{{ifempty(parameters.limit, 20)}}",

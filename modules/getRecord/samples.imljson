@@ -1,0 +1,46 @@
+{
+  "id": "6ab10b92-d89c-4436-acec-4c3d9b50a4a4",
+  "type": "enrichment",
+  "entity_id": "9c54a8d2-1234-4567-89ab-cdef01234567",
+  "entity_name": "12 Angry Men",
+  "llm_provider_name": "xai",
+  "model_name": "grok-4-1-fast",
+  "structured_output": {
+    "title": { "en": "12 Angry Men", "fr": "Douze hommes en colère" },
+    "releaseYear": "1957"
+  },
+  "saved_schema_id": "ffd7d371-c313-4599-9594-5cff654bbdc1",
+  "strategy": "multi_expertise",
+  "success": true,
+  "cancelled": false,
+  "processing_time_ms": 15560,
+  "input_tokens": 1458,
+  "output_tokens": 252,
+  "cost_usd": 0.00043461,
+  "prompt_count": 3,
+  "prompts": [
+    {
+      "id": "11111111-2222-3333-4444-555555555555",
+      "expertise_key": "general",
+      "expertise_name": "General attributes",
+      "sequence_order": 1,
+      "prompt_used": "Enrich the entity: {\"title\":\"12 angry men\"}",
+      "system_prompt_used": "You are a film knowledge agent...",
+      "raw_response": "{\"title\":{\"en\":\"12 Angry Men\"}}",
+      "structured_output": { "title": { "en": "12 Angry Men" } },
+      "processing_time_ms": 5200,
+      "input_tokens": 486,
+      "output_tokens": 84,
+      "cost_usd": 0.000145,
+      "success": true,
+      "error_message": null,
+      "attempts": 1,
+      "web_search_calls": 0
+    }
+  ],
+  "validation_errors": [],
+  "job_id": "93f87bba-a10c-4ff8-89cc-6f18330580f0",
+  "job_label": "Single Enrichment",
+  "origin": "make",
+  "created_at": "2026-05-14T12:24:25Z"
+}

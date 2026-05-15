@@ -1,13 +1,9 @@
 {
   "url": "api/enrichment/options",
-  "headers": {
-    "x-api-key": "{{connection.apiKey}}"
-  },
   "method": "GET",
   "response": {
     "temp": {
       "selectedModels": "{{ifempty(parameters.models, emptyarray)}}",
-      "selectedSet": "{{join(ifempty(parameters.models, emptyarray), ',')}}",
       "anyWebSearch": "{{contains(map(filter(body.models, 'key', 'in', parameters.models), 'supports_web_search'), true)}}"
     },
     "output": [

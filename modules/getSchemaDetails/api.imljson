@@ -1,8 +1,5 @@
 {
   "url": "api/schema/saved/{{parameters.schemaId}}",
-  "headers": {
-    "x-api-key": "{{connection.apiKey}}"
-  },
   "method": "GET",
   "response": {
     "output": "{{body}}"

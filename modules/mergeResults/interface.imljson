@@ -1,10 +1,11 @@
 [
   { "name": "success", "type": "boolean", "label": "Success" },
-  { "name": "merged_result", "type": "any", "label": "Merged result" },
+  { "name": "merged_result", "type": "any", "label": "Merged result (shape varies per schema)" },
   { "name": "record_id", "type": "uuid", "label": "Arbitration record ID" },
-  { "name": "cost_usd", "type": "number", "label": "Cost (USD)" },
-  { "name": "input_tokens", "type": "uinteger", "label": "Input tokens" },
-  { "name": "output_tokens", "type": "uinteger", "label": "Output tokens" },
+  { "name": "processing_time_ms", "type": "uinteger", "label": "Processing time (ms)" },
+  { "name": "cost_usd", "type": "number", "label": "Cost (USD, null if rule-based)" },
+  { "name": "input_tokens", "type": "uinteger", "label": "Input tokens (null if rule-based)" },
+  { "name": "output_tokens", "type": "uinteger", "label": "Output tokens (null if rule-based)" },
   {
     "name": "conflict_report",
     "type": "collection",
@@ -15,5 +16,11 @@
       { "name": "total_fields", "type": "uinteger", "label": "Total fields" }
     ]
   },
-  { "name": "error_message", "type": "text", "label": "Error message (if failed)" }
+  { "name": "error_message", "type": "text", "label": "Error message (if failed)" },
+  {
+    "name": "validation_warnings",
+    "type": "array",
+    "label": "Validation warnings",
+    "spec": { "type": "text" }
+  }
 ]

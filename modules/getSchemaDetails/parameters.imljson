@@ -1,14 +1,1 @@
-[
-  {
-    "name": "schemaId",
-    "type": "select",
-    "label": "Schema",
-    "help": "The schema to retrieve.",
-    "required": true,
-    "options": {
-      "store": "rpc://getSchemas",
-      "label": "{{if(item.is_pinned, '\ud83d\udccc ' + item.name, item.name)}}",
-      "value": "{{item.id}}"
-    }
-  }
-]
+[]

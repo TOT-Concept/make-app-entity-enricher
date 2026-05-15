@@ -1,0 +1,23 @@
+[
+  {
+    "name": "resultIds",
+    "type": "array",
+    "label": "Source record IDs",
+    "help": "UUIDs of the enrichment records to merge. Map from previous Enrich Entity modules' record_id.",
+    "required": true,
+    "spec": {
+      "type": "uuid"
+    }
+  },
+  {
+    "name": "arbitrationModel",
+    "type": "select",
+    "label": "Arbitration model (optional)",
+    "help": "Use an LLM to arbitrate field conflicts. Leave empty for deterministic rule-based merging.",
+    "options": {
+      "store": "rpc://getArbitrationModels",
+      "label": "label",
+      "value": "key"
+    }
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "schemaId",
+    "type": "select",
+    "label": "Schema",
+    "help": "The schema to retrieve.",
+    "required": true,
+    "options": {
+      "store": "rpc://getSchemas",
+      "label": "name",
+      "value": "id"
+    }
+  }
+]

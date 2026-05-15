@@ -1,0 +1,9 @@
+{
+  "id": "ffd7d371-c313-4599-9594-5cff654bbdc1",
+  "name": "Movie",
+  "is_pinned": true,
+  "tags": ["film", "entertainment"],
+  "property_count": 12,
+  "created_at": "2026-03-12T10:14:00Z",
+  "updated_at": "2026-05-08T15:42:00Z"
+}

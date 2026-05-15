@@ -1,12 +1,17 @@
 {
-  "name": "entity-enricher",
-  "label": "Entity Enricher",
-  "description": "Enrich any entity against a JSON schema using multiple LLMs in parallel, with automatic fusion, multilingual output, and pre-flight classification. Powered by entityenricher.ai.",
-  "version": "0.1.0",
-  "language": "en",
-  "countries": ["fr", "us", "gb", "de"],
-  "private": false,
-  "theme": "#f59e0b",
-  "icon": "icon.png",
-  "audience": "global"
+	"name": "entity-enricher",
+	"label": "Entity Enricher",
+	"description": "Enrich any entity against a JSON schema using multiple LLMs in parallel, with automatic fusion, multilingual output, and pre-flight classification. Powered by entityenricher.ai.",
+	"version": "1.0.0",
+	"language": "en",
+	"countries": [
+		"fr",
+		"us",
+		"gb",
+		"de"
+	],
+	"private": false,
+	"theme": "#f59e0b",
+	"icon": "icon.png",
+	"audience": "global"
 }

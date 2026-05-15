@@ -1,14 +1,21 @@
 [
   { "name": "id", "type": "uuid", "label": "Record ID" },
-  { "name": "type", "type": "text", "label": "Type" },
-  { "name": "model_composite_key", "type": "text", "label": "Model" },
+  { "name": "type", "type": "text", "label": "Type (enrichment | schema_generation | playground | …)" },
+  { "name": "entity_id", "type": "uuid", "label": "Entity ID" },
+  { "name": "entity_name", "type": "text", "label": "Entity name" },
+  { "name": "llm_provider_name", "type": "text", "label": "Provider name" },
   { "name": "model_name", "type": "text", "label": "Model name" },
-  { "name": "structured_output", "type": "any", "label": "Structured output" },
-  { "name": "saved_schema_id", "type": "uuid", "label": "Schema ID" },
+  { "name": "created_at", "type": "date", "label": "Created at" },
+  { "name": "processing_time_ms", "type": "uinteger", "label": "Processing time (ms)" },
+  { "name": "input_tokens", "type": "uinteger", "label": "Input tokens" },
+  { "name": "output_tokens", "type": "uinteger", "label": "Output tokens" },
+  { "name": "cost_usd", "type": "number", "label": "Cost (USD)" },
+  { "name": "success", "type": "boolean", "label": "Success" },
+  { "name": "cancelled", "type": "boolean", "label": "Cancelled" },
+  { "name": "prompt_count", "type": "uinteger", "label": "Prompt count" },
+  { "name": "saved_schema_id", "type": "uuid", "label": "Saved schema ID" },
   { "name": "strategy", "type": "text", "label": "Strategy" },
   { "name": "job_id", "type": "text", "label": "Job ID" },
   { "name": "job_label", "type": "text", "label": "Job label" },
-  { "name": "cancelled", "type": "boolean", "label": "Cancelled" },
-  { "name": "validation_errors", "type": "any", "label": "Validation errors" },
-  { "name": "created_at", "type": "date", "label": "Created at" }
+  { "name": "origin", "type": "text", "label": "Origin (web | n8n | make | api)" }
 ]

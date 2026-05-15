@@ -3,7 +3,16 @@
   { "name": "name", "type": "text", "label": "Name" },
   { "name": "is_pinned", "type": "boolean", "label": "Pinned" },
   { "name": "tags", "type": "array", "label": "Tags", "spec": { "type": "text" } },
-  { "name": "schema_content", "type": "any", "label": "Schema content (root + defs + expertise_domains)" },
+  { "name": "schema_content", "type": "any", "label": "Schema content (root + $defs + expertise_domains)" },
+  { "name": "sample_json", "type": "any", "label": "Sample JSON (if seeded)" },
+  { "name": "form_values", "type": "any", "label": "Form values (if seeded)" },
+  {
+    "name": "ai_suggestions",
+    "type": "array",
+    "label": "AI suggestions",
+    "spec": { "type": "text" }
+  },
+  { "name": "generation_params", "type": "any", "label": "Generation parameters" },
   { "name": "created_at", "type": "date", "label": "Created at" },
   { "name": "updated_at", "type": "date", "label": "Updated at" }
 ]

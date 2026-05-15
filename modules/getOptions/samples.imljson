@@ -1,0 +1,54 @@
+{
+  "models": [
+    {
+      "key": "xai::grok-4-1-fast",
+      "provider": "xai",
+      "model": "grok-4-1-fast",
+      "display_name": "Xai grok-4-1-fast",
+      "input_price": 0.22,
+      "output_price": 0.55,
+      "is_available": true,
+      "supports_web_search": true,
+      "supports_vision": false,
+      "supports_tool_calls": true
+    },
+    {
+      "key": "anthropic::claude-sonnet-4-5",
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-5",
+      "display_name": "Anthropic Claude Sonnet 4.5",
+      "input_price": 3.00,
+      "output_price": 15.00,
+      "is_available": true,
+      "supports_web_search": true,
+      "supports_vision": true,
+      "supports_tool_calls": true
+    }
+  ],
+  "languages": {
+    "en": "English",
+    "fr": "French (Français)",
+    "de": "German (Deutsch)",
+    "ja": "Japanese (日本語)"
+  },
+  "strategies": [
+    { "name": "single_pass", "description": "Single LLM call - for little schema" },
+    { "name": "expert_domains", "description": "Single LLM call with expertise-grouped sections" },
+    { "name": "multi_expertise", "description": "Parallel LLM calls per expertise domain" }
+  ],
+  "total_companies": 1284,
+  "organization_name": "TOT Concept",
+  "api_key_name": "Make Access",
+  "api_key_role": "operator",
+  "profile_limits": {
+    "can_view_prompts": true,
+    "daily_prompt_limit": 500,
+    "weekly_prompt_limit": 2500,
+    "monthly_prompt_limit": 10000,
+    "max_record_results": 1000,
+    "max_concurrent_jobs": 5,
+    "max_models_per_enrichment": 5,
+    "max_languages": 10
+  },
+  "models_last_updated": "2026-05-12T08:30:00Z"
+}

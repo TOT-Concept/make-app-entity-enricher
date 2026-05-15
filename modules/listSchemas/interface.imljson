@@ -3,7 +3,7 @@
   { "name": "name", "type": "text", "label": "Name" },
   { "name": "is_pinned", "type": "boolean", "label": "Pinned" },
   { "name": "tags", "type": "array", "label": "Tags", "spec": { "type": "text" } },
+  { "name": "property_count", "type": "uinteger", "label": "Top-level property count" },
   { "name": "created_at", "type": "date", "label": "Created at" },
-  { "name": "updated_at", "type": "date", "label": "Updated at" },
-  { "name": "schema_content", "type": "any", "label": "Full schema content" }
+  { "name": "updated_at", "type": "date", "label": "Updated at" }
 ]

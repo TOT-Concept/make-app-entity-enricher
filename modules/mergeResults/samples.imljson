@@ -1,0 +1,28 @@
+{
+  "success": true,
+  "merged_result": {
+    "ratings": {
+      "mpaa": "R",
+      "imdbScore": 8.6,
+      "rottenTomatoesTomatometer": 93,
+      "rottenTomatoesAudienceScore": 94
+    },
+    "boxOffice": {
+      "budgetUsd": 102000000,
+      "worldwideGrossUsd": 519843345
+    },
+    "identifiers": { "imdbTitleId": "tt0103064" }
+  },
+  "record_id": "8c1d7e3f-0a4b-4c6d-9f12-aabbccddeeff",
+  "processing_time_ms": 4280,
+  "cost_usd": 0.00125,
+  "input_tokens": 1842,
+  "output_tokens": 256,
+  "conflict_report": {
+    "agreed_fields": 6,
+    "conflicted_fields": 1,
+    "total_fields": 7
+  },
+  "error_message": null,
+  "validation_warnings": null
+}

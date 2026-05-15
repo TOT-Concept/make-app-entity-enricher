@@ -1,13 +1,10 @@
 {
   "url": "api/schema/saved",
-  "headers": {
-    "x-api-key": "{{connection.apiKey}}"
-  },
   "method": "GET",
   "response": {
     "iterate": "{{body.schemas}}",
     "output": {
-      "name": "{{if(item.is_pinned, '\ud83d\udccc ' + item.name, item.name)}}",
+      "name": "{{if(item.is_pinned, '📌 ' + item.name, item.name)}}",
       "id": "{{item.id}}"
     }
   }

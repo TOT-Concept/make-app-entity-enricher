@@ -1,0 +1,129 @@
+[
+  {
+    "name": "entityData",
+    "type": "text",
+    "label": "Entity data (JSON)",
+    "help": "Enter a valid JSON object, for example: {\"title\":\"Fight Club\"}. You can also map a JSON string from a previous module. 📖 [Full module guide](https://entityenricher.ai/docs/integrations/make)",
+    "required": true
+  },
+  {
+    "name": "schemaId",
+    "type": "select",
+    "label": "Schema",
+    "help": "Saved schema that defines the enrichment output structure. Create or edit schemas at the [Schema editor](https://entityenricher.ai/schema-editor).",
+    "required": true,
+    "options": {
+      "store": "rpc://getSchemas",
+      "label": "name",
+      "value": "id",
+      "placeholder": "Select a schema"
+    }
+  },
+  {
+    "name": "models",
+    "type": "array",
+    "label": "Models",
+    "help": "Pick one or more LLM models. With 2+ models the results are automatically fused. Plan limits are enforced server-side; pick fewer if you exceed your quota.",
+    "required": true,
+    "spec": {
+      "type": "select",
+      "options": {
+        "store": "rpc://getModels",
+        "label": "label",
+        "value": "key"
+      }
+    }
+  },
+  {
+    "name": "languages",
+    "type": "array",
+    "label": "Languages",
+    "help": "Languages to populate for multilingual fields.",
+    "default": [
+      "en"
+    ],
+    "spec": {
+      "type": "select",
+      "options": {
+        "store": "rpc://getLanguages",
+        "label": "label",
+        "value": "code"
+      }
+    }
+  },
+  {
+    "name": "strategy",
+    "type": "select",
+    "label": "Strategy",
+    "help": "How the LLM is prompted: single_pass (one call), expert_domains (one call grouped by expertise), multi_expertise (parallel calls per expertise).",
+    "default": "single_pass",
+    "options": {
+      "store": "rpc://getStrategies",
+      "label": "label",
+      "value": "value"
+    }
+  },
+  {
+    "name": "classificationModel",
+    "type": "select",
+    "label": "Classification model (optional)",
+    "help": "Run a fast pre-flight classification to detect entity-type mismatches before enrichment. If the entity is mismatched/unknown/ambiguous, the module fails with a 'classification_warning' DataError instead of producing hallucinated data.",
+    "options": {
+      "store": "rpc://getClassificationModels",
+      "label": "label",
+      "value": "key"
+    }
+  },
+  {
+    "name": "arbitrationModel",
+    "type": "select",
+    "label": "Arbitration model (optional)",
+    "help": "Used to LLM-arbitrate field conflicts during fusion. Leave empty for deterministic rule-based merging.",
+    "options": {
+      "store": "rpc://getArbitrationModels",
+      "label": "label",
+      "value": "key"
+    }
+  },
+  {
+    "name": "enableWebSearch",
+    "type": "select",
+    "label": "Web search",
+    "help": "Enable provider-builtin web search for selected models that support it. The 'On' label flips to a 'no selected model supports web search' note when the chosen models can't actually run web search.",
+    "required": false,
+    "default": "off",
+    "options": {
+      "store": "rpc://getWebSearchOptions",
+      "label": "label",
+      "value": "value"
+    }
+  },
+  {
+    "name": "timeoutSeconds",
+    "type": "uinteger",
+    "label": "Timeout (seconds)",
+    "help": "How long the module waits before failing with a timeout error. Bounded [10, 900].",
+    "default": 300,
+    "validate": {
+      "min": 10,
+      "max": 900
+    },
+    "advanced": true
+  },
+  {
+    "name": "includePerModelResults",
+    "type": "boolean",
+    "label": "Include per-model results",
+    "help": "When true, the response includes the full per-model result list alongside the fused result.",
+    "default": false,
+    "advanced": true
+  },
+  {
+    "name": "includeProfileLimits",
+    "type": "boolean",
+    "label": "Include profile limits",
+    "help": "When true, the response includes the org's profile_limits \u2014 useful for downstream branching on remaining quota.",
+    "default": false,
+    "advanced": true
+  } 
+]

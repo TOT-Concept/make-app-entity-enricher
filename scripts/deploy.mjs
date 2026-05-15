@@ -114,6 +114,31 @@ mk([
   `--body=${readBody(join(ROOT, "base.imljson"))}`,
 ]);
 
+if (existsSync(join(ROOT, "common.imljson"))) {
+  mk([
+    "sdk-apps",
+    "set-common",
+    `--name=${APP_NAME}`,
+    `--version=${APP_VERSION}`,
+    `--common=${readBody(join(ROOT, "common.imljson"))}`,
+  ]);
+}
+
+// help.md — user-facing help shown in the Developer Hub's "Help center"
+// tab and on the public marketplace listing. Pushed via the dedicated
+// `set-docs` subcommand (the CLI doesn't expose `readme` as a
+// `set-section` choice). README.md stays GitHub/dev-facing and is not
+// uploaded to Make.
+if (existsSync(join(ROOT, "help.md"))) {
+  mk([
+    "sdk-apps",
+    "set-docs",
+    `--name=${APP_NAME}`,
+    `--version=${APP_VERSION}`,
+    `--docs=${readBody(join(ROOT, "help.md"))}`,
+  ]);
+}
+
 // ---------------------------------------------------------------------------
 // 2. Connections
 // ---------------------------------------------------------------------------
@@ -241,7 +266,9 @@ for (const dirName of listSubdirs(join(ROOT, "modules"))) {
   for (const [file, section] of [
     ["api.imljson", "api"],
     ["parameters.imljson", "parameters"],
+    ["expect.imljson", "expect"],
     ["interface.imljson", "interface"],
+    ["samples.imljson", "samples"],
   ]) {
     const path = join(dir, file);
     if (!existsSync(path)) continue;

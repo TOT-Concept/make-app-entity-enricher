@@ -1,0 +1,94 @@
+{
+  "id": 5699258,
+  "name": "Get options",
+  "teamId": 1665915,
+  "hookId": null,
+  "devices": [],
+  "deviceId": null,
+  "deviceScope": null,
+  "concept": false,
+  "description": "",
+  "folderId": null,
+  "slots": null,
+  "isinvalid": false,
+  "islinked": false,
+  "islocked": false,
+  "isPaused": false,
+  "usedPackages": [
+    "app#entity-enricher-3ebi2k"
+  ],
+  "scheduling": {
+    "type": "indefinitely",
+    "interval": 900
+  },
+  "chainingRole": "none",
+  "type": "scenario",
+  "isShared": false,
+  "isActive": false,
+  "blueprint": {
+    "flow": [
+      {
+        "id": 1,
+        "mapper": {},
+        "module": "app#entity-enricher-3ebi2k:getOptions",
+        "version": 1,
+        "metadata": {
+          "restore": {
+            "parameters": {
+              "__IMTCONN__": {
+                "data": {
+                  "scoped": "true",
+                  "connection": "app#entity-enricher-3ebi2k"
+                },
+                "label": "My Entity Enricher API Key connection (Make Access)"
+              }
+            }
+          },
+          "designer": {
+            "x": 0,
+            "y": 0
+          },
+          "parameters": [
+            {
+              "name": "__IMTCONN__",
+              "type": "account:app#entity-enricher-3ebi2k",
+              "label": "Connection",
+              "required": true
+            }
+          ]
+        },
+        "parameters": {
+          "__IMTCONN__": 7324927
+        }
+      }
+    ],
+    "name": "Get options",
+    "metadata": {
+      "instant": false,
+      "version": 1,
+      "designer": {
+        "orphans": []
+      },
+      "scenario": {
+        "dlq": false,
+        "slots": null,
+        "dataloss": false,
+        "maxErrors": 3,
+        "autoCommit": true,
+        "roundtrips": 1,
+        "sequential": false,
+        "confidential": false,
+        "freshVariables": false,
+        "autoCommitTriggerLast": true
+      }
+    },
+    "scheduling": {
+      "type": "indefinitely",
+      "interval": 900
+    },
+    "interface": {
+      "input": [],
+      "output": []
+    }
+  }
+}

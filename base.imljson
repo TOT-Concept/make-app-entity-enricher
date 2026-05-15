@@ -1,10 +1,12 @@
 {
   "baseUrl": "{{connection.baseUrl}}",
   "headers": {
-    "x-api-key": "{{parameters.apiKey}}",
+    "x-api-key": "{{connection.apiKey}}",
+    "x-client-origin": "make",
     "content-type": "application/json",
     "accept": "application/json"
   },
+  "timeout": 300000,
   "response": {
     "error": {
       "400": {

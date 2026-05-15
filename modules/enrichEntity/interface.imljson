@@ -17,7 +17,7 @@
   {
     "name": "result",
     "type": "any",
-    "label": "Enriched result (JSON)"
+    "label": "Enriched result (shape varies per schema)"
   },
   {
     "name": "record_id",
@@ -69,11 +69,36 @@
     "name": "per_model_results",
     "type": "array",
     "label": "Per-model results (when requested)",
-    "spec": { "type": "any" }
+    "spec": {
+      "type": "collection",
+      "spec": [
+        { "name": "model", "type": "text", "label": "Model" },
+        { "name": "success", "type": "boolean", "label": "Success" },
+        { "name": "partial_success", "type": "boolean", "label": "Partial success" },
+        { "name": "result", "type": "any", "label": "Result" },
+        { "name": "error_message", "type": "text", "label": "Error message" },
+        { "name": "record_id", "type": "uuid", "label": "Record ID" },
+        { "name": "cost_usd", "type": "number", "label": "Cost (USD)" },
+        { "name": "input_tokens", "type": "uinteger", "label": "Input tokens" },
+        { "name": "output_tokens", "type": "uinteger", "label": "Output tokens" },
+        { "name": "processing_time_ms", "type": "uinteger", "label": "Processing time (ms)" },
+        { "name": "cancelled", "type": "boolean", "label": "Cancelled" }
+      ]
+    }
   },
   {
     "name": "profile_limits",
-    "type": "any",
-    "label": "Profile limits (when requested)"
+    "type": "collection",
+    "label": "Profile limits (when requested)",
+    "spec": [
+      { "name": "can_view_prompts", "type": "boolean", "label": "Can view prompts" },
+      { "name": "daily_prompt_limit", "type": "uinteger", "label": "Daily prompt limit" },
+      { "name": "weekly_prompt_limit", "type": "uinteger", "label": "Weekly prompt limit" },
+      { "name": "monthly_prompt_limit", "type": "uinteger", "label": "Monthly prompt limit" },
+      { "name": "max_record_results", "type": "uinteger", "label": "Max record results" },
+      { "name": "max_concurrent_jobs", "type": "uinteger", "label": "Max concurrent jobs" },
+      { "name": "max_models_per_enrichment", "type": "uinteger", "label": "Max models per enrichment" },
+      { "name": "max_languages", "type": "uinteger", "label": "Max languages" }
+    ]
   }
 ]

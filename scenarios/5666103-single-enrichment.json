@@ -1,0 +1,1685 @@
+{
+  "id": 5666103,
+  "name": "Single Enrichment",
+  "teamId": 1665915,
+  "hookId": null,
+  "devices": [],
+  "deviceId": null,
+  "deviceScope": null,
+  "concept": false,
+  "description": "",
+  "folderId": null,
+  "slots": null,
+  "isinvalid": false,
+  "islinked": false,
+  "islocked": false,
+  "isPaused": false,
+  "usedPackages": [
+    "util",
+    "app#entity-enricher-3ebi2k",
+    "google-cloud-firestore"
+  ],
+  "scheduling": {
+    "type": "indefinitely",
+    "interval": 900
+  },
+  "chainingRole": "none",
+  "type": "scenario",
+  "isShared": false,
+  "isActive": false,
+  "blueprint": {
+    "flow": [
+      {
+        "id": 5,
+        "mapper": {
+          "scope": "roundtrip",
+          "variables": [
+            {
+              "name": "entityInput",
+              "value": "{\n   \"title\": \"Inception\"\n}"
+            }
+          ]
+        },
+        "module": "util:SetVariables",
+        "version": 1,
+        "metadata": {
+          "expect": [
+            {
+              "name": "variables",
+              "spec": [
+                {
+                  "name": "name",
+                  "type": "text",
+                  "label": "Variable name",
+                  "required": true
+                },
+                {
+                  "name": "value",
+                  "type": "any",
+                  "label": "Variable value"
+                }
+              ],
+              "type": "array",
+              "label": "Variables"
+            },
+            {
+              "name": "scope",
+              "type": "select",
+              "label": "Variable lifetime",
+              "required": true,
+              "validate": {
+                "enum": [
+                  "roundtrip",
+                  "execution"
+                ]
+              }
+            }
+          ],
+          "restore": {
+            "expect": {
+              "scope": {
+                "label": "One cycle"
+              },
+              "variables": {
+                "items": [
+                  null
+                ]
+              }
+            }
+          },
+          "designer": {
+            "x": -169,
+            "y": -159
+          },
+          "interface": [
+            {
+              "name": "entityInput",
+              "type": "any",
+              "label": "entityInput"
+            }
+          ]
+        },
+        "parameters": {}
+      },
+      {
+        "id": 2,
+        "mapper": {
+          "models": [
+            "xai::grok-4-1-fast"
+          ],
+          "schemaId": "ffd7d371-c313-4599-9594-5cff654bbdc1",
+          "strategy": "multi_expertise",
+          "languages": [
+            "en",
+            "fr"
+          ],
+          "entityData": "{{5.entityInput}}",
+          "timeoutSeconds": "300",
+          "enableWebSearch": "off",
+          "includeProfileLimits": false,
+          "includePerModelResults": false
+        },
+        "module": "app#entity-enricher-3ebi2k:enrichEntity",
+        "version": 1,
+        "metadata": {
+          "expect": [
+            {
+              "name": "entityData",
+              "type": "text",
+              "label": "Entity data (JSON)",
+              "required": true
+            },
+            {
+              "name": "schemaId",
+              "type": "select",
+              "label": "Schema",
+              "required": true
+            },
+            {
+              "name": "models",
+              "spec": {
+                "name": "value",
+                "type": "select",
+                "dynamic": true,
+                "options": {
+                  "label": "label",
+                  "store": [],
+                  "value": "key"
+                }
+              },
+              "type": "array",
+              "label": "Models",
+              "required": true
+            },
+            {
+              "name": "languages",
+              "spec": {
+                "name": "value",
+                "type": "select",
+                "dynamic": true,
+                "options": {
+                  "label": "label",
+                  "store": [],
+                  "value": "code"
+                }
+              },
+              "type": "array",
+              "label": "Languages"
+            },
+            {
+              "name": "strategy",
+              "type": "select",
+              "label": "Strategy"
+            },
+            {
+              "name": "classificationModel",
+              "type": "select",
+              "label": "Classification model (optional)"
+            },
+            {
+              "name": "arbitrationModel",
+              "type": "select",
+              "label": "Arbitration model (optional)"
+            },
+            {
+              "name": "enableWebSearch",
+              "type": "select",
+              "label": "Web search",
+              "validate": {
+                "enum": [
+                  "off",
+                  "on"
+                ]
+              }
+            },
+            {
+              "name": "timeoutSeconds",
+              "type": "uinteger",
+              "label": "Timeout (seconds)",
+              "validate": {
+                "max": 900,
+                "min": 10
+              }
+            },
+            {
+              "name": "includePerModelResults",
+              "type": "boolean",
+              "label": "Include per-model results"
+            },
+            {
+              "name": "includeProfileLimits",
+              "type": "boolean",
+              "label": "Include profile limits"
+            }
+          ],
+          "restore": {
+            "expect": {
+              "models": {
+                "mode": "chose",
+                "items": [
+                  {
+                    "value": {
+                      "mode": "chose",
+                      "label": "Xai grok-4-1-fast (in $0,22/M, out $0,55/M) 🌍"
+                    }
+                  }
+                ]
+              },
+              "schemaId": {
+                "mode": "chose",
+                "label": "Movie"
+              },
+              "strategy": {
+                "mode": "chose",
+                "label": "Parallel LLM calls per expertise domain"
+              },
+              "languages": {
+                "mode": "chose",
+                "items": [
+                  {
+                    "value": {
+                      "mode": "chose",
+                      "label": "English"
+                    }
+                  },
+                  {
+                    "value": {
+                      "mode": "chose",
+                      "label": "French (Français)"
+                    }
+                  }
+                ]
+              },
+              "enableWebSearch": {
+                "mode": "chose",
+                "label": "Off"
+              },
+              "arbitrationModel": {
+                "mode": "chose",
+                "label": "Empty"
+              },
+              "classificationModel": {
+                "mode": "chose",
+                "label": "Empty"
+              },
+              "includeProfileLimits": {
+                "mode": "chose"
+              },
+              "includePerModelResults": {
+                "mode": "chose"
+              }
+            },
+            "parameters": {
+              "__IMTCONN__": {
+                "data": {
+                  "scoped": "true",
+                  "connection": "app#entity-enricher-3ebi2k"
+                },
+                "label": "My Entity Enricher API Key connection (Make Access)"
+              }
+            }
+          },
+          "designer": {
+            "x": 195,
+            "y": -153
+          },
+          "parameters": [
+            {
+              "name": "__IMTCONN__",
+              "type": "account:app#entity-enricher-3ebi2k",
+              "label": "Connection",
+              "required": true
+            }
+          ]
+        },
+        "parameters": {
+          "__IMTCONN__": 7324927
+        }
+      },
+      {
+        "id": 4,
+        "mapper": {
+          "path": "/movies/{{lower(2.result.title.en)}}/",
+          "fields": [
+            {
+              "value": "{{2.result}}",
+              "fieldName": "Entity",
+              "valueType": "stringValue"
+            }
+          ],
+          "input_type": "select",
+          "project_id": "entityenricher"
+        },
+        "module": "google-cloud-firestore:UpdateADocument",
+        "version": 1,
+        "metadata": {
+          "expect": [
+            {
+              "name": "input_type",
+              "type": "select",
+              "label": "Input the document path",
+              "required": true,
+              "validate": {
+                "enum": [
+                  "select",
+                  "manual"
+                ]
+              }
+            },
+            {
+              "name": "fields",
+              "spec": [
+                {
+                  "name": "fieldName",
+                  "type": "text",
+                  "label": "Field Name",
+                  "required": true,
+                  "validate": {
+                    "pattern": "^(?!__.+__).+$"
+                  }
+                },
+                {
+                  "name": "valueType",
+                  "type": "select",
+                  "label": "Value Type",
+                  "options": [
+                    {
+                      "label": "Null Value",
+                      "value": "nullValue"
+                    },
+                    {
+                      "label": "Boolean Value",
+                      "value": "booleanValue",
+                      "nested": [
+                        {
+                          "name": "value",
+                          "type": "boolean",
+                          "label": "True"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Integer Value",
+                      "value": "integerValue",
+                      "nested": [
+                        {
+                          "name": "value",
+                          "type": "integer",
+                          "label": "Integer"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Double Value",
+                      "value": "doubleValue",
+                      "nested": [
+                        {
+                          "name": "value",
+                          "type": "number",
+                          "label": "Double"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Timestamp Value",
+                      "value": "timestampValue",
+                      "nested": [
+                        {
+                          "name": "value",
+                          "time": true,
+                          "type": "date",
+                          "label": "Timestamp"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "String Value",
+                      "value": "stringValue",
+                      "nested": [
+                        {
+                          "help": "Leave this field empty for an empty string.",
+                          "name": "value",
+                          "type": "text",
+                          "label": "Text"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Reference Value",
+                      "value": "referenceValue",
+                      "nested": [
+                        {
+                          "help": "The resource name of a Document.\nIn the format: 'projects/{project_id}/databases/{database_id}\n/documents/{document_path}'.",
+                          "name": "value",
+                          "type": "text",
+                          "label": "Document Reference",
+                          "validate": {
+                            "pattern": "^projects/[^/]+/databases/[^/]+/documents.*"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "label": "GeoPoint Value",
+                      "value": "geoPointValue",
+                      "nested": [
+                        {
+                          "name": "value",
+                          "spec": [
+                            {
+                              "name": "latitude",
+                              "type": "number",
+                              "label": "Latitude",
+                              "required": true
+                            },
+                            {
+                              "name": "longitude",
+                              "type": "number",
+                              "label": "Longitude",
+                              "required": true
+                            }
+                          ],
+                          "type": "collection",
+                          "label": "GeoPoint"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Array Value",
+                      "value": "arrayValue",
+                      "nested": [
+                        {
+                          "name": "value",
+                          "spec": [
+                            {
+                              "name": "valueType",
+                              "type": "select",
+                              "label": "Value Type",
+                              "options": [
+                                {
+                                  "label": "Null Value",
+                                  "value": "nullValue"
+                                },
+                                {
+                                  "label": "Boolean Value",
+                                  "value": "booleanValue",
+                                  "nested": [
+                                    {
+                                      "name": "value",
+                                      "type": "boolean",
+                                      "label": "True"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "label": "Integer Value",
+                                  "value": "integerValue",
+                                  "nested": [
+                                    {
+                                      "name": "value",
+                                      "type": "integer",
+                                      "label": "Integer"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "label": "Double Value",
+                                  "value": "doubleValue",
+                                  "nested": [
+                                    {
+                                      "name": "value",
+                                      "type": "number",
+                                      "label": "Double"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "label": "Timestamp Value",
+                                  "value": "timestampValue",
+                                  "nested": [
+                                    {
+                                      "name": "value",
+                                      "time": true,
+                                      "type": "date",
+                                      "label": "Timestamp"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "label": "String Value",
+                                  "value": "stringValue",
+                                  "nested": [
+                                    {
+                                      "help": "Leave this field empty for an empty string.",
+                                      "name": "value",
+                                      "type": "text",
+                                      "label": "Text"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "label": "Reference Value",
+                                  "value": "referenceValue",
+                                  "nested": [
+                                    {
+                                      "help": "The resource name of a Document.\nIn the format: 'projects/{project_id}/databases/{database_id}\n/documents/{document_path}'.",
+                                      "name": "value",
+                                      "type": "text",
+                                      "label": "Document Reference",
+                                      "validate": {
+                                        "pattern": "^projects/[^/]+/databases/[^/]+/documents.*"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "label": "GeoPoint Value",
+                                  "value": "geoPointValue",
+                                  "nested": [
+                                    {
+                                      "name": "value",
+                                      "spec": [
+                                        {
+                                          "name": "latitude",
+                                          "type": "number",
+                                          "label": "Latitude",
+                                          "required": true
+                                        },
+                                        {
+                                          "name": "longitude",
+                                          "type": "number",
+                                          "label": "Longitude",
+                                          "required": true
+                                        }
+                                      ],
+                                      "type": "collection",
+                                      "label": "GeoPoint"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "label": "Map Value",
+                                  "value": "mapValue",
+                                  "nested": [
+                                    {
+                                      "name": "value",
+                                      "spec": [
+                                        {
+                                          "help": "Field name matching the regular expression `__.*__` are reserved.",
+                                          "name": "fieldName",
+                                          "type": "text",
+                                          "label": "Field Name",
+                                          "required": true,
+                                          "validate": {
+                                            "pattern": "^(?!__.+__).+$"
+                                          }
+                                        },
+                                        {
+                                          "name": "valueType",
+                                          "type": "select",
+                                          "label": "Value Type",
+                                          "options": [
+                                            {
+                                              "label": "Null Value",
+                                              "value": "nullValue"
+                                            },
+                                            {
+                                              "label": "Boolean Value",
+                                              "value": "booleanValue",
+                                              "nested": [
+                                                {
+                                                  "name": "value",
+                                                  "type": "boolean",
+                                                  "label": "True"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "label": "Integer Value",
+                                              "value": "integerValue",
+                                              "nested": [
+                                                {
+                                                  "name": "value",
+                                                  "type": "integer",
+                                                  "label": "Integer"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "label": "Double Value",
+                                              "value": "doubleValue",
+                                              "nested": [
+                                                {
+                                                  "name": "value",
+                                                  "type": "number",
+                                                  "label": "Double"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "label": "Timestamp Value",
+                                              "value": "timestampValue",
+                                              "nested": [
+                                                {
+                                                  "name": "value",
+                                                  "time": true,
+                                                  "type": "date",
+                                                  "label": "Timestamp"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "label": "String Value",
+                                              "value": "stringValue",
+                                              "nested": [
+                                                {
+                                                  "help": "Leave this field empty for an empty string.",
+                                                  "name": "value",
+                                                  "type": "text",
+                                                  "label": "Text"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "label": "Reference Value",
+                                              "value": "referenceValue",
+                                              "nested": [
+                                                {
+                                                  "help": "The resource name of a Document.\nIn the format: 'projects/{project_id}/databases/{database_id}\n/documents/{document_path}'.",
+                                                  "name": "value",
+                                                  "type": "text",
+                                                  "label": "Document Reference",
+                                                  "validate": {
+                                                    "pattern": "^projects/[^/]+/databases/[^/]+/documents.*"
+                                                  }
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "label": "GeoPoint Value",
+                                              "value": "geoPointValue",
+                                              "nested": [
+                                                {
+                                                  "name": "value",
+                                                  "spec": [
+                                                    {
+                                                      "name": "latitude",
+                                                      "type": "number",
+                                                      "label": "Latitude",
+                                                      "required": true
+                                                    },
+                                                    {
+                                                      "name": "longitude",
+                                                      "type": "number",
+                                                      "label": "Longitude",
+                                                      "required": true
+                                                    }
+                                                  ],
+                                                  "type": "collection",
+                                                  "label": "GeoPoint"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "label": "Array Value",
+                                              "value": "arrayValue",
+                                              "nested": [
+                                                {
+                                                  "name": "value",
+                                                  "spec": [
+                                                    {
+                                                      "name": "valueType",
+                                                      "type": "select",
+                                                      "label": "Value Type",
+                                                      "options": [
+                                                        {
+                                                          "label": "Null Value",
+                                                          "value": "nullValue"
+                                                        },
+                                                        {
+                                                          "label": "Boolean Value",
+                                                          "value": "booleanValue",
+                                                          "nested": [
+                                                            {
+                                                              "name": "value",
+                                                              "type": "boolean",
+                                                              "label": "True"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "label": "Integer Value",
+                                                          "value": "integerValue",
+                                                          "nested": [
+                                                            {
+                                                              "name": "value",
+                                                              "type": "integer",
+                                                              "label": "Integer"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "label": "Double Value",
+                                                          "value": "doubleValue",
+                                                          "nested": [
+                                                            {
+                                                              "name": "value",
+                                                              "type": "number",
+                                                              "label": "Double"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "label": "Timestamp Value",
+                                                          "value": "timestampValue",
+                                                          "nested": [
+                                                            {
+                                                              "name": "value",
+                                                              "time": true,
+                                                              "type": "date",
+                                                              "label": "Timestamp"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "label": "String Value",
+                                                          "value": "stringValue",
+                                                          "nested": [
+                                                            {
+                                                              "help": "Leave this field empty for an empty string.",
+                                                              "name": "value",
+                                                              "type": "text",
+                                                              "label": "Text"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "label": "Reference Value",
+                                                          "value": "referenceValue",
+                                                          "nested": [
+                                                            {
+                                                              "help": "The resource name of a Document.\nIn the format: 'projects/{project_id}/databases/{database_id}\n/documents/{document_path}'.",
+                                                              "name": "value",
+                                                              "type": "text",
+                                                              "label": "Document Reference",
+                                                              "validate": {
+                                                                "pattern": "^projects/[^/]+/databases/[^/]+/documents.*"
+                                                              }
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "label": "GeoPoint Value",
+                                                          "value": "geoPointValue",
+                                                          "nested": [
+                                                            {
+                                                              "name": "value",
+                                                              "spec": [
+                                                                {
+                                                                  "name": "latitude",
+                                                                  "type": "number",
+                                                                  "label": "Latitude",
+                                                                  "required": true
+                                                                },
+                                                                {
+                                                                  "name": "longitude",
+                                                                  "type": "number",
+                                                                  "label": "Longitude",
+                                                                  "required": true
+                                                                }
+                                                              ],
+                                                              "type": "collection",
+                                                              "label": "GeoPoint"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "label": "Map Value",
+                                                          "value": "mapValue",
+                                                          "nested": [
+                                                            {
+                                                              "name": "value",
+                                                              "spec": [
+                                                                {
+                                                                  "help": "Field name matching the regular expression `__.*__` are reserved.",
+                                                                  "name": "fieldName",
+                                                                  "type": "text",
+                                                                  "label": "Field Name",
+                                                                  "required": true,
+                                                                  "validate": {
+                                                                    "pattern": "^(?!__.+__).+$"
+                                                                  }
+                                                                },
+                                                                {
+                                                                  "name": "valueType",
+                                                                  "type": "select",
+                                                                  "label": "Value Type",
+                                                                  "options": [
+                                                                    {
+                                                                      "label": "Null Value",
+                                                                      "value": "nullValue"
+                                                                    },
+                                                                    {
+                                                                      "label": "Boolean Value",
+                                                                      "value": "booleanValue",
+                                                                      "nested": [
+                                                                        {
+                                                                          "name": "value",
+                                                                          "type": "boolean",
+                                                                          "label": "True"
+                                                                        }
+                                                                      ]
+                                                                    },
+                                                                    {
+                                                                      "label": "Integer Value",
+                                                                      "value": "integerValue",
+                                                                      "nested": [
+                                                                        {
+                                                                          "name": "value",
+                                                                          "type": "integer",
+                                                                          "label": "Integer"
+                                                                        }
+                                                                      ]
+                                                                    },
+                                                                    {
+                                                                      "label": "Double Value",
+                                                                      "value": "doubleValue",
+                                                                      "nested": [
+                                                                        {
+                                                                          "name": "value",
+                                                                          "type": "number",
+                                                                          "label": "Double"
+                                                                        }
+                                                                      ]
+                                                                    },
+                                                                    {
+                                                                      "label": "Timestamp Value",
+                                                                      "value": "timestampValue",
+                                                                      "nested": [
+                                                                        {
+                                                                          "name": "value",
+                                                                          "time": true,
+                                                                          "type": "date",
+                                                                          "label": "Timestamp"
+                                                                        }
+                                                                      ]
+                                                                    },
+                                                                    {
+                                                                      "label": "String Value",
+                                                                      "value": "stringValue",
+                                                                      "nested": [
+                                                                        {
+                                                                          "help": "Leave this field empty for an empty string.",
+                                                                          "name": "value",
+                                                                          "type": "text",
+                                                                          "label": "Text"
+                                                                        }
+                                                                      ]
+                                                                    },
+                                                                    {
+                                                                      "label": "Reference Value",
+                                                                      "value": "referenceValue",
+                                                                      "nested": [
+                                                                        {
+                                                                          "help": "The resource name of a Document.\nIn the format: 'projects/{project_id}/databases/{database_id}\n/documents/{document_path}'.",
+                                                                          "name": "value",
+                                                                          "type": "text",
+                                                                          "label": "Document Reference",
+                                                                          "validate": {
+                                                                            "pattern": "^projects/[^/]+/databases/[^/]+/documents.*"
+                                                                          }
+                                                                        }
+                                                                      ]
+                                                                    },
+                                                                    {
+                                                                      "label": "GeoPoint Value",
+                                                                      "value": "geoPointValue",
+                                                                      "nested": [
+                                                                        {
+                                                                          "name": "value",
+                                                                          "spec": [
+                                                                            {
+                                                                              "name": "latitude",
+                                                                              "type": "number",
+                                                                              "label": "Latitude",
+                                                                              "required": true
+                                                                            },
+                                                                            {
+                                                                              "name": "longitude",
+                                                                              "type": "number",
+                                                                              "label": "Longitude",
+                                                                              "required": true
+                                                                            }
+                                                                          ],
+                                                                          "type": "collection",
+                                                                          "label": "GeoPoint"
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ],
+                                                                  "mappable": false,
+                                                                  "required": true
+                                                                }
+                                                              ],
+                                                              "type": "array",
+                                                              "label": "Value",
+                                                              "required": true
+                                                            }
+                                                          ]
+                                                        }
+                                                      ],
+                                                      "mappable": false,
+                                                      "required": true
+                                                    }
+                                                  ],
+                                                  "type": "array",
+                                                  "label": "Value",
+                                                  "required": true
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "label": "Map Value",
+                                              "value": "mapValue",
+                                              "nested": [
+                                                {
+                                                  "name": "value",
+                                                  "spec": [
+                                                    {
+                                                      "help": "Field name matching the regular expression `__.*__` are reserved.",
+                                                      "name": "fieldName",
+                                                      "type": "text",
+                                                      "label": "Field Name",
+                                                      "required": true,
+                                                      "validate": {
+                                                        "pattern": "^(?!__.+__).+$"
+                                                      }
+                                                    },
+                                                    {
+                                                      "name": "valueType",
+                                                      "type": "select",
+                                                      "label": "Value Type",
+                                                      "options": [
+                                                        {
+                                                          "label": "Null Value",
+                                                          "value": "nullValue"
+                                                        },
+                                                        {
+                                                          "label": "Boolean Value",
+                                                          "value": "booleanValue",
+                                                          "nested": [
+                                                            {
+                                                              "name": "value",
+                                                              "type": "boolean",
+                                                              "label": "True"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "label": "Integer Value",
+                                                          "value": "integerValue",
+                                                          "nested": [
+                                                            {
+                                                              "name": "value",
+                                                              "type": "integer",
+                                                              "label": "Integer"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "label": "Double Value",
+                                                          "value": "doubleValue",
+                                                          "nested": [
+                                                            {
+                                                              "name": "value",
+                                                              "type": "number",
+                                                              "label": "Double"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "label": "Timestamp Value",
+                                                          "value": "timestampValue",
+                                                          "nested": [
+                                                            {
+                                                              "name": "value",
+                                                              "time": true,
+                                                              "type": "date",
+                                                              "label": "Timestamp"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "label": "String Value",
+                                                          "value": "stringValue",
+                                                          "nested": [
+                                                            {
+                                                              "help": "Leave this field empty for an empty string.",
+                                                              "name": "value",
+                                                              "type": "text",
+                                                              "label": "Text"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "label": "Reference Value",
+                                                          "value": "referenceValue",
+                                                          "nested": [
+                                                            {
+                                                              "help": "The resource name of a Document.\nIn the format: 'projects/{project_id}/databases/{database_id}\n/documents/{document_path}'.",
+                                                              "name": "value",
+                                                              "type": "text",
+                                                              "label": "Document Reference",
+                                                              "validate": {
+                                                                "pattern": "^projects/[^/]+/databases/[^/]+/documents.*"
+                                                              }
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "label": "GeoPoint Value",
+                                                          "value": "geoPointValue",
+                                                          "nested": [
+                                                            {
+                                                              "name": "value",
+                                                              "spec": [
+                                                                {
+                                                                  "name": "latitude",
+                                                                  "type": "number",
+                                                                  "label": "Latitude",
+                                                                  "required": true
+                                                                },
+                                                                {
+                                                                  "name": "longitude",
+                                                                  "type": "number",
+                                                                  "label": "Longitude",
+                                                                  "required": true
+                                                                }
+                                                              ],
+                                                              "type": "collection",
+                                                              "label": "GeoPoint"
+                                                            }
+                                                          ]
+                                                        }
+                                                      ],
+                                                      "mappable": false,
+                                                      "required": true
+                                                    }
+                                                  ],
+                                                  "type": "array",
+                                                  "label": "Value",
+                                                  "required": true
+                                                }
+                                              ]
+                                            }
+                                          ],
+                                          "mappable": false,
+                                          "required": true
+                                        }
+                                      ],
+                                      "type": "array",
+                                      "label": "Value",
+                                      "required": true
+                                    }
+                                  ]
+                                }
+                              ],
+                              "mappable": false,
+                              "required": true
+                            }
+                          ],
+                          "type": "array",
+                          "label": "Value",
+                          "required": true
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Map Value",
+                      "value": "mapValue",
+                      "nested": [
+                        {
+                          "name": "value",
+                          "spec": [
+                            {
+                              "help": "Field name matching the regular expression `__.*__` are reserved.",
+                              "name": "fieldName",
+                              "type": "text",
+                              "label": "Field Name",
+                              "required": true,
+                              "validate": {
+                                "pattern": "^(?!__.+__).+$"
+                              }
+                            },
+                            {
+                              "name": "valueType",
+                              "type": "select",
+                              "label": "Value Type",
+                              "options": [
+                                {
+                                  "label": "Null Value",
+                                  "value": "nullValue"
+                                },
+                                {
+                                  "label": "Boolean Value",
+                                  "value": "booleanValue",
+                                  "nested": [
+                                    {
+                                      "name": "value",
+                                      "type": "boolean",
+                                      "label": "True"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "label": "Integer Value",
+                                  "value": "integerValue",
+                                  "nested": [
+                                    {
+                                      "name": "value",
+                                      "type": "integer",
+                                      "label": "Integer"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "label": "Double Value",
+                                  "value": "doubleValue",
+                                  "nested": [
+                                    {
+                                      "name": "value",
+                                      "type": "number",
+                                      "label": "Double"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "label": "Timestamp Value",
+                                  "value": "timestampValue",
+                                  "nested": [
+                                    {
+                                      "name": "value",
+                                      "time": true,
+                                      "type": "date",
+                                      "label": "Timestamp"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "label": "String Value",
+                                  "value": "stringValue",
+                                  "nested": [
+                                    {
+                                      "help": "Leave this field empty for an empty string.",
+                                      "name": "value",
+                                      "type": "text",
+                                      "label": "Text"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "label": "Reference Value",
+                                  "value": "referenceValue",
+                                  "nested": [
+                                    {
+                                      "help": "The resource name of a Document.\nIn the format: 'projects/{project_id}/databases/{database_id}\n/documents/{document_path}'.",
+                                      "name": "value",
+                                      "type": "text",
+                                      "label": "Document Reference",
+                                      "validate": {
+                                        "pattern": "^projects/[^/]+/databases/[^/]+/documents.*"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "label": "GeoPoint Value",
+                                  "value": "geoPointValue",
+                                  "nested": [
+                                    {
+                                      "name": "value",
+                                      "spec": [
+                                        {
+                                          "name": "latitude",
+                                          "type": "number",
+                                          "label": "Latitude",
+                                          "required": true
+                                        },
+                                        {
+                                          "name": "longitude",
+                                          "type": "number",
+                                          "label": "Longitude",
+                                          "required": true
+                                        }
+                                      ],
+                                      "type": "collection",
+                                      "label": "GeoPoint"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "label": "Map Value",
+                                  "value": "mapValue",
+                                  "nested": [
+                                    {
+                                      "name": "value",
+                                      "spec": [
+                                        {
+                                          "help": "Field name matching the regular expression `__.*__` are reserved.",
+                                          "name": "fieldName",
+                                          "type": "text",
+                                          "label": "Field Name",
+                                          "required": true,
+                                          "validate": {
+                                            "pattern": "^(?!__.+__).+$"
+                                          }
+                                        },
+                                        {
+                                          "name": "valueType",
+                                          "type": "select",
+                                          "label": "Value Type",
+                                          "options": [
+                                            {
+                                              "label": "Null Value",
+                                              "value": "nullValue"
+                                            },
+                                            {
+                                              "label": "Boolean Value",
+                                              "value": "booleanValue",
+                                              "nested": [
+                                                {
+                                                  "name": "value",
+                                                  "type": "boolean",
+                                                  "label": "True"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "label": "Integer Value",
+                                              "value": "integerValue",
+                                              "nested": [
+                                                {
+                                                  "name": "value",
+                                                  "type": "integer",
+                                                  "label": "Integer"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "label": "Double Value",
+                                              "value": "doubleValue",
+                                              "nested": [
+                                                {
+                                                  "name": "value",
+                                                  "type": "number",
+                                                  "label": "Double"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "label": "Timestamp Value",
+                                              "value": "timestampValue",
+                                              "nested": [
+                                                {
+                                                  "name": "value",
+                                                  "time": true,
+                                                  "type": "date",
+                                                  "label": "Timestamp"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "label": "String Value",
+                                              "value": "stringValue",
+                                              "nested": [
+                                                {
+                                                  "help": "Leave this field empty for an empty string.",
+                                                  "name": "value",
+                                                  "type": "text",
+                                                  "label": "Text"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "label": "Reference Value",
+                                              "value": "referenceValue",
+                                              "nested": [
+                                                {
+                                                  "help": "The resource name of a Document.\nIn the format: 'projects/{project_id}/databases/{database_id}\n/documents/{document_path}'.",
+                                                  "name": "value",
+                                                  "type": "text",
+                                                  "label": "Document Reference",
+                                                  "validate": {
+                                                    "pattern": "^projects/[^/]+/databases/[^/]+/documents.*"
+                                                  }
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "label": "GeoPoint Value",
+                                              "value": "geoPointValue",
+                                              "nested": [
+                                                {
+                                                  "name": "value",
+                                                  "spec": [
+                                                    {
+                                                      "name": "latitude",
+                                                      "type": "number",
+                                                      "label": "Latitude",
+                                                      "required": true
+                                                    },
+                                                    {
+                                                      "name": "longitude",
+                                                      "type": "number",
+                                                      "label": "Longitude",
+                                                      "required": true
+                                                    }
+                                                  ],
+                                                  "type": "collection",
+                                                  "label": "GeoPoint"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "label": "Map Value",
+                                              "value": "mapValue",
+                                              "nested": [
+                                                {
+                                                  "name": "value",
+                                                  "spec": [
+                                                    {
+                                                      "help": "Field name matching the regular expression `__.*__` are reserved.",
+                                                      "name": "fieldName",
+                                                      "type": "text",
+                                                      "label": "Field Name",
+                                                      "required": true,
+                                                      "validate": {
+                                                        "pattern": "^(?!__.+__).+$"
+                                                      }
+                                                    },
+                                                    {
+                                                      "name": "valueType",
+                                                      "type": "select",
+                                                      "label": "Value Type",
+                                                      "options": [
+                                                        {
+                                                          "label": "Null Value",
+                                                          "value": "nullValue"
+                                                        },
+                                                        {
+                                                          "label": "Boolean Value",
+                                                          "value": "booleanValue",
+                                                          "nested": [
+                                                            {
+                                                              "name": "value",
+                                                              "type": "boolean",
+                                                              "label": "True"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "label": "Integer Value",
+                                                          "value": "integerValue",
+                                                          "nested": [
+                                                            {
+                                                              "name": "value",
+                                                              "type": "integer",
+                                                              "label": "Integer"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "label": "Double Value",
+                                                          "value": "doubleValue",
+                                                          "nested": [
+                                                            {
+                                                              "name": "value",
+                                                              "type": "number",
+                                                              "label": "Double"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "label": "Timestamp Value",
+                                                          "value": "timestampValue",
+                                                          "nested": [
+                                                            {
+                                                              "name": "value",
+                                                              "time": true,
+                                                              "type": "date",
+                                                              "label": "Timestamp"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "label": "String Value",
+                                                          "value": "stringValue",
+                                                          "nested": [
+                                                            {
+                                                              "help": "Leave this field empty for an empty string.",
+                                                              "name": "value",
+                                                              "type": "text",
+                                                              "label": "Text"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "label": "Reference Value",
+                                                          "value": "referenceValue",
+                                                          "nested": [
+                                                            {
+                                                              "help": "The resource name of a Document.\nIn the format: 'projects/{project_id}/databases/{database_id}\n/documents/{document_path}'.",
+                                                              "name": "value",
+                                                              "type": "text",
+                                                              "label": "Document Reference",
+                                                              "validate": {
+                                                                "pattern": "^projects/[^/]+/databases/[^/]+/documents.*"
+                                                              }
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "label": "GeoPoint Value",
+                                                          "value": "geoPointValue",
+                                                          "nested": [
+                                                            {
+                                                              "name": "value",
+                                                              "spec": [
+                                                                {
+                                                                  "name": "latitude",
+                                                                  "type": "number",
+                                                                  "label": "Latitude",
+                                                                  "required": true
+                                                                },
+                                                                {
+                                                                  "name": "longitude",
+                                                                  "type": "number",
+                                                                  "label": "Longitude",
+                                                                  "required": true
+                                                                }
+                                                              ],
+                                                              "type": "collection",
+                                                              "label": "GeoPoint"
+                                                            }
+                                                          ]
+                                                        }
+                                                      ],
+                                                      "mappable": false,
+                                                      "required": true
+                                                    }
+                                                  ],
+                                                  "type": "array",
+                                                  "label": "Value",
+                                                  "required": true
+                                                }
+                                              ]
+                                            }
+                                          ],
+                                          "mappable": false,
+                                          "required": true
+                                        }
+                                      ],
+                                      "type": "array",
+                                      "label": "Value",
+                                      "required": true
+                                    }
+                                  ]
+                                }
+                              ],
+                              "mappable": false,
+                              "required": true
+                            }
+                          ],
+                          "type": "array",
+                          "label": "Value",
+                          "required": true
+                        }
+                      ]
+                    }
+                  ],
+                  "required": true
+                }
+              ],
+              "type": "array",
+              "label": "Add or Update Fields"
+            },
+            {
+              "name": "delete_fields",
+              "spec": {
+                "name": "value",
+                "type": "text",
+                "label": "Field"
+              },
+              "type": "array",
+              "label": "Delete Fields"
+            },
+            {
+              "name": "mask",
+              "spec": {
+                "name": "value",
+                "type": "text",
+                "label": "Field Paths"
+              },
+              "type": "array",
+              "label": "Mask"
+            },
+            {
+              "name": "project_id",
+              "type": "select",
+              "label": "Project",
+              "required": true
+            },
+            {
+              "name": "path",
+              "type": "folder",
+              "label": "Document Path",
+              "required": true
+            }
+          ],
+          "restore": {
+            "expect": {
+              "mask": {
+                "mode": "chose"
+              },
+              "path": {
+                "mode": "edit"
+              },
+              "fields": {
+                "mode": "chose",
+                "items": [
+                  {
+                    "valueType": {
+                      "mode": "chose",
+                      "label": "String Value"
+                    }
+                  }
+                ]
+              },
+              "input_type": {
+                "label": "By Dropdown"
+              },
+              "project_id": {
+                "label": "projects/entityenricher"
+              },
+              "delete_fields": {
+                "mode": "chose"
+              }
+            },
+            "parameters": {
+              "__IMTCONN__": {
+                "data": {
+                  "scoped": "true",
+                  "connection": "google-custom"
+                },
+                "label": "My Google Custom connection (entity.enricher@gmail.com)"
+              }
+            }
+          },
+          "designer": {
+            "x": 514,
+            "y": -158
+          },
+          "parameters": [
+            {
+              "name": "__IMTCONN__",
+              "type": "account:google-custom",
+              "label": "Connection",
+              "required": true
+            }
+          ]
+        },
+        "parameters": {
+          "__IMTCONN__": 7385254
+        }
+      }
+    ],
+    "name": "Single Enrichment",
+    "metadata": {
+      "instant": false,
+      "version": 1,
+      "designer": {
+        "orphans": [],
+        "samples": {
+          "2": {
+            "model": "xai::grok-4-1-fast",
+            "fusion": null,
+            "job_id": "93f87bba-a10c-4ff8-89cc-6f18330580f0",
+            "result": {
+              "title": {
+                "en": "12 Angry Men",
+                "fr": "Douze hommes en colère"
+              },
+              "genres": {
+                "en": [
+                  "Crime"
+                ],
+                "fr": [
+                  "Crime"
+                ]
+              },
+              "basedOn": {
+                "en": "Teleplay \"Twelve Angry Men\" by Reginald Rose",
+                "fr": "Télépièce « Twelve Angry Men » de Reginald Rose"
+              },
+              "plotSummary": {
+                "en": "Following the trial of a young man accused of murder, 12 jurors retire to deliberate the verdict. De...",
+                "fr": "Après le procès d'un jeune homme accusé de meurtre, 12 jurés se retirent pour délibérer sur le verdi..."
+              },
+              "releaseDate": "1957-04-13",
+              "releaseYear": "1957",
+              "countryOfOrigin": {
+                "en": "United States",
+                "fr": "États-Unis"
+              },
+              "originalLanguage": {
+                "en": "English",
+                "fr": "Anglais"
+              }
+            },
+            "success": true,
+            "cost_usd": 0.00043461000000000004,
+            "is_fused": false,
+            "record_id": "6ab10b92-d89c-4436-acec-4c3d9b50a4a4",
+            "input_tokens": 1458,
+            "output_tokens": 252,
+            "source_models": null,
+            "profile_limits": null,
+            "per_model_results": null,
+            "processing_time_ms": 15560
+          },
+          "4": {
+            "name": "projects/entityenricher/databases/(default)/documents/movies/12 angry men",
+            "fields": {
+              "Entity": "{\"basedOn\":{\"en\":\"Teleplay \\\"Twelve Angry Men\\\" by Reginald Rose\",\"fr\":\"Télépièce « Twelve Angry Men..."
+            },
+            "createTime": "2026-05-14T12:24:41.510Z",
+            "updateTime": "2026-05-14T12:24:41.510Z"
+          },
+          "5": {
+            "entityInput": "{\n   \"title\": \"12 angry men\"\n}"
+          }
+        }
+      },
+      "scenario": {
+        "dlq": false,
+        "slots": null,
+        "dataloss": false,
+        "maxErrors": 3,
+        "autoCommit": true,
+        "roundtrips": 1,
+        "sequential": false,
+        "confidential": false,
+        "freshVariables": false,
+        "autoCommitTriggerLast": true
+      }
+    },
+    "scheduling": {
+      "type": "indefinitely",
+      "interval": 900
+    },
+    "interface": {
+      "input": [],
+      "output": []
+    }
+  }
+}

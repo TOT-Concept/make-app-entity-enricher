@@ -1,8 +1,5 @@
 {
   "url": "api/enrichment/options",
-  "headers": {
-    "x-api-key": "{{connection.apiKey}}"
-  },
   "method": "GET",
   "response": {
     "output": {

@@ -1,0 +1,39 @@
+{
+  "job_id": "93f87bba-a10c-4ff8-89cc-6f18330580f0",
+  "success": true,
+  "is_fused": false,
+  "result": {
+    "title": {
+      "en": "12 Angry Men",
+      "fr": "Douze hommes en colère"
+    },
+    "genres": {
+      "en": ["Crime", "Drama"],
+      "fr": ["Crime", "Drame"]
+    },
+    "releaseDate": "1957-04-13",
+    "releaseYear": "1957",
+    "countryOfOrigin": {
+      "en": "United States",
+      "fr": "États-Unis"
+    },
+    "originalLanguage": {
+      "en": "English",
+      "fr": "Anglais"
+    },
+    "plotSummary": {
+      "en": "Following the trial of a young man accused of murder, 12 jurors retire to deliberate the verdict.",
+      "fr": "Après le procès d'un jeune homme accusé de meurtre, 12 jurés se retirent pour délibérer."
+    }
+  },
+  "record_id": "6ab10b92-d89c-4436-acec-4c3d9b50a4a4",
+  "model": "xai::grok-4-1-fast",
+  "source_models": null,
+  "cost_usd": 0.00043461,
+  "input_tokens": 1458,
+  "output_tokens": 252,
+  "processing_time_ms": 15560,
+  "fusion": null,
+  "per_model_results": null,
+  "profile_limits": null
+}

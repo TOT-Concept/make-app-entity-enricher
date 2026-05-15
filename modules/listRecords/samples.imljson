@@ -1,0 +1,21 @@
+{
+  "id": "6ab10b92-d89c-4436-acec-4c3d9b50a4a4",
+  "type": "enrichment",
+  "entity_id": "9c54a8d2-1234-4567-89ab-cdef01234567",
+  "entity_name": "12 Angry Men",
+  "llm_provider_name": "xai",
+  "model_name": "grok-4-1-fast",
+  "created_at": "2026-05-14T12:24:25Z",
+  "processing_time_ms": 15560,
+  "input_tokens": 1458,
+  "output_tokens": 252,
+  "cost_usd": 0.00043461,
+  "success": true,
+  "cancelled": false,
+  "prompt_count": 3,
+  "saved_schema_id": "ffd7d371-c313-4599-9594-5cff654bbdc1",
+  "strategy": "multi_expertise",
+  "job_id": "93f87bba-a10c-4ff8-89cc-6f18330580f0",
+  "job_label": "Single Enrichment",
+  "origin": "make"
+}

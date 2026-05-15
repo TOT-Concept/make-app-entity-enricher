@@ -1,0 +1,9 @@
+[
+  {
+    "name": "recordId",
+    "type": "uuid",
+    "label": "Record ID",
+    "help": "UUID of the record to retrieve. Map from a previous module (e.g. List Records, Enrich Entity).",
+    "required": true
+  }
+]

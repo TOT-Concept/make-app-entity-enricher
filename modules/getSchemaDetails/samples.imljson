@@ -1,0 +1,30 @@
+{
+  "id": "ffd7d371-c313-4599-9594-5cff654bbdc1",
+  "name": "Movie",
+  "is_pinned": true,
+  "tags": ["film", "entertainment"],
+  "schema_content": {
+    "root": {
+      "name": "Movie",
+      "description": "A motion picture work",
+      "properties": [
+        { "name": "title", "type": "multilingual", "is_key": true },
+        { "name": "releaseYear", "type": "string" },
+        { "name": "genres", "type": "multilingual_array" }
+      ]
+    },
+    "$defs": {},
+    "expertise_domains": ["general", "cinematic"]
+  },
+  "sample_json": { "title": "Inception" },
+  "form_values": null,
+  "ai_suggestions": ["Add a director property", "Consider a runtime_minutes field"],
+  "generation_params": {
+    "model": "anthropic::claude-sonnet-4-5",
+    "input_tokens": 312,
+    "output_tokens": 184,
+    "cost_usd": 0.00276
+  },
+  "created_at": "2026-03-12T10:14:00Z",
+  "updated_at": "2026-05-08T15:42:00Z"
+}

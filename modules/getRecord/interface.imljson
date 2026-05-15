@@ -1,12 +1,54 @@
 [
   { "name": "id", "type": "uuid", "label": "Record ID" },
   { "name": "type", "type": "text", "label": "Type" },
-  { "name": "model_composite_key", "type": "text", "label": "Model" },
-  { "name": "structured_output", "type": "any", "label": "Structured output" },
-  { "name": "saved_schema_id", "type": "uuid", "label": "Schema ID" },
+  { "name": "entity_id", "type": "uuid", "label": "Entity ID" },
+  { "name": "entity_name", "type": "text", "label": "Entity name" },
+  { "name": "llm_provider_name", "type": "text", "label": "Provider name" },
+  { "name": "model_name", "type": "text", "label": "Model name" },
+  { "name": "structured_output", "type": "any", "label": "Structured output (shape varies per schema)" },
+  { "name": "saved_schema_id", "type": "uuid", "label": "Saved schema ID" },
   { "name": "strategy", "type": "text", "label": "Strategy" },
-  { "name": "prompts", "type": "any", "label": "Per-prompt metrics" },
-  { "name": "metrics", "type": "any", "label": "Aggregated metrics" },
-  { "name": "validation_errors", "type": "any", "label": "Validation errors" },
+  { "name": "success", "type": "boolean", "label": "Success" },
+  { "name": "cancelled", "type": "boolean", "label": "Cancelled" },
+  { "name": "processing_time_ms", "type": "uinteger", "label": "Processing time (ms)" },
+  { "name": "input_tokens", "type": "uinteger", "label": "Input tokens" },
+  { "name": "output_tokens", "type": "uinteger", "label": "Output tokens" },
+  { "name": "cost_usd", "type": "number", "label": "Cost (USD)" },
+  { "name": "prompt_count", "type": "uinteger", "label": "Prompt count" },
+  {
+    "name": "prompts",
+    "type": "array",
+    "label": "Per-prompt details",
+    "spec": {
+      "type": "collection",
+      "spec": [
+        { "name": "id", "type": "uuid", "label": "Prompt ID" },
+        { "name": "expertise_key", "type": "text", "label": "Expertise key" },
+        { "name": "expertise_name", "type": "text", "label": "Expertise name" },
+        { "name": "sequence_order", "type": "uinteger", "label": "Sequence order" },
+        { "name": "prompt_used", "type": "text", "label": "Prompt sent" },
+        { "name": "system_prompt_used", "type": "text", "label": "System prompt" },
+        { "name": "raw_response", "type": "text", "label": "Raw response" },
+        { "name": "structured_output", "type": "any", "label": "Structured output" },
+        { "name": "processing_time_ms", "type": "uinteger", "label": "Processing time (ms)" },
+        { "name": "input_tokens", "type": "uinteger", "label": "Input tokens" },
+        { "name": "output_tokens", "type": "uinteger", "label": "Output tokens" },
+        { "name": "cost_usd", "type": "number", "label": "Cost (USD)" },
+        { "name": "success", "type": "boolean", "label": "Success" },
+        { "name": "error_message", "type": "text", "label": "Error message" },
+        { "name": "attempts", "type": "uinteger", "label": "Attempts" },
+        { "name": "web_search_calls", "type": "uinteger", "label": "Web search calls" }
+      ]
+    }
+  },
+  {
+    "name": "validation_errors",
+    "type": "array",
+    "label": "Validation errors",
+    "spec": { "type": "text" }
+  },
+  { "name": "job_id", "type": "text", "label": "Job ID" },
+  { "name": "job_label", "type": "text", "label": "Job label" },
+  { "name": "origin", "type": "text", "label": "Origin" },
   { "name": "created_at", "type": "date", "label": "Created at" }
 ]

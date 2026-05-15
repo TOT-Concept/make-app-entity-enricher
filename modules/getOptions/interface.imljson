@@ -1,9 +1,55 @@
 [
-  { "name": "models", "type": "any", "label": "Models" },
-  { "name": "languages", "type": "any", "label": "Languages" },
-  { "name": "strategies", "type": "any", "label": "Strategies" },
+  {
+    "name": "models",
+    "type": "array",
+    "label": "Available models",
+    "spec": {
+      "type": "collection",
+      "spec": [
+        { "name": "key", "type": "text", "label": "Composite key (provider::model)" },
+        { "name": "provider", "type": "text", "label": "Provider" },
+        { "name": "model", "type": "text", "label": "Model identifier" },
+        { "name": "display_name", "type": "text", "label": "Display name" },
+        { "name": "input_price", "type": "number", "label": "Input price (USD/M tokens)" },
+        { "name": "output_price", "type": "number", "label": "Output price (USD/M tokens)" },
+        { "name": "is_available", "type": "boolean", "label": "Is available" },
+        { "name": "supports_web_search", "type": "boolean", "label": "Supports web search" },
+        { "name": "supports_vision", "type": "boolean", "label": "Supports vision" },
+        { "name": "supports_tool_calls", "type": "boolean", "label": "Supports tool calls" }
+      ]
+    }
+  },
+  { "name": "languages", "type": "any", "label": "Languages (code → display name map)" },
+  {
+    "name": "strategies",
+    "type": "array",
+    "label": "Strategies",
+    "spec": {
+      "type": "collection",
+      "spec": [
+        { "name": "name", "type": "text", "label": "Name" },
+        { "name": "description", "type": "text", "label": "Description" }
+      ]
+    }
+  },
+  { "name": "total_companies", "type": "uinteger", "label": "Total enrichment records" },
   { "name": "organization_name", "type": "text", "label": "Organization name" },
   { "name": "api_key_name", "type": "text", "label": "API key name" },
-  { "name": "profile_limits", "type": "any", "label": "Profile limits" },
-  { "name": "processing_type_models", "type": "any", "label": "Processing type models" }
+  { "name": "api_key_role", "type": "text", "label": "API key role" },
+  {
+    "name": "profile_limits",
+    "type": "collection",
+    "label": "Profile limits",
+    "spec": [
+      { "name": "can_view_prompts", "type": "boolean", "label": "Can view prompts" },
+      { "name": "daily_prompt_limit", "type": "uinteger", "label": "Daily prompt limit" },
+      { "name": "weekly_prompt_limit", "type": "uinteger", "label": "Weekly prompt limit" },
+      { "name": "monthly_prompt_limit", "type": "uinteger", "label": "Monthly prompt limit" },
+      { "name": "max_record_results", "type": "uinteger", "label": "Max record results" },
+      { "name": "max_concurrent_jobs", "type": "uinteger", "label": "Max concurrent jobs" },
+      { "name": "max_models_per_enrichment", "type": "uinteger", "label": "Max models per enrichment" },
+      { "name": "max_languages", "type": "uinteger", "label": "Max languages" }
+    ]
+  },
+  { "name": "models_last_updated", "type": "date", "label": "Models last updated" }
 ]
