@@ -5,6 +5,16 @@ All notable changes to the Entity Enricher Make.com app are documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] — 2026-05-31
+
+### Added
+- **Response schema** and **Strict structured output** dropdowns on `Enrich Entity` (advanced parameters), backed by the new `getResponseSchemaOptions` / `getStrictStructuredOutputOptions` RPCs. Each option only offers "On" when at least one selected enrichment model declares the matching capability (`supports_response_schema` / `supports_strict_structured_output`); otherwise it locks to "Off". Response schema defaults on; strict structured output defaults off. Mirrors the n8n connector and web app behaviour.
+- **Record origin tracking** — requests send an `X-Client-Origin` header so enrichment records created via Make are tagged `origin="make"`.
+
+### Fixed
+- **Dropdown persistence** — switched RPC-backed dropdowns to the `options.store` pattern so selected values persist across module reconfiguration.
+- **Connection & RPC hardening** — fixed API requests and dynamic dropdown IML so the connection test and `loadOptions` calls succeed reliably.
+
 ## [1.0.0] — 2026-05-14
 
 ### Added

@@ -99,6 +99,34 @@
     }
   },
   {
+    "name": "enableResponseSchema",
+    "type": "select",
+    "label": "Response schema",
+    "help": "Use the provider response-schema channel (NativeOutput) for selected models that support it. On by default; when off, even capable models fall back to tool-call output. The 'On' label flips to a 'no selected model supports response schema' note when the chosen models can't actually use it.",
+    "required": false,
+    "default": "on",
+    "advanced": true,
+    "options": {
+      "store": "rpc://getResponseSchemaOptions",
+      "label": "label",
+      "value": "value"
+    }
+  },
+  {
+    "name": "enableStrictStructuredOutput",
+    "type": "select",
+    "label": "Strict structured output",
+    "help": "Constrain decoding to the schema (no drift) on whichever structured channel is used, for selected models that support it. Off by default. The 'On' label flips to a 'no selected model supports strict structured output' note when the chosen models can't enforce it.",
+    "required": false,
+    "default": "off",
+    "advanced": true,
+    "options": {
+      "store": "rpc://getStrictStructuredOutputOptions",
+      "label": "label",
+      "value": "value"
+    }
+  },
+  {
     "name": "timeoutSeconds",
     "type": "uinteger",
     "label": "Timeout (seconds)",

@@ -1,0 +1,20 @@
+{
+  "url": "api/enrichment/options",
+  "method": "GET",
+  "response": {
+    "temp": {
+      "selectedModels": "{{ifempty(parameters.models, emptyarray)}}",
+      "anyStrict": "{{contains(map(filter(body.models, 'key', 'in', parameters.models), 'supports_strict_structured_output'), true)}}"
+    },
+    "output": [
+      {
+        "label": "Off",
+        "value": "off"
+      },
+      {
+        "label": "{{if(temp.anyStrict, 'On — constrained decoding (no drift)', 'On — no selected model supports strict structured output')}}",
+        "value": "on"
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "url": "api/enrichment/options",
+  "method": "GET",
+  "response": {
+    "temp": {
+      "selectedModels": "{{ifempty(parameters.models, emptyarray)}}",
+      "anyResponseSchema": "{{contains(map(filter(body.models, 'key', 'in', parameters.models), 'supports_response_schema'), true)}}"
+    },
+    "output": [
+      {
+        "label": "Off",
+        "value": "off"
+      },
+      {
+        "label": "{{if(temp.anyResponseSchema, 'On — provider response-schema channel', 'On — no selected model supports response schema')}}",
+        "value": "on"
+      }
+    ]
+  }
+}

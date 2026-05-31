@@ -1,0 +1,6 @@
+{
+  "name": "getResponseSchemaOptions",
+  "label": "Response schema availability",
+  "description": "Returns ['On', 'Off'] only when at least one selected enrichment model declares supports_response_schema; otherwise returns just 'Off'. Mirrors the n8n connector behavior.",
+  "connection": "apiKey"
+}
