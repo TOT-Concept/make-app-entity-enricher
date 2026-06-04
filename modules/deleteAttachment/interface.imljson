@@ -1,0 +1,5 @@
+[
+  { "name": "success", "type": "boolean", "label": "Success" },
+  { "name": "id", "type": "uuid", "label": "Attachment ID" },
+  { "name": "filename", "type": "text", "label": "File name" }
+]

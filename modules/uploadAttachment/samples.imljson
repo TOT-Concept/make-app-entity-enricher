@@ -1,0 +1,11 @@
+{
+  "id": "aada725d-81b4-4f83-bcdf-c902378decf3",
+  "sha256": "2be7e2d66f17c0e1234e4828768f112c657b2e827e1f7d8d957c5ff5467c49b3",
+  "filename": "report.pdf",
+  "media_type": "application/pdf",
+  "size_bytes": 184213,
+  "mode": "binary",
+  "extraction_kind": "binary",
+  "requires_capability": "supports_pdf_input",
+  "extracted_chars": null
+}

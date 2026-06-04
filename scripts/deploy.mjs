@@ -358,4 +358,26 @@ for (const dirName of listSubdirs(join(ROOT, "rpcs"))) {
   }
 }
 
+// ---------------------------------------------------------------------------
+// 5. Groups — module order in the scenario picker
+// ---------------------------------------------------------------------------
+//
+// Pushed AFTER modules exist (groups reference module names). Make re-sorts
+// the auto-generated "Other" group by type, so an explicit, named-group
+// `groups.json` is the only way to pin module order (e.g. keep Delete
+// Attachment last). Optional file — skipped if absent.
+
+const groupsPath = join(ROOT, "groups.json");
+if (existsSync(groupsPath)) {
+  console.log("\n─── Groups ───");
+  mk([
+    "sdk-apps",
+    "set-section",
+    `--name=${APP_NAME}`,
+    `--version=${APP_VERSION}`,
+    "--section=groups",
+    `--body=${readBody(groupsPath)}`,
+  ]);
+}
+
 console.log("\n✓ Deploy complete");

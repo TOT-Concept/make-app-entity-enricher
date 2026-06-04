@@ -1,0 +1,7 @@
+{
+  "url": "api/attachments/{{parameters.attachmentId}}",
+  "method": "DELETE",
+  "response": {
+    "output": "{{body}}"
+  }
+}

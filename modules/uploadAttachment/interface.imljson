@@ -1,0 +1,11 @@
+[
+  { "name": "id", "type": "uuid", "label": "Attachment ID" },
+  { "name": "sha256", "type": "text", "label": "SHA-256" },
+  { "name": "filename", "type": "text", "label": "File name" },
+  { "name": "media_type", "type": "text", "label": "MIME type" },
+  { "name": "size_bytes", "type": "uinteger", "label": "Size (bytes)" },
+  { "name": "mode", "type": "text", "label": "Mode (inline_text / binary)" },
+  { "name": "extraction_kind", "type": "text", "label": "Extraction kind" },
+  { "name": "requires_capability", "type": "text", "label": "Required model capability" },
+  { "name": "extracted_chars", "type": "uinteger", "label": "Extracted characters" }
+]

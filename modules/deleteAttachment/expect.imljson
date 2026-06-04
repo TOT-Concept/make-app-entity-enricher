@@ -1,0 +1,9 @@
+[
+  {
+    "name": "attachmentId",
+    "type": "uuid",
+    "label": "Attachment ID",
+    "help": "UUID of the attachment to delete (the 'id' returned by the Upload Attachment module).",
+    "required": true
+  }
+]

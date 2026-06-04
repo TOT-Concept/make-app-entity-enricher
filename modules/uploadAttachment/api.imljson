@@ -1,0 +1,16 @@
+{
+  "url": "api/attachments",
+  "method": "POST",
+  "type": "multipart/form-data",
+  "body": {
+    "files": {
+      "value": "{{parameters.data}}",
+      "options": {
+        "filename": "{{parameters.fileName}}"
+      }
+    }
+  },
+  "response": {
+    "output": "{{body[1]}}"
+  }
+}

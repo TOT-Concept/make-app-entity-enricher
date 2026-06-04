@@ -1,0 +1,18 @@
+[
+  {
+    "name": "data",
+    "type": "buffer",
+    "label": "File",
+    "help": "The file to upload. Map a file/binary output from a previous module (e.g. HTTP ▸ Get a File, Google Drive ▸ Download a File). The source module must expose the file as a buffer.",
+    "required": true,
+    "semantic": "file:data"
+  },
+  {
+    "name": "fileName",
+    "type": "filename",
+    "label": "File name",
+    "help": "Original file name including extension (e.g. report.pdf). The extension matters — the server sniffs the format and applies the matching document policy.",
+    "required": true,
+    "semantic": "file:name"
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "name": "deleteAttachment",
+  "label": "Delete Attachment",
+  "description": "Permanently remove an attachment from the server by ID. Typically used as a cleanup step after a successful enrichment so source documents are not left on the storage box.",
+  "connection": "apiKey",
+  "typeId": 4,
+  "actionType": "delete"
+}

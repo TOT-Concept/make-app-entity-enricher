@@ -5,6 +5,13 @@ All notable changes to the Entity Enricher Make.com app are documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] — 2026-06-04
+
+### Added
+- **Upload Attachment** module — upload a file as `multipart/form-data` via `POST /api/attachments`. Map a file/buffer output from an upstream module (e.g. HTTP ▸ Get a File, Google Drive ▸ Download a File) into its *File* field. Returns the attachment `id`, MIME type, mode (`inline_text` / `binary`), and required model capability.
+- **Delete Attachment** module — permanently remove an attachment from the server via `DELETE /api/attachments/{id}`. Use as a cleanup step after a successful enrichment.
+- **Attachment IDs** parameter on `Enrich Entity` (advanced) — map one or more Upload Attachment `id` outputs so the uploaded files are used as source material for the enrichment.
+
 ## [1.1.0] — 2026-05-31
 
 ### Added

@@ -22,6 +22,8 @@ Exposes Entity Enricher's REST API as **7 first-class Make modules** with dynami
 | **Records** | List Records | `GET /api/records` | Search |
 | **Records** | Get Record | `GET /api/records/{id}` | Action |
 | **Fusion** | Merge Results | `POST /api/fusion/merge` | Action |
+| **Attachments** | Upload Attachment | `POST /api/attachments` (multipart) | Action |
+| **Attachments** | Delete Attachment | `DELETE /api/attachments/{id}` | Action |
 | **Configuration** | Get Options | `GET /api/enrichment/options` | Action |
 
 ### Designed for Make
