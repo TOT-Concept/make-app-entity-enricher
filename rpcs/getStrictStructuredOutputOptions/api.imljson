@@ -4,7 +4,7 @@
   "response": {
     "temp": {
       "selectedModels": "{{ifempty(parameters.models, emptyarray)}}",
-      "anyStrict": "{{contains(map(filter(body.models, 'key', 'in', parameters.models), 'supports_strict_structured_output'), true)}}"
+      "anyStrict": "{{contains(map(body.models, 'supports_strict_structured_output', 'key', parameters.models), true)}}"
     },
     "output": [
       {

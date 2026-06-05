@@ -1,43 +1,43 @@
 {
-  "name": "make-app-entity-enricher",
-  "version": "1.2.0",
-  "private": true,
-  "description": "Make.com Custom App for Entity Enricher — enrich entities with multi-model LLM fusion, multilingual output, and expertise-driven strategies",
-  "keywords": [
-    "make-app",
-    "make.com",
-    "integromat",
-    "entity-enricher",
-    "llm",
-    "enrichment"
-  ],
-  "license": "MIT",
-  "author": {
-    "name": "TOT Concept",
-    "email": "contact@entityenricher.ai"
-  },
-  "homepage": "https://entityenricher.ai/docs/integrations/make",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/TOT-Concept/make-app-entity-enricher.git"
-  },
-  "bugs": {
-    "url": "https://github.com/TOT-Concept/make-app-entity-enricher/issues"
-  },
-  "scripts": {
-    "validate": "node scripts/validate.mjs",
-    "lint": "node scripts/validate.mjs",
-    "deploy": "node scripts/deploy.mjs",
-    "pull-scenarios": "node scripts/pull-scenarios.mjs",
-    "mk": "make-cli",
-    "mk:login": "make-cli login",
-    "mk:whoami": "make-cli whoami",
-    "mk:apps": "make-cli sdk-apps list"
-  },
-  "devDependencies": {
-    "@makehq/cli": "^1.4.0"
-  },
-  "engines": {
-    "node": ">=18"
-  }
+	"name": "make-app-entity-enricher",
+	"version": "1.2.1",
+	"private": true,
+	"description": "Make.com Custom App for Entity Enricher — enrich entities with multi-model LLM fusion, multilingual output, and expertise-driven strategies",
+	"keywords": [
+		"make-app",
+		"make.com",
+		"integromat",
+		"entity-enricher",
+		"llm",
+		"enrichment"
+	],
+	"license": "MIT",
+	"author": {
+		"name": "TOT Concept",
+		"email": "contact@entityenricher.ai"
+	},
+	"homepage": "https://entityenricher.ai/docs/integrations/make",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/TOT-Concept/make-app-entity-enricher.git"
+	},
+	"bugs": {
+		"url": "https://github.com/TOT-Concept/make-app-entity-enricher/issues"
+	},
+	"scripts": {
+		"validate": "node scripts/validate.mjs",
+		"lint": "node scripts/validate.mjs",
+		"deploy": "node scripts/deploy.mjs",
+		"pull-scenarios": "node scripts/pull-scenarios.mjs",
+		"mk": "make-cli",
+		"mk:login": "make-cli login",
+		"mk:whoami": "make-cli whoami",
+		"mk:apps": "make-cli sdk-apps list"
+	},
+	"devDependencies": {
+		"@makehq/cli": "^1.4.0"
+	},
+	"engines": {
+		"node": ">=18"
+	}
 }

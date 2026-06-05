@@ -4,7 +4,7 @@
   "response": {
     "temp": {
       "selectedModels": "{{ifempty(parameters.models, emptyarray)}}",
-      "anyWebSearch": "{{contains(map(filter(body.models, 'key', 'in', parameters.models), 'supports_web_search'), true)}}"
+      "anyWebSearch": "{{contains(map(body.models, 'supports_web_search', 'key', parameters.models), true)}}"
     },
     "output": [
       {

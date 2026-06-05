@@ -3,7 +3,7 @@
     "name": "data",
     "type": "buffer",
     "label": "File",
-    "help": "The file to upload. Map a file/binary output from a previous module (e.g. HTTP ▸ Get a File, Google Drive ▸ Download a File). The source module must expose the file as a buffer.",
+    "help": "The file's raw bytes. Map a binary/file output from an upstream module — e.g. HTTP ▸ 'Get a File', Google Drive ▸ 'Download a File', or HTTP ▸ 'Make a request' with Parse response = No. Do NOT use 'Make a request' with parsing on: it turns XML/JSON into a collection, which can't be cast to a buffer (you'll get 'Value can't be casted as buffer for parameter data').",
     "required": true,
     "semantic": "file:data"
   },

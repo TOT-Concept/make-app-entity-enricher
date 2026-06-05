@@ -35,6 +35,16 @@
     }
   },
   {
+    "name": "attachmentIds",
+    "type": "array",
+    "label": "Attachment IDs (optional)",
+    "help": "Attachment UUIDs (from the Upload Attachment module) to use as source material for this enrichment. Map the 'id' output of one or more Upload Attachment modules here.",
+    "spec": {
+      "type": "uuid",
+      "label": "Attachment ID"
+    }
+  },
+  {
     "name": "languages",
     "type": "array",
     "label": "Languages",
@@ -153,16 +163,5 @@
     "help": "When true, the response includes the org's profile_limits \u2014 useful for downstream branching on remaining quota.",
     "default": false,
     "advanced": true
-  },
-  {
-    "name": "attachmentIds",
-    "type": "array",
-    "label": "Attachment IDs (optional)",
-    "help": "Attachment UUIDs (from the Upload Attachment module) to use as source material for this enrichment. Map the 'id' output of one or more Upload Attachment modules here.",
-    "advanced": true,
-    "spec": {
-      "type": "uuid",
-      "label": "Attachment ID"
-    }
   }
 ]

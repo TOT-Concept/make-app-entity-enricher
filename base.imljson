@@ -41,6 +41,10 @@
         "type": "RuntimeError",
         "message": "Job cancelled: {{ifempty(body.detail.message, statusCode)}}"
       },
+      "503": {
+        "type": "ConnectionError",
+        "message": "Service temporarily unavailable ({{ifempty(body.detail.code, 'service_unavailable')}}): {{ifempty(body.detail.message, ifempty(body.detail, 'a backend dependency (e.g. attachment storage) is offline — please retry shortly'))}}"
+      },
       "502": {
         "type": "ConnectionError",
         "message": "Enrichment failed upstream: {{ifempty(body.detail.message, statusCode)}}"

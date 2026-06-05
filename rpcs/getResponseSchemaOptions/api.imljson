@@ -4,7 +4,7 @@
   "response": {
     "temp": {
       "selectedModels": "{{ifempty(parameters.models, emptyarray)}}",
-      "anyResponseSchema": "{{contains(map(filter(body.models, 'key', 'in', parameters.models), 'supports_response_schema'), true)}}"
+      "anyResponseSchema": "{{contains(map(body.models, 'supports_response_schema', 'key', parameters.models), true)}}"
     },
     "output": [
       {

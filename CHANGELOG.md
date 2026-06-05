@@ -5,6 +5,14 @@ All notable changes to the Entity Enricher Make.com app are documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1] — 2026-06-05
+
+### Fixed
+- **Capability dropdowns failed to load** — the `getResponseSchemaOptions`, `getStrictStructuredOutputOptions`, and `getWebSearchOptions` RPCs used a non-existent `filter()` IML function, so the **Response schema**, **Strict structured output**, and **Web search** dropdowns showed "Failed to load data!" (`Function 'filter' not found`). Rewrote them to use Make's built-in `map(array; key; filterKey; possibleValues)` filtering. The web-search variant had carried this latent bug since 1.0.0.
+
+### Changed
+- **Attachment IDs** on `Enrich Entity` moved out of the advanced section to a primary parameter directly after **Models**, so attachment mapping is visible without expanding advanced options.
+
 ## [1.2.0] — 2026-06-04
 
 ### Added
