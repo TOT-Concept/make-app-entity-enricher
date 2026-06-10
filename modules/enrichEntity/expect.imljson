@@ -65,8 +65,8 @@
     "name": "strategy",
     "type": "select",
     "label": "Strategy",
-    "help": "How the LLM is prompted: single_pass (one call), expert_domains (one call grouped by expertise), multi_expertise (parallel calls per expertise).",
-    "default": "single_pass",
+    "help": "How the LLM is prompted: auto (default — the server picks the best strategy from your schema), single_pass (one call), expert_domains (one call grouped by expertise), multi_expertise (parallel calls per expertise).",
+    "default": "auto",
     "options": {
       "store": "rpc://getStrategies",
       "label": "label",

@@ -6,6 +6,7 @@
   { "name": "llm_provider_name", "type": "text", "label": "Provider name" },
   { "name": "model_name", "type": "text", "label": "Model name" },
   { "name": "structured_output", "type": "any", "label": "Structured output (shape varies per schema)" },
+  { "name": "entity_input_data", "type": "any", "label": "Original input entity data (for replay; null for legacy/fusion records)" },
   { "name": "saved_schema_id", "type": "uuid", "label": "Saved schema ID" },
   { "name": "strategy", "type": "text", "label": "Strategy" },
   { "name": "success", "type": "boolean", "label": "Success" },

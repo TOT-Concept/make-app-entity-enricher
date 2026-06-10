@@ -6,7 +6,7 @@
     "schema_id": "{{parameters.schemaId}}",
     "models": "{{parameters.models}}",
     "languages": "{{ifempty(parameters.languages, array('en'))}}",
-    "strategy": "{{ifempty(parameters.strategy, 'single_pass')}}",
+    "strategy": "{{ifempty(parameters.strategy, 'auto')}}",
     "classification_model": "{{parameters.classificationModel}}",
     "arbitration_model": "{{parameters.arbitrationModel}}",
     "enable_web_search": "{{ifempty(parameters.enableWebSearch, 'off') == 'on'}}",
