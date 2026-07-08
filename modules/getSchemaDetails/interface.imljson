@@ -13,6 +13,7 @@
     "spec": { "type": "text" }
   },
   { "name": "generation_params", "type": "any", "label": "Generation parameters" },
+  { "name": "non_determinism_enabled", "type": "boolean", "label": "Non-determinism analysis enabled" },
   { "name": "created_at", "type": "date", "label": "Created at" },
   { "name": "updated_at", "type": "date", "label": "Updated at" }
 ]
