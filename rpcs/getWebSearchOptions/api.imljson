@@ -12,7 +12,7 @@
         "value": "off"
       },
       {
-        "label": "{{if(temp.anyWebSearch, 'On — server-side web search', 'On — no selected model supports web search')}}",
+        "label": "{{if(length(temp.selectedModels) = 0, 'On — applies when the auto-selected model supports web search', if(temp.anyWebSearch, 'On — server-side web search', 'On — no selected model supports web search'))}}",
         "value": "on"
       }
     ]

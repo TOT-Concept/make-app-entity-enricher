@@ -2,5 +2,6 @@
   "name": "getStrategies",
   "label": "List enrichment strategies",
   "description": "Returns the enrichment strategies available (auto, single_pass, expert_domains, multi_expertise).",
-  "connection": "apiKey"
+  "connection": "apiKey",
+  "altConnection": "oauth2"
 }

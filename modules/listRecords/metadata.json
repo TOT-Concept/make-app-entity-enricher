@@ -3,5 +3,6 @@
   "label": "List Records",
   "description": "Returns enrichment records, most recent first. Supports filtering by type, success, and search query.",
   "connection": "apiKey",
+  "altConnection": "oauth2",
   "typeId": 9
 }

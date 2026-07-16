@@ -5,6 +5,16 @@ All notable changes to the Entity Enricher Make.com app are documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] — 2026-07-16
+
+### Added
+- **OAuth 2.0 connection** — connect with your Entity Enricher account instead of pasting an API key: pick *Entity Enricher OAuth 2.0* when creating a connection, sign in, and click **Authorize**. The connection acts on your behalf with your own role and can be revoked anytime from Entity Enricher → *API Keys → Connected Apps*. Implemented as OAuth 2.1 authorization code + PKCE with rotating refresh tokens; every module and dropdown RPC accepts either connection type (`altConnection`). The API-key connection remains available and is still the recommendation for durable service-to-service scenarios (it acts independently of any user account).
+- Self-hosted instances can use the OAuth connection too: seed a confidential client via `AUTH_OAUTH_SEED_CLIENTS` (redirect URI `https://www.integromat.com/oauth/cb/app`) and fill the advanced *Client ID* / *Client Secret* connection fields.
+- **Simpler Enrich Entity module by default** — the non-essential parameters (*Models*, *Attachment IDs*, *Strategy*, *Classification model*, *Arbitration model*) moved behind Make's **Show advanced settings** toggle, joining the existing advanced parameters. The default view now shows only *Entity data*, *Schema*, *Languages*, and *Web search*; with *Models* left empty, Entity Enricher runs with your organization's best model (pinned default or top benchmark score). The Web search "On" label now reads "applies when the auto-selected model supports web search" when no models are selected, instead of the misleading "no selected model supports web search".
+
+### Changed
+- **Benchmark scores in the Models dropdown** — when your organization has scoring-source benchmark scenarios configured, each model label in the `getModels` RPC now appends the overall benchmark score and a Quality/Speed/Cost breakdown (0–100), e.g. `GPT OSS 120B ★82 (Q88 S90 C55), in $0.17, out $0.66`. Models without scores keep their previous label.
+
 ## [1.2.1] — 2026-06-05
 
 ### Fixed

@@ -3,6 +3,7 @@
   "label": "Upload Attachment",
   "description": "Upload a file so it can be used as source material in an enrichment. Map a file/binary output from a previous module (e.g. HTTP ▸ Get a File). Returns the attachment ID to map into the Enrich Entity module's Attachment IDs field. Delete it afterwards with the Delete Attachment module if it is no longer needed.",
   "connection": "apiKey",
+  "altConnection": "oauth2",
   "typeId": 4,
   "actionType": "create"
 }

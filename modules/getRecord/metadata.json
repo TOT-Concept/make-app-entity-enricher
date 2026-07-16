@@ -3,6 +3,7 @@
   "label": "Get Record",
   "description": "Returns a single enrichment record by ID, including its full structured output and per-prompt metrics.",
   "connection": "apiKey",
+  "altConnection": "oauth2",
   "typeId": 4,
   "actionType": "read"
 }

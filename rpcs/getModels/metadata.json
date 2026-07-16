@@ -2,5 +2,6 @@
   "name": "getModels",
   "label": "List enrichment models",
   "description": "Returns models available for enrichment (is_available && not processing_disabled.enrichment). Label includes per-million-token pricing.",
-  "connection": "apiKey"
+  "connection": "apiKey",
+  "altConnection": "oauth2"
 }

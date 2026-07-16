@@ -51,5 +51,48 @@
       { "name": "max_languages", "type": "uinteger", "label": "Max languages" }
     ]
   },
-  { "name": "models_last_updated", "type": "date", "label": "Models last updated" }
+  { "name": "models_last_updated", "type": "date", "label": "Models last updated" },
+  {
+    "name": "default_models",
+    "type": "collection",
+    "label": "Default models (what Auto resolves to, per task)",
+    "spec": [
+      {
+        "name": "enrichment",
+        "type": "collection",
+        "label": "Enrichment default",
+        "spec": [
+          { "name": "key", "type": "text", "label": "Composite key (provider::model)" },
+          { "name": "display_name", "type": "text", "label": "Display name" },
+          { "name": "overall", "type": "number", "label": "Overall benchmark score (0-1)" },
+          { "name": "source", "type": "text", "label": "Score source (organization | global)" },
+          { "name": "pinned", "type": "boolean", "label": "Pinned org default" }
+        ]
+      },
+      {
+        "name": "schema_generation",
+        "type": "collection",
+        "label": "Schema generation default",
+        "spec": [
+          { "name": "key", "type": "text", "label": "Composite key (provider::model)" },
+          { "name": "display_name", "type": "text", "label": "Display name" },
+          { "name": "overall", "type": "number", "label": "Overall benchmark score (0-1)" },
+          { "name": "source", "type": "text", "label": "Score source (organization | global)" },
+          { "name": "pinned", "type": "boolean", "label": "Pinned org default" }
+        ]
+      },
+      {
+        "name": "sample_generation",
+        "type": "collection",
+        "label": "Sample generation default",
+        "spec": [
+          { "name": "key", "type": "text", "label": "Composite key (provider::model)" },
+          { "name": "display_name", "type": "text", "label": "Display name" },
+          { "name": "overall", "type": "number", "label": "Overall benchmark score (0-1)" },
+          { "name": "source", "type": "text", "label": "Score source (organization | global)" },
+          { "name": "pinned", "type": "boolean", "label": "Pinned org default" }
+        ]
+      }
+    ]
+  }
 ]

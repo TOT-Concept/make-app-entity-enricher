@@ -2,5 +2,6 @@
   "name": "getClassificationModels",
   "label": "List classification models",
   "description": "Returns models available for pre-flight entity classification (excludes models with processing_disabled.classification).",
-  "connection": "apiKey"
+  "connection": "apiKey",
+  "altConnection": "oauth2"
 }

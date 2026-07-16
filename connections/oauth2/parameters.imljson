@@ -1,0 +1,27 @@
+[
+  {
+    "name": "baseUrl",
+    "type": "url",
+    "label": "Base URL",
+    "help": "Defaults to the Entity Enricher production cloud. Override only if you self-host (e.g. https://entityenricher.your-domain.com).",
+    "default": "https://entityenricher.ai",
+    "required": false,
+    "advanced": true
+  },
+  {
+    "name": "clientId",
+    "type": "text",
+    "label": "OAuth Client ID (self-hosted only)",
+    "help": "Leave empty on the Entity Enricher cloud — the app ships with its own client. Self-hosters: seed a confidential client via AUTH_OAUTH_SEED_CLIENTS and paste its client_id here.",
+    "required": false,
+    "advanced": true
+  },
+  {
+    "name": "clientSecret",
+    "type": "password",
+    "label": "OAuth Client Secret (self-hosted only)",
+    "help": "Leave empty on the Entity Enricher cloud. Self-hosters: the client_secret of your seeded OAuth client.",
+    "required": false,
+    "advanced": true
+  }
+]

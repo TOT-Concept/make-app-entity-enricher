@@ -1,0 +1,128 @@
+{
+  "authorize": {
+    "url": "{{parameters.baseUrl}}/api/oauth/authorize",
+    "temp": {
+      "codeVerifier": "{{uuid}}{{uuid}}"
+    },
+    "qs": {
+      "response_type": "code",
+      "client_id": "{{ifempty(parameters.clientId, common.clientId)}}",
+      "redirect_uri": "{{oauth.redirectUri}}",
+      "scope": "api",
+      "code_challenge": "{{base64url(sha256(temp.codeVerifier, 'base64'))}}",
+      "code_challenge_method": "S256"
+    },
+    "response": {
+      "temp": {
+        "code": "{{query.code}}"
+      }
+    }
+  },
+  "token": {
+    "url": "{{parameters.baseUrl}}/api/oauth/token",
+    "method": "POST",
+    "type": "urlencoded",
+    "body": {
+      "grant_type": "authorization_code",
+      "code": "{{temp.code}}",
+      "redirect_uri": "{{oauth.redirectUri}}",
+      "client_id": "{{ifempty(parameters.clientId, common.clientId)}}",
+      "client_secret": "{{ifempty(parameters.clientSecret, common.clientSecret)}}",
+      "code_verifier": "{{temp.codeVerifier}}"
+    },
+    "response": {
+      "data": {
+        "baseUrl": "{{ifempty(parameters.baseUrl, 'https://entityenricher.ai')}}",
+        "clientId": "{{ifempty(parameters.clientId, common.clientId)}}",
+        "clientSecret": "{{ifempty(parameters.clientSecret, common.clientSecret)}}",
+        "accessToken": "{{body.access_token}}",
+        "refreshToken": "{{body.refresh_token}}",
+        "expires": "{{addSeconds(now, body.expires_in)}}"
+      },
+      "error": {
+        "message": "OAuth token exchange failed [{{statusCode}}]: {{ifempty(body.error_description, body.error)}}"
+      }
+    },
+    "log": {
+      "sanitize": [
+        "request.body.client_secret",
+        "request.body.code",
+        "request.body.code_verifier",
+        "response.body.access_token",
+        "response.body.refresh_token"
+      ]
+    }
+  },
+  "refresh": {
+    "condition": "{{data.expires < addMinutes(now, 15)}}",
+    "url": "{{ifempty(data.baseUrl, parameters.baseUrl)}}/api/oauth/token",
+    "method": "POST",
+    "type": "urlencoded",
+    "body": {
+      "grant_type": "refresh_token",
+      "refresh_token": "{{data.refreshToken}}",
+      "client_id": "{{ifempty(data.clientId, common.clientId)}}",
+      "client_secret": "{{ifempty(data.clientSecret, common.clientSecret)}}"
+    },
+    "response": {
+      "data": {
+        "accessToken": "{{body.access_token}}",
+        "refreshToken": "{{body.refresh_token}}",
+        "expires": "{{addSeconds(now, body.expires_in)}}"
+      },
+      "error": {
+        "message": "OAuth token refresh failed [{{statusCode}}]: {{ifempty(body.error_description, body.error)}} — reauthorize the connection in Make if this persists."
+      }
+    },
+    "log": {
+      "sanitize": [
+        "request.body.client_secret",
+        "request.body.refresh_token",
+        "response.body.access_token",
+        "response.body.refresh_token"
+      ]
+    }
+  },
+  "info": {
+    "url": "{{ifempty(data.baseUrl, parameters.baseUrl)}}/api/enrichment/options",
+    "method": "GET",
+    "headers": {
+      "authorization": "Bearer {{connection.accessToken}}",
+      "x-client-origin": "make"
+    },
+    "response": {
+      "metadata": {
+        "type": "text",
+        "value": "{{ifempty(body.organization_name, 'Entity Enricher')}}"
+      },
+      "error": {
+        "401": {
+          "type": "InvalidCredentials",
+          "message": "The OAuth connection is no longer valid (revoked or expired). Reauthorize it in Make, or check Entity Enricher → API Keys → Connected Apps."
+        },
+        "message": "Connection test failed [{{statusCode}}]: {{ifempty(body.detail, body)}}"
+      }
+    },
+    "log": {
+      "sanitize": [
+        "request.headers.authorization"
+      ]
+    }
+  },
+  "invalidate": {
+    "url": "{{ifempty(data.baseUrl, parameters.baseUrl)}}/api/oauth/revoke",
+    "method": "POST",
+    "type": "urlencoded",
+    "body": {
+      "token": "{{data.refreshToken}}",
+      "client_id": "{{ifempty(data.clientId, common.clientId)}}",
+      "client_secret": "{{ifempty(data.clientSecret, common.clientSecret)}}"
+    },
+    "log": {
+      "sanitize": [
+        "request.body.client_secret",
+        "request.body.token"
+      ]
+    }
+  }
+}

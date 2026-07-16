@@ -43,9 +43,11 @@ Make scenarios bill **per operation**. To process N entities, use Make's built-i
 1. Sign in to your Make organisation as a developer.
 2. Go to **Apps → Create a new app → Custom App**.
 3. Either upload this directory as a `.zip`, or paste the contents of each `.json` / `.imljson` file into the corresponding tab in the editor.
-4. Add an **API Key connection**: paste a key from Entity Enricher → *Settings → API Keys* (format `ent_XXXXXXXXXXXX`). The connection auto-tests against `/api/enrichment/options`.
+4. Add a connection — two types are available on every module:
+   - **Entity Enricher OAuth 2.0** (easiest): click *Create a connection*, sign in to Entity Enricher, and click **Authorize**. The connection acts on your behalf with your own role; manage or revoke it anytime under Entity Enricher → *API Keys → Connected Apps*.
+   - **Entity Enricher API Key**: paste a key from Entity Enricher → *Settings → API Keys* (format `ent_XXXXXXXXXXXX`). The connection auto-tests against `/api/enrichment/options`. Recommended for durable service-to-service scenarios — an organization access key keeps working even if the person who created it changes role or leaves.
 
-The **Base URL** defaults to `https://entityenricher.ai` and only needs to change for self-hosted deployments.
+The **Base URL** defaults to `https://entityenricher.ai` and only needs to change for self-hosted deployments. Self-hosted OAuth additionally needs a seeded confidential client (`AUTH_OAUTH_SEED_CLIENTS`, redirect URI `https://www.integromat.com/oauth/cb/app`) whose ID/secret go in the connection's advanced fields.
 
 ![API Key connection setup form](https://entityenricher.ai/docs/make-connector-connection-setup.png)
 
@@ -69,7 +71,7 @@ Drop one **Enrich Entity** module into a scenario, configure schema + models + l
                        └ Entity:    {{trigger.json}}
 ```
 
-When 2+ models are selected, the result is **automatically fused** server-side. The Make output bundle includes `is_fused: true`, the list of `source_models`, and a `fusion: {agreed_fields, conflicted_fields, total_fields}` summary.
+Models is optional — leave it empty for **Auto**: Entity Enricher uses your organization's best-scoring model (a pinned organization default wins when set; single model, no fusion). When 2+ models are selected, the result is **automatically fused** server-side. The Make output bundle includes `is_fused: true`, the list of `source_models`, and a `fusion: {agreed_fields, conflicted_fields, total_fields}` summary.
 
 ![Configuring the Enrich Entity module](https://entityenricher.ai/docs/make-connector-add.gif)
 
@@ -107,7 +109,7 @@ Downstream Make modules can map any language directly: `{{enrichEntity.result.na
 
 ## Dynamic dropdowns
 
-Every selectable field is populated by an RPC that hits the Entity Enricher API at configuration time. Pinned schemas surface first (marked with 📌), model labels include per-million-token pricing, and plan-limited orgs see a notice when their quota is reached.
+Every selectable field is populated by an RPC that hits the Entity Enricher API at configuration time. Pinned schemas surface first (marked with 📌), model labels include your organization's benchmark score (★ overall plus a Quality/Speed/Cost breakdown, when scoring benchmarks are configured) and per-million-token pricing, and plan-limited orgs see a notice when their quota is reached.
 
 ![Schemas dropdown open with pinned schemas at the top](https://entityenricher.ai/docs/make-connector-schemas.png)
 
@@ -142,7 +144,7 @@ Profile-limited orgs see structured 402 errors when they exceed quota — Make s
 | HTTP | Make error type | When it fires |
 |---|---|---|
 | `400` | `DataError` | Schema not found, missing search keys, invalid models or languages. |
-| `401` | `InvalidCredentials` | Bad or missing API key. |
+| `401` | `InvalidCredentials` | Bad or missing API key, or a revoked/expired OAuth connection. |
 | `402` | `OutOfMoneyError` | Plan limit exceeded OR insufficient credits. Includes `code` (`insufficient_credits`, `model_limit_exceeded`, …). |
 | `403` | `AccessDeniedError` | Role or scope insufficient. |
 | `404` | `InvalidConfigurationError` | Schema or record not found. |

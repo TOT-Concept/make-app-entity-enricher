@@ -2,5 +2,6 @@
   "name": "getWebSearchOptions",
   "label": "Web search availability",
   "description": "Returns ['On', 'Off'] only when at least one selected enrichment model declares supports_web_search; otherwise returns just 'Off'. Mirrors the n8n connector behavior.",
-  "connection": "apiKey"
+  "connection": "apiKey",
+  "altConnection": "oauth2"
 }

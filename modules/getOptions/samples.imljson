@@ -17,8 +17,8 @@
       "provider": "anthropic",
       "model": "claude-sonnet-4-5",
       "display_name": "Anthropic Claude Sonnet 4.5",
-      "input_price": 3.00,
-      "output_price": 15.00,
+      "input_price": 3.0,
+      "output_price": 15.0,
       "is_available": true,
       "supports_web_search": true,
       "supports_vision": true,
@@ -32,9 +32,18 @@
     "ja": "Japanese (日本語)"
   },
   "strategies": [
-    { "name": "single_pass", "description": "Single LLM call - for little schema" },
-    { "name": "expert_domains", "description": "Single LLM call with expertise-grouped sections" },
-    { "name": "multi_expertise", "description": "Parallel LLM calls per expertise domain" }
+    {
+      "name": "single_pass",
+      "description": "Single LLM call - for little schema"
+    },
+    {
+      "name": "expert_domains",
+      "description": "Single LLM call with expertise-grouped sections"
+    },
+    {
+      "name": "multi_expertise",
+      "description": "Parallel LLM calls per expertise domain"
+    }
   ],
   "total_companies": 1284,
   "organization_name": "TOT Concept",
@@ -50,5 +59,28 @@
     "max_models_per_enrichment": 5,
     "max_languages": 10
   },
-  "models_last_updated": "2026-05-12T08:30:00Z"
+  "models_last_updated": "2026-05-12T08:30:00Z",
+  "default_models": {
+    "enrichment": {
+      "key": "google::gemini-2.5-flash",
+      "display_name": "Google Gemini 2.5 Flash",
+      "overall": 0.86,
+      "source": "organization",
+      "pinned": false
+    },
+    "schema_generation": {
+      "key": "openai::gpt-5.1",
+      "display_name": "OpenAI GPT 5.1",
+      "overall": 0.91,
+      "source": "organization",
+      "pinned": true
+    },
+    "sample_generation": {
+      "key": "openai::gpt-5.1",
+      "display_name": "OpenAI GPT 5.1",
+      "overall": 0.79,
+      "source": "global",
+      "pinned": false
+    }
+  }
 }
