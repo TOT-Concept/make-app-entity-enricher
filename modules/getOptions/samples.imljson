@@ -82,5 +82,21 @@
       "source": "global",
       "pinned": false
     }
+  },
+  "default_models_web_search": {
+    "enrichment": {
+      "key": "google::gemini-2.5-flash",
+      "display_name": "Google Gemini 2.5 Flash",
+      "overall": 0.86,
+      "source": "organization",
+      "pinned": false
+    },
+    "sample_generation": {
+      "key": "openai::gpt-5.1",
+      "display_name": "OpenAI GPT 5.1",
+      "overall": 0.79,
+      "source": "global",
+      "pinned": false
+    }
   }
 }

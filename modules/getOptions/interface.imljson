@@ -94,5 +94,36 @@
         ]
       }
     ]
+  },
+  {
+    "name": "default_models_web_search",
+    "type": "collection",
+    "label": "Default models with web search on (Auto restricted to web-search-capable models; task absent when none resolves)",
+    "spec": [
+      {
+        "name": "enrichment",
+        "type": "collection",
+        "label": "Enrichment default (web search)",
+        "spec": [
+          { "name": "key", "type": "text", "label": "Composite key (provider::model)" },
+          { "name": "display_name", "type": "text", "label": "Display name" },
+          { "name": "overall", "type": "number", "label": "Overall benchmark score (0-1)" },
+          { "name": "source", "type": "text", "label": "Score source (organization | global)" },
+          { "name": "pinned", "type": "boolean", "label": "Pinned org default" }
+        ]
+      },
+      {
+        "name": "sample_generation",
+        "type": "collection",
+        "label": "Sample generation default (web search)",
+        "spec": [
+          { "name": "key", "type": "text", "label": "Composite key (provider::model)" },
+          { "name": "display_name", "type": "text", "label": "Display name" },
+          { "name": "overall", "type": "number", "label": "Overall benchmark score (0-1)" },
+          { "name": "source", "type": "text", "label": "Score source (organization | global)" },
+          { "name": "pinned", "type": "boolean", "label": "Pinned org default" }
+        ]
+      }
+    ]
   }
 ]
