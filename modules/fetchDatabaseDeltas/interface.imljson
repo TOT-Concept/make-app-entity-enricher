@@ -1,0 +1,13 @@
+[
+  { "name": "id", "type": "number", "label": "Delta ID" },
+  { "name": "kind", "type": "text", "label": "Kind" },
+  { "name": "op", "type": "text", "label": "Operation" },
+  { "name": "entity_type", "type": "text", "label": "Entity type" },
+  { "name": "revision", "type": "number", "label": "Revision" },
+  { "name": "sql", "type": "text", "label": "SQL" },
+  { "name": "payload", "type": "collection", "label": "Payload (JSON)" },
+  { "name": "created_at", "type": "date", "label": "Created at" },
+  { "name": "database_id", "type": "uuid", "label": "Database ID" },
+  { "name": "next_cursor", "type": "number", "label": "Next cursor" },
+  { "name": "lease_expires_at", "type": "date", "label": "Lease expires at" }
+]

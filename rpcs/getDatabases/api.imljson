@@ -1,0 +1,11 @@
+{
+  "url": "api/schemas/{{parameters.schemaId}}/databases",
+  "method": "GET",
+  "response": {
+    "iterate": "{{body.databases}}",
+    "output": {
+      "name": "{{item.name}} ({{item.dialect}}, {{item.locale}})",
+      "id": "{{item.id}}"
+    }
+  }
+}

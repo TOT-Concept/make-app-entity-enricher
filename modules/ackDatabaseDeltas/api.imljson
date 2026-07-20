@@ -1,0 +1,10 @@
+{
+  "url": "api/databases/{{parameters.databaseId}}/ack",
+  "method": "POST",
+  "body": {
+    "up_to_id": "{{parameters.upToId}}"
+  },
+  "response": {
+    "output": "{{body}}"
+  }
+}

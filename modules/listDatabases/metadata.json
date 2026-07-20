@@ -1,0 +1,8 @@
+{
+  "name": "listDatabases",
+  "label": "List Databases",
+  "description": "Returns the schema databases (entity-layer sync) of a schema, with pending delta counts.",
+  "connection": "apiKey",
+  "altConnection": "oauth2",
+  "typeId": 9
+}

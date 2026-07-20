@@ -1,0 +1,8 @@
+{
+  "url": "api/schemas/{{parameters.schemaId}}/databases",
+  "method": "GET",
+  "response": {
+    "iterate": "{{body.databases}}",
+    "output": "{{item}}"
+  }
+}

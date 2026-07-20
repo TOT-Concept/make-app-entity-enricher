@@ -1,0 +1,10 @@
+[
+  {
+    "name": "schemaId",
+    "type": "select",
+    "label": "Schema",
+    "help": "Schema whose databases to list.",
+    "required": true,
+    "options": "rpc://getSchemas"
+  }
+]

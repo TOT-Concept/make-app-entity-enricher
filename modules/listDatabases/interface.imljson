@@ -1,0 +1,11 @@
+[
+  { "name": "id", "type": "uuid", "label": "Database ID" },
+  { "name": "name", "type": "text", "label": "Name" },
+  { "name": "dialect", "type": "text", "label": "Dialect" },
+  { "name": "pending_deltas", "type": "number", "label": "Pending deltas" },
+  { "name": "require_complete", "type": "boolean", "label": "Admission gate" },
+  { "name": "purge_on_ack", "type": "boolean", "label": "Purge deltas on ack" },
+  { "name": "purge_entity_state", "type": "boolean", "label": "Purge entity state" },
+  { "name": "webhook_url", "type": "url", "label": "Webhook URL" },
+  { "name": "created_at", "type": "date", "label": "Created at" }
+]

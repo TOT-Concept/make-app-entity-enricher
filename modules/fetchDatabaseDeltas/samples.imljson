@@ -1,0 +1,13 @@
+{
+  "id": 42,
+  "kind": "data",
+  "op": "upsert",
+  "entity_type": "Company",
+  "revision": 7,
+  "sql": "INSERT INTO \"Company\" (\"name\", \"country\", \"_sync_revision\") VALUES ('ACME', 'FR', 7) ON CONFLICT (\"name\", \"country\") DO UPDATE SET \"_sync_revision\" = EXCLUDED.\"_sync_revision\" WHERE \"Company\".\"_sync_revision\" < EXCLUDED.\"_sync_revision\";",
+  "payload": { "entity_type": "Company", "revision": 7 },
+  "created_at": "2026-07-19T11:06:00Z",
+  "database_id": "50838887-c4b9-4218-8544-1a88186683b9",
+  "next_cursor": 42,
+  "lease_expires_at": "2026-07-19T11:08:00Z"
+}

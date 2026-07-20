@@ -1,0 +1,34 @@
+[
+  {
+    "name": "schemaId",
+    "type": "select",
+    "label": "Schema",
+    "help": "Schema owning the database.",
+    "required": true,
+    "options": "rpc://getSchemas"
+  },
+  {
+    "name": "databaseId",
+    "type": "select",
+    "label": "Database",
+    "help": "Schema database to pull deltas from.",
+    "required": true,
+    "options": "rpc://getDatabases"
+  },
+  {
+    "name": "since",
+    "type": "number",
+    "label": "Since (cursor)",
+    "help": "Return deltas with ID greater than this cursor. Leave 0 to resume from the unacknowledged window.",
+    "required": false,
+    "default": 0
+  },
+  {
+    "name": "claim",
+    "type": "boolean",
+    "label": "Claim (lease)",
+    "help": "Lease the returned deltas (requires Acknowledge Database Deltas at the end of the scenario). Disable for a replayable read.",
+    "required": false,
+    "default": true
+  }
+]

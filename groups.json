@@ -1,8 +1,49 @@
 [
-  { "label": "Enrichment", "modules": ["enrichEntity"] },
-  { "label": "Schemas", "modules": ["listSchemas", "getSchemaDetails"] },
-  { "label": "Records", "modules": ["listRecords", "getRecord"] },
-  { "label": "Fusion", "modules": ["mergeResults"] },
-  { "label": "Configuration", "modules": ["getOptions"] },
-  { "label": "Attachments", "modules": ["uploadAttachment", "deleteAttachment"] }
+  {
+    "label": "Enrichment",
+    "modules": [
+      "enrichEntity"
+    ]
+  },
+  {
+    "label": "Schemas",
+    "modules": [
+      "listSchemas",
+      "getSchemaDetails"
+    ]
+  },
+  {
+    "label": "Records",
+    "modules": [
+      "listRecords",
+      "getRecord"
+    ]
+  },
+  {
+    "label": "Fusion",
+    "modules": [
+      "mergeResults"
+    ]
+  },
+  {
+    "label": "Configuration",
+    "modules": [
+      "getOptions"
+    ]
+  },
+  {
+    "label": "Attachments",
+    "modules": [
+      "uploadAttachment",
+      "deleteAttachment"
+    ]
+  },
+  {
+    "label": "Databases",
+    "modules": [
+      "listDatabases",
+      "fetchDatabaseDeltas",
+      "ackDatabaseDeltas"
+    ]
+  }
 ]

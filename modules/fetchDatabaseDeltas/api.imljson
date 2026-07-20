@@ -1,0 +1,25 @@
+{
+  "url": "api/databases/{{parameters.databaseId}}/changes",
+  "method": "GET",
+  "qs": {
+    "since": "{{ifempty(parameters.since, 0)}}",
+    "claim": "{{if(parameters.claim, true, false)}}",
+    "format": "json"
+  },
+  "response": {
+    "iterate": "{{body.deltas}}",
+    "output": {
+      "id": "{{item.id}}",
+      "kind": "{{item.kind}}",
+      "op": "{{item.op}}",
+      "entity_type": "{{item.entity_type}}",
+      "revision": "{{item.revision}}",
+      "sql": "{{item.sql}}",
+      "payload": "{{item.payload}}",
+      "created_at": "{{item.created_at}}",
+      "database_id": "{{parameters.databaseId}}",
+      "next_cursor": "{{body.next_cursor}}",
+      "lease_expires_at": "{{body.lease_expires_at}}"
+    }
+  }
+}

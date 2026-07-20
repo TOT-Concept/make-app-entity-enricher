@@ -1,0 +1,5 @@
+[
+  { "name": "acked", "type": "number", "label": "Acknowledged deltas" },
+  { "name": "purged_deltas", "type": "number", "label": "Purged delta copies" },
+  { "name": "purged_entities", "type": "number", "label": "Purged entities" }
+]

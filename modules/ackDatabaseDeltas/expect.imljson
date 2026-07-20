@@ -1,0 +1,25 @@
+[
+  {
+    "name": "schemaId",
+    "type": "select",
+    "label": "Schema",
+    "help": "Schema owning the database.",
+    "required": true,
+    "options": "rpc://getSchemas"
+  },
+  {
+    "name": "databaseId",
+    "type": "select",
+    "label": "Database",
+    "help": "Schema database whose deltas were applied.",
+    "required": true,
+    "options": "rpc://getDatabases"
+  },
+  {
+    "name": "upToId",
+    "type": "number",
+    "label": "Acknowledge up to ID",
+    "help": "Highest delta ID that was applied (map Next Cursor from Fetch Database Deltas).",
+    "required": true
+  }
+]
