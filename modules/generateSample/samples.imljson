@@ -1,0 +1,26 @@
+{
+  "success": true,
+  "samples": [
+    {
+      "company_name": "Sanofi",
+      "headquarters": { "city": "Paris", "country": "France" },
+      "industry": "Pharmaceuticals"
+    },
+    {
+      "company_name": "Roche",
+      "headquarters": { "city": "Basel", "country": "Switzerland" },
+      "industry": "Pharmaceuticals"
+    }
+  ],
+  "samples_requested": 2,
+  "samples_note": null,
+  "cost_usd": 0.00061204,
+  "input_tokens": 1120,
+  "output_tokens": 940,
+  "processing_time_ms": 18230,
+  "determinism_report": {
+    "analyzed_count": 12,
+    "findings": []
+  },
+  "attachment_coherence": null
+}

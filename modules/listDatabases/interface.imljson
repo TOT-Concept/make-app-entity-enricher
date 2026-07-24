@@ -2,6 +2,20 @@
   { "name": "id", "type": "uuid", "label": "Database ID" },
   { "name": "name", "type": "text", "label": "Name" },
   { "name": "dialect", "type": "text", "label": "Dialect" },
+  {
+    "name": "schemas",
+    "type": "array",
+    "label": "Linked schemas",
+    "spec": {
+      "type": "collection",
+      "spec": [
+        { "name": "saved_schema_id", "type": "uuid", "label": "Schema ID" },
+        { "name": "schema_name", "type": "text", "label": "Schema name" },
+        { "name": "schema_content_hash", "type": "text", "label": "Schema content hash" },
+        { "name": "linked_at", "type": "date", "label": "Linked at" }
+      ]
+    }
+  },
   { "name": "pending_deltas", "type": "number", "label": "Pending deltas" },
   { "name": "require_complete", "type": "boolean", "label": "Admission gate" },
   { "name": "purge_on_ack", "type": "boolean", "label": "Purge deltas on ack" },

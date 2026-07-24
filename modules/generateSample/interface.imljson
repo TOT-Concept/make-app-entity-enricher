@@ -1,0 +1,70 @@
+[
+  {
+    "name": "success",
+    "type": "boolean",
+    "label": "Success"
+  },
+  {
+    "name": "samples",
+    "type": "array",
+    "label": "Generated samples",
+    "spec": {
+      "type": "any",
+      "label": "Sample (shape varies per entity type)"
+    }
+  },
+  {
+    "name": "samples_requested",
+    "type": "uinteger",
+    "label": "Samples requested"
+  },
+  {
+    "name": "samples_note",
+    "type": "text",
+    "label": "Samples note (set when fewer samples were delivered than requested)"
+  },
+  {
+    "name": "cost_usd",
+    "type": "number",
+    "label": "Cost (USD)"
+  },
+  {
+    "name": "input_tokens",
+    "type": "uinteger",
+    "label": "Input tokens"
+  },
+  {
+    "name": "output_tokens",
+    "type": "uinteger",
+    "label": "Output tokens"
+  },
+  {
+    "name": "processing_time_ms",
+    "type": "uinteger",
+    "label": "Processing time (ms)"
+  },
+  {
+    "name": "determinism_report",
+    "type": "collection",
+    "label": "Determinism report (template sample only)",
+    "spec": [
+      { "name": "analyzed_count", "type": "uinteger", "label": "Analyzed property count" },
+      {
+        "name": "findings",
+        "type": "array",
+        "label": "Flagged findings",
+        "spec": { "type": "any", "label": "Finding" }
+      }
+    ]
+  },
+  {
+    "name": "attachment_coherence",
+    "type": "collection",
+    "label": "Attachment coherence verdict (source mode with 2+ attachments only)",
+    "spec": [
+      { "name": "mode", "type": "text", "label": "Mode" },
+      { "name": "object_type", "type": "text", "label": "Resolved object type" },
+      { "name": "reason", "type": "text", "label": "Reason (incoherent mode only)" }
+    ]
+  }
+]

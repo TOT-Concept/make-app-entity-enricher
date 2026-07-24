@@ -4,7 +4,7 @@
   "response": {
     "iterate": "{{body.databases}}",
     "output": {
-      "name": "{{item.name}} ({{item.dialect}}, {{item.locale}})",
+      "name": "{{item.name}} ({{item.dialect}})",
       "id": "{{item.id}}"
     }
   }

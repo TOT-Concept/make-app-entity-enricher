@@ -1,0 +1,9 @@
+{
+  "name": "generateSample",
+  "label": "Generate Sample",
+  "description": "Generate 1..N realistic sample JSON objects of one entity type — the entry point of the schema-authoring loop. The first sample defines the field set; the rest reuse it and invent values for a different typical instance. The module blocks until generation completes or times out.",
+  "connection": "apiKey",
+  "altConnection": "oauth2",
+  "typeId": 4,
+  "actionType": "create"
+}

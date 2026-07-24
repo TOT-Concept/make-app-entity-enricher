@@ -1,0 +1,112 @@
+[
+  {
+    "name": "entityType",
+    "type": "text",
+    "label": "Entity type",
+    "help": "What kind of entity to sample, e.g. 'Pharmaceutical Company'. 📖 [Full module guide](https://entityenricher.ai/docs/integrations/make)",
+    "required": true
+  },
+  {
+    "name": "sampleCount",
+    "type": "uinteger",
+    "label": "Sample count",
+    "help": "How many samples of this entity type to generate in one call. The first defines the field set (full pipeline incl. determinism analysis); the rest are fast parallel follow-up turns that keep the same fields and invent values for a different typical instance. Forced to 1 whenever Attachment IDs is set.",
+    "default": 1,
+    "validate": {
+      "min": 1,
+      "max": 20
+    }
+  },
+  {
+    "name": "typicalObjects",
+    "type": "array",
+    "label": "Typical instances (optional)",
+    "help": "Up to Sample Count concrete instances to anchor knowledge mode (e.g. 'Sanofi', 'Pfizer'), one per generated sample in order — samples beyond the number given are auto-invented.",
+    "advanced": true,
+    "spec": {
+      "type": "text",
+      "label": "Instance"
+    }
+  },
+  {
+    "name": "fields",
+    "type": "array",
+    "label": "Fields (optional)",
+    "help": "Field names the sample must include. The model may add other relevant fields.",
+    "advanced": true,
+    "spec": {
+      "type": "text",
+      "label": "Field name"
+    }
+  },
+  {
+    "name": "namingConvention",
+    "type": "select",
+    "label": "Naming convention",
+    "default": "auto",
+    "advanced": true,
+    "options": [
+      { "label": "Auto", "value": "auto" },
+      { "label": "snake_case", "value": "snake_case" },
+      { "label": "camelCase", "value": "camelCase" }
+    ]
+  },
+  {
+    "name": "attachmentIds",
+    "type": "array",
+    "label": "Attachment IDs (optional)",
+    "help": "Attachment UUIDs (from the Upload Attachment module) to use as source material. Switches into source mode: transcribe the document or describe visible photo attributes only. Forces Sample Count to 1.",
+    "advanced": true,
+    "spec": {
+      "type": "uuid",
+      "label": "Attachment ID"
+    }
+  },
+  {
+    "name": "extraInstructions",
+    "type": "text",
+    "label": "Extra instructions (optional)",
+    "help": "Free-form guidance appended to the prompt.",
+    "advanced": true
+  },
+  {
+    "name": "enableWebSearch",
+    "type": "select",
+    "label": "Web search",
+    "help": "Ground knowledge mode with the model's builtin web-search tool (ignored in source mode and for models without search support).",
+    "default": "off",
+    "advanced": true,
+    "options": [
+      { "label": "Off", "value": "off" },
+      { "label": "On", "value": "on" }
+    ]
+  },
+  {
+    "name": "language",
+    "type": "text",
+    "label": "Language",
+    "help": "Output language code for field names AND values (e.g. 'en', 'fr').",
+    "default": "en",
+    "advanced": true
+  },
+  {
+    "name": "model",
+    "type": "text",
+    "label": "Model",
+    "help": "'auto' (default) lets the server pick the org's default sample-generation model.",
+    "default": "auto",
+    "advanced": true
+  },
+  {
+    "name": "timeoutSeconds",
+    "type": "uinteger",
+    "label": "Timeout (seconds)",
+    "help": "How long the module waits before failing with a timeout error. Bounded [10, 900].",
+    "default": 300,
+    "validate": {
+      "min": 10,
+      "max": 900
+    },
+    "advanced": true
+  }
+]

@@ -5,6 +5,16 @@ All notable changes to the Entity Enricher Make.com app are documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- **Typed failure code on Enrich Entity per-model results** — a new `error_code` output field (inside *Per-model results*) names why a model produced no result: `model_retired` (provider retired the model, now auto-deactivated — reselect and retry), `rate_limited`, `context_length_exceeded`, or `provider_timeout`. The backend now returns matching HTTP statuses (422/429/504) for these instead of a generic 502.
+
+## [1.4.0] — 2026-07-21
+
+### Changed
+- **Multi-schema databases** — a schema database can now be linked to several saved schemas (shared entity types merge into the same tables, matched by database key). **List Databases** output rows replace the single `saved_schema_id`/`schema_content_hash` fields with a `schemas` array (schema ID, name, content hash, linked date per linked schema); the stale `locale` field was removed from the sample and the database dropdown label. **Fetch Database Deltas** batches may now include `kind: "schema"` DDL-migration rows — apply their `sql` like any other delta; they arrive before the data rows that need them.
+
 ## [1.3.0] — 2026-07-16
 
 ### Added

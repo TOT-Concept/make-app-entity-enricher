@@ -9,7 +9,8 @@
     "label": "Schemas",
     "modules": [
       "listSchemas",
-      "getSchemaDetails"
+      "getSchemaDetails",
+      "generateSample"
     ]
   },
   {

@@ -33,7 +33,9 @@
     "name": "source_models",
     "type": "array",
     "label": "Source models (fused only)",
-    "spec": { "type": "text" }
+    "spec": {
+      "type": "text"
+    }
   },
   {
     "name": "cost_usd",
@@ -60,10 +62,42 @@
     "type": "collection",
     "label": "Fusion summary (fused only)",
     "spec": [
-      { "name": "agreed_fields", "type": "uinteger", "label": "Agreed fields" },
-      { "name": "conflicted_fields", "type": "uinteger", "label": "Conflicted fields" },
-      { "name": "total_fields", "type": "uinteger", "label": "Total fields" }
+      {
+        "name": "agreed_fields",
+        "type": "uinteger",
+        "label": "Agreed fields"
+      },
+      {
+        "name": "conflicted_fields",
+        "type": "uinteger",
+        "label": "Conflicted fields"
+      },
+      {
+        "name": "total_fields",
+        "type": "uinteger",
+        "label": "Total fields"
+      }
     ]
+  },
+  {
+    "name": "failed_models",
+    "type": "array",
+    "label": "Failed models (set when a requested model produced no result)",
+    "spec": {
+      "type": "collection",
+      "spec": [
+        {
+          "name": "model",
+          "type": "text",
+          "label": "Model"
+        },
+        {
+          "name": "error_message",
+          "type": "text",
+          "label": "Error message"
+        }
+      ]
+    }
   },
   {
     "name": "per_model_results",
@@ -72,17 +106,66 @@
     "spec": {
       "type": "collection",
       "spec": [
-        { "name": "model", "type": "text", "label": "Model" },
-        { "name": "success", "type": "boolean", "label": "Success" },
-        { "name": "partial_success", "type": "boolean", "label": "Partial success" },
-        { "name": "result", "type": "any", "label": "Result" },
-        { "name": "error_message", "type": "text", "label": "Error message" },
-        { "name": "record_id", "type": "uuid", "label": "Record ID" },
-        { "name": "cost_usd", "type": "number", "label": "Cost (USD)" },
-        { "name": "input_tokens", "type": "uinteger", "label": "Input tokens" },
-        { "name": "output_tokens", "type": "uinteger", "label": "Output tokens" },
-        { "name": "processing_time_ms", "type": "uinteger", "label": "Processing time (ms)" },
-        { "name": "cancelled", "type": "boolean", "label": "Cancelled" }
+        {
+          "name": "model",
+          "type": "text",
+          "label": "Model"
+        },
+        {
+          "name": "success",
+          "type": "boolean",
+          "label": "Success"
+        },
+        {
+          "name": "partial_success",
+          "type": "boolean",
+          "label": "Partial success"
+        },
+        {
+          "name": "result",
+          "type": "any",
+          "label": "Result"
+        },
+        {
+          "name": "error_message",
+          "type": "text",
+          "label": "Error message"
+        },
+        {
+          "name": "error_code",
+          "type": "text",
+          "label": "Error code (model_retired / rate_limited / context_length_exceeded / provider_timeout)"
+        },
+        {
+          "name": "record_id",
+          "type": "uuid",
+          "label": "Record ID"
+        },
+        {
+          "name": "cost_usd",
+          "type": "number",
+          "label": "Cost (USD)"
+        },
+        {
+          "name": "input_tokens",
+          "type": "uinteger",
+          "label": "Input tokens"
+        },
+        {
+          "name": "output_tokens",
+          "type": "uinteger",
+          "label": "Output tokens"
+        },
+        {
+          "name": "processing_time_ms",
+          "type": "uinteger",
+          "label": "Processing time (ms)"
+        },
+        {
+          "name": "cancelled",
+          "type": "boolean",
+          "label": "Cancelled"
+        }
       ]
     }
   },
@@ -91,14 +174,46 @@
     "type": "collection",
     "label": "Profile limits (when requested)",
     "spec": [
-      { "name": "can_view_prompts", "type": "boolean", "label": "Can view prompts" },
-      { "name": "daily_prompt_limit", "type": "uinteger", "label": "Daily prompt limit" },
-      { "name": "weekly_prompt_limit", "type": "uinteger", "label": "Weekly prompt limit" },
-      { "name": "monthly_prompt_limit", "type": "uinteger", "label": "Monthly prompt limit" },
-      { "name": "max_record_results", "type": "uinteger", "label": "Max record results" },
-      { "name": "max_concurrent_jobs", "type": "uinteger", "label": "Max concurrent jobs" },
-      { "name": "max_models_per_enrichment", "type": "uinteger", "label": "Max models per enrichment" },
-      { "name": "max_languages", "type": "uinteger", "label": "Max languages" }
+      {
+        "name": "can_view_prompts",
+        "type": "boolean",
+        "label": "Can view prompts"
+      },
+      {
+        "name": "daily_prompt_limit",
+        "type": "uinteger",
+        "label": "Daily prompt limit"
+      },
+      {
+        "name": "weekly_prompt_limit",
+        "type": "uinteger",
+        "label": "Weekly prompt limit"
+      },
+      {
+        "name": "monthly_prompt_limit",
+        "type": "uinteger",
+        "label": "Monthly prompt limit"
+      },
+      {
+        "name": "max_record_results",
+        "type": "uinteger",
+        "label": "Max record results"
+      },
+      {
+        "name": "max_concurrent_jobs",
+        "type": "uinteger",
+        "label": "Max concurrent jobs"
+      },
+      {
+        "name": "max_models_per_enrichment",
+        "type": "uinteger",
+        "label": "Max models per enrichment"
+      },
+      {
+        "name": "max_languages",
+        "type": "uinteger",
+        "label": "Max languages"
+      }
     ]
   }
 ]

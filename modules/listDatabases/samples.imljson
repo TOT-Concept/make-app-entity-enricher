@@ -2,7 +2,14 @@
   "id": "50838887-c4b9-4218-8544-1a88186683b9",
   "name": "production_mirror",
   "dialect": "postgres",
-  "locale": "en",
+  "schemas": [
+    {
+      "saved_schema_id": "c049fbaa-fe52-4598-8728-18cc9506b0d1",
+      "schema_name": "VideoGame",
+      "schema_content_hash": "8d7f2b3c4e5a6f708192a3b4c5d6e7f8091a2b3c4d5e6f708192a3b4c5d6e7f8",
+      "linked_at": "2026-07-19T11:05:58Z"
+    }
+  ],
   "pending_deltas": 4,
   "require_complete": true,
   "purge_on_ack": false,
