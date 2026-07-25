@@ -10,7 +10,8 @@
     "modules": [
       "listSchemas",
       "getSchemaDetails",
-      "generateSample"
+      "generateSample",
+      "generateSchema"
     ]
   },
   {

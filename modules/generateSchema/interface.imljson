@@ -1,0 +1,63 @@
+[
+  {
+    "name": "success",
+    "type": "boolean",
+    "label": "Success"
+  },
+  {
+    "name": "schema_id",
+    "type": "uuid",
+    "label": "Saved schema ID"
+  },
+  {
+    "name": "schema",
+    "type": "any",
+    "label": "Generated schema (GeneratedJsonSchema)"
+  },
+  {
+    "name": "suggestions",
+    "type": "array",
+    "label": "Improvement suggestions",
+    "spec": { "type": "text" }
+  },
+  {
+    "name": "property_count",
+    "type": "uinteger",
+    "label": "Property count"
+  },
+  {
+    "name": "expertise_count",
+    "type": "uinteger",
+    "label": "Expertise domain count"
+  },
+  {
+    "name": "record_id",
+    "type": "uuid",
+    "label": "Record ID"
+  },
+  {
+    "name": "model",
+    "type": "text",
+    "label": "Model"
+  },
+  {
+    "name": "cost_usd",
+    "type": "number",
+    "label": "Cost (USD)"
+  },
+  {
+    "name": "input_tokens",
+    "type": "uinteger",
+    "label": "Input tokens"
+  },
+  {
+    "name": "output_tokens",
+    "type": "uinteger",
+    "label": "Output tokens"
+  },
+  {
+    "name": "processing_time_ms",
+    "type": "uinteger",
+    "label": "Processing time (ms)"
+  }
+]

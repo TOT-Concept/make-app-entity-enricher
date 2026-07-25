@@ -22,5 +22,22 @@
     "type": "array",
     "label": "Validation warnings",
     "spec": { "type": "text" }
+  },
+  {
+    "name": "database",
+    "type": "collection",
+    "label": "Database sync outcome (when the schema has a registered database)",
+    "spec": [
+      { "name": "saved", "type": "boolean", "label": "Saved to the entity layer (false = will NOT reach your database)" },
+      { "name": "reason", "type": "text", "label": "Rejection reason (when not saved)" },
+      {
+        "name": "missing_fields",
+        "type": "array",
+        "label": "Required fields that came back empty",
+        "spec": { "type": "text" }
+      },
+      { "name": "entity_count", "type": "uinteger", "label": "Entities written" },
+      { "name": "delta_count", "type": "uinteger", "label": "SQL deltas queued" }
+    ]
   }
 ]

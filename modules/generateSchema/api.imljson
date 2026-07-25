@@ -1,0 +1,13 @@
+{
+  "url": "api/schema/generate/sync",
+  "method": "POST",
+  "body": {
+    "entity_samples": "{{parseJSON(parameters.entitySamples)}}",
+    "model": "{{ifempty(parameters.model, 'auto')}}",
+    "generation_strategy": "{{if(parameters.generationStrategy = 'auto', null, parameters.generationStrategy)}}",
+    "generate_semantic_ids": "{{ifempty(parameters.generateSemanticIds, false)}}",
+    "sample_commonality_threshold": "{{ifempty(parameters.commonalityThreshold, 0.5)}}",
+    "extra_instructions": "{{parameters.extraInstructions}}",
+    "timeout_seconds": "{{ifempty(parameters.timeoutSeconds, 300)}}"
+  }
+}

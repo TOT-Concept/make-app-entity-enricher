@@ -1,0 +1,65 @@
+[
+  {
+    "name": "entitySamples",
+    "type": "text",
+    "label": "Sample data (JSON)",
+    "help": "One sample object, e.g. {\"title\":\"Fight Club\"}, or a JSON array of several samples of the SAME entity type, e.g. [{\"title\":\"Fight Club\"},{\"title\":\"Heat\"}]. With several samples the schema covers the union of their fields: a field missing or null in any sample becomes nullable, and distinct observed values become the property examples. You can also map a JSON string from a previous module. 📖 [Full module guide](https://entityenricher.ai/docs/integrations/make)",
+    "required": true
+  },
+  {
+    "name": "model",
+    "type": "text",
+    "label": "Model",
+    "help": "'auto' (default) lets the server pick the org's default schema-generation model.",
+    "default": "auto",
+    "advanced": true
+  },
+  {
+    "name": "generationStrategy",
+    "type": "select",
+    "label": "Strategy",
+    "help": "Generation pipeline: staged (small single-concern calls, small-model friendly) or monolithic (legacy single call). Auto uses the server default.",
+    "default": "auto",
+    "advanced": true,
+    "options": [
+      { "label": "Auto (server default)", "value": "auto" },
+      { "label": "Multi-step (staged)", "value": "staged" },
+      { "label": "Single call (monolithic)", "value": "monolithic" }
+    ]
+  },
+  {
+    "name": "generateSemanticIds",
+    "type": "boolean",
+    "label": "Generate semantic IDs",
+    "help": "Add a semantic_id property to every object with a key source (enables embedding-based entity resolution).",
+    "default": false,
+    "advanced": true
+  },
+  {
+    "name": "commonalityThreshold",
+    "type": "number",
+    "label": "Commonality threshold",
+    "help": "Minimum share (0..1) of the combined field set every sample must cover — mixed entity types fail with a 400 before any LLM call. Default 0.5.",
+    "default": 0.5,
+    "advanced": true
+  },
+  {
+    "name": "extraInstructions",
+    "type": "text",
+    "label": "Extra instructions (optional)",
+    "help": "Free-form guidance appended to the prompt.",
+    "advanced": true
+  },
+  {
+    "name": "timeoutSeconds",
+    "type": "uinteger",
+    "label": "Timeout (seconds)",
+    "help": "How long the module waits before failing with a timeout error. Bounded [10, 900].",
+    "default": 300,
+    "validate": {
+      "min": 10,
+      "max": 900
+    },
+    "advanced": true
+  }
+]

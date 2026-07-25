@@ -1,0 +1,33 @@
+{
+  "success": true,
+  "schema_id": "6ab10b92-d89c-4436-acec-4c3d9b50a4a4",
+  "schema": {
+    "root": {
+      "name": "Film",
+      "description": "A feature film",
+      "properties": {
+        "title": { "type": "string", "is_key": true, "expertise": "film_analyst" },
+        "release_year": { "type": "integer", "expertise": "film_analyst", "examples": ["1999", "1995"] },
+        "box_office_usd": { "type": "number", "nullable": true, "expertise": "film_analyst" }
+      }
+    },
+    "expertise_domains": {
+      "film_analyst": { "name": "Film Analyst", "description": "Cinema knowledge" }
+    }
+  },
+  "suggestions": [
+    "Add a director field",
+    "Add a genres array",
+    "Add a runtime_minutes field",
+    "Add a production_companies array",
+    "Add an original_language field"
+  ],
+  "property_count": 3,
+  "expertise_count": 1,
+  "record_id": "93f87bba-a10c-4ff8-89cc-6f18330580f0",
+  "model": "openai::gpt-5.4-nano",
+  "cost_usd": 0.00087,
+  "input_tokens": 2210,
+  "output_tokens": 1470,
+  "processing_time_ms": 21870
+}
