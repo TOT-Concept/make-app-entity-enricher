@@ -13,7 +13,7 @@
     "label": "Database",
     "help": "Schema database to pull deltas from.",
     "required": true,
-    "options": "rpc://getDatabases"
+    "options": "rpc://getDatabaseSyncs"
   },
   {
     "name": "since",

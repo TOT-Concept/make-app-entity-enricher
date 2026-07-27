@@ -13,7 +13,7 @@
     "label": "Database",
     "help": "Schema database whose deltas were applied.",
     "required": true,
-    "options": "rpc://getDatabases"
+    "options": "rpc://getDatabaseSyncs"
   },
   {
     "name": "upToId",

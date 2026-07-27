@@ -1,7 +1,7 @@
 {
   "name": "ackDatabaseDeltas",
   "label": "Acknowledge Database Deltas",
-  "description": "Acknowledges applied deltas up to an ID: releases the lease and, per database options, purges delivered copies and fully-delivered entity state.",
+  "description": "Acknowledges applied deltas up to an ID: releases the lease and, per sync options, purges delivered copies and fully-delivered entity state.",
   "connection": "apiKey",
   "altConnection": "oauth2",
   "typeId": 4,

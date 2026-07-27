@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### ⚠ BREAKING — "Databases" is now "Database Sync"
+
+The feature was named as though Entity Enricher hosted a database for you. It does not: it keeps *your own* PostgreSQL up to date by shipping SQL that a client you run applies. The module group and the identifiers are renamed to match:
+
+| Was | Now |
+|---|---|
+| Module `listDatabases` ("List Databases") | Module `listDatabaseSyncs` ("List Database Syncs") |
+| RPC `getDatabases` (the Database dropdown) | RPC `getDatabaseSyncs` |
+| Group "Databases" | Group "Database Sync" |
+
+**Existing scenarios that use List Databases keep pointing at the old module and must be re-created with List Database Syncs.** `fetchDatabaseDeltas` and `ackDatabaseDeltas` keep their names — only their descriptions changed — so scenarios using only those are unaffected.
+
+**Maintainer step, required at release:** `scripts/deploy.mjs` only *creates* entities that are missing on the remote — it never deletes. After deploying this version, delete the obsolete `listDatabases` module and `getDatabases` RPC by hand in the Make Developer Hub. If you skip it, both the old and new modules stay published and Make buckets the orphans under "Other".
+
 ### Added
 - **Typed failure code on Enrich Entity per-model results** — a new `error_code` output field (inside *Per-model results*) names why a model produced no result: `model_retired` (provider retired the model, now auto-deactivated — reselect and retry), `rate_limited`, `context_length_exceeded`, or `provider_timeout`. The backend now returns matching HTTP statuses (422/429/504) for these instead of a generic 502.
 

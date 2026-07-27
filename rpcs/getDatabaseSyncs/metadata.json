@@ -1,0 +1,7 @@
+{
+  "name": "getDatabaseSyncs",
+  "label": "List database syncs",
+  "description": "Returns the database syncs registered on a schema.",
+  "connection": "apiKey",
+  "altConnection": "oauth2"
+}

@@ -41,9 +41,9 @@
     ]
   },
   {
-    "label": "Databases",
+    "label": "Database Sync",
     "modules": [
-      "listDatabases",
+      "listDatabaseSyncs",
       "fetchDatabaseDeltas",
       "ackDatabaseDeltas"
     ]

@@ -1,7 +1,0 @@
-{
-  "name": "getDatabases",
-  "label": "List schema databases",
-  "description": "Returns the schema databases (entity-layer sync) registered on a schema.",
-  "connection": "apiKey",
-  "altConnection": "oauth2"
-}
