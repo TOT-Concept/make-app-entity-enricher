@@ -21,9 +21,9 @@
     "spec": { "type": "text" }
   },
   {
-    "name": "property_count",
+    "name": "sample_property_count",
     "type": "uinteger",
-    "label": "Property count"
+    "label": "Sample property count"
   },
   {
     "name": "expertise_count",

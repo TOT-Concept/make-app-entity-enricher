@@ -22,7 +22,7 @@
     "Add a production_companies array",
     "Add an original_language field"
   ],
-  "property_count": 3,
+  "sample_property_count": 3,
   "expertise_count": 1,
   "record_id": "93f87bba-a10c-4ff8-89cc-6f18330580f0",
   "model": "openai::gpt-5.4-nano",

@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### ⚠ BREAKING — per-prompt fields and schema-generation property count renamed
+
+- **Get Record** *Per-prompt details*: `prompt_used` is now `user_prompt` ("Prompt sent"), `system_prompt_used` is now `system_prompt` (`raw_response` unchanged). Scenarios mapping those fields must be re-mapped; the values are unchanged.
+- **Generate Schema** output: `property_count` is now `sample_property_count` ("Sample property count") — the count was always taken from the input sample's properties, not from the generated schema.
+
+### ⚠ BREAKING — record output field `llm_provider_name` is now `model_composite_key`
+
+The field never held a provider name — it holds the model composite key (e.g. `anthropic::claude-sonnet-4-5`). Renamed in the **Get Record** and **List Records** output bundles (interface label is now "Model composite key"). **Existing scenarios mapping `llm_provider_name` must be re-mapped to `model_composite_key`;** the value is unchanged.
+
 ### ⚠ BREAKING — "Databases" is now "Database Sync"
 
 The feature was named as though Entity Enricher hosted a database for you. It does not: it keeps *your own* PostgreSQL up to date by shipping SQL that a client you run applies. The module group and the identifiers are renamed to match:

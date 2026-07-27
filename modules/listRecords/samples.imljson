@@ -3,7 +3,7 @@
   "type": "enrichment",
   "entity_id": "9c54a8d2-1234-4567-89ab-cdef01234567",
   "entity_name": "12 Angry Men",
-  "llm_provider_name": "xai",
+  "model_composite_key": "xai::grok-4-1-fast",
   "model_name": "grok-4-1-fast",
   "created_at": "2026-05-14T12:24:25Z",
   "processing_time_ms": 15560,
