@@ -141,6 +141,61 @@
         }
       },
       {
+        "name": "shared_entity_conflicts",
+        "type": "array",
+        "label": "Shared rows this run overwrote while another parent still links to them",
+        "spec": {
+          "type": "collection",
+          "spec": [
+            {
+              "name": "entity_type",
+              "type": "text",
+              "label": "Entity type"
+            },
+            {
+              "name": "path",
+              "type": "text",
+              "label": "Path of the shared child"
+            },
+            {
+              "name": "keys",
+              "type": "any",
+              "label": "Identifying values of the shared row"
+            },
+            {
+              "name": "other_parents",
+              "type": "uinteger",
+              "label": "Other entities linking to that row"
+            },
+            {
+              "name": "fields",
+              "type": "array",
+              "label": "Overwritten properties",
+              "spec": {
+                "type": "collection",
+                "spec": [
+                  {
+                    "name": "property",
+                    "type": "text",
+                    "label": "Property"
+                  },
+                  {
+                    "name": "previous",
+                    "type": "text",
+                    "label": "Value stored by the other parent"
+                  },
+                  {
+                    "name": "incoming",
+                    "type": "text",
+                    "label": "Value written over it"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
         "name": "entity_count",
         "type": "uinteger",
         "label": "Entities written"

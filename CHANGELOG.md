@@ -9,9 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added — database sync outcome exposes dropped rows
 
-**Enrich Entity** and **Merge Results** now map two more fields under *Database sync outcome*:
+**Enrich Entity** and **Merge Results** now map three more fields under *Database sync outcome*:
 
 - `key_collisions` — list items that claimed a database key an earlier sibling already had. Only the first is written (one key = one row downstream), and each entry names the `entity_type`, the `path` of the dropped item, and the `kept` / `dropped` identifying values so a fabricated or non-discriminating id is visible instead of silently collapsing two rows into one.
+- `shared_entity_conflicts` — shared (non-owned) rows whose stored values this run overwrote while at least one *other* parent still links to them. Each entry names the `entity_type`, `path`, `keys` and `other_parents` count plus every overwritten `property` with its `previous` / `incoming` value. Usually it means the nested object holds per-parent data (a rating measured for *this* entity) and the relationship should be marked owned.
 - `skipped_items` — array items dropped by a `skip_row` database; the field was already returned by the API but was missing from the output bundle.
 
 ### ⚠ BREAKING — per-prompt fields and schema-generation property count renamed
