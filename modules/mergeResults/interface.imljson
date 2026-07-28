@@ -36,6 +36,26 @@
         "label": "Required fields that came back empty",
         "spec": { "type": "text" }
       },
+      {
+        "name": "skipped_items",
+        "type": "array",
+        "label": "Array items dropped by a skip_row database (own required fields empty)",
+        "spec": { "type": "text" }
+      },
+      {
+        "name": "key_collisions",
+        "type": "array",
+        "label": "List items that claimed a database key an earlier sibling already had (only the first was written)",
+        "spec": {
+          "type": "collection",
+          "spec": [
+            { "name": "entity_type", "type": "text", "label": "Entity type" },
+            { "name": "path", "type": "text", "label": "Path of the dropped item" },
+            { "name": "kept", "type": "any", "label": "Identifying values of the item kept" },
+            { "name": "dropped", "type": "any", "label": "Identifying values of the item dropped" }
+          ]
+        }
+      },
       { "name": "entity_count", "type": "uinteger", "label": "Entities written" },
       { "name": "delta_count", "type": "uinteger", "label": "SQL deltas queued" }
     ]

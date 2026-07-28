@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added — database sync outcome exposes dropped rows
+
+**Enrich Entity** and **Merge Results** now map two more fields under *Database sync outcome*:
+
+- `key_collisions` — list items that claimed a database key an earlier sibling already had. Only the first is written (one key = one row downstream), and each entry names the `entity_type`, the `path` of the dropped item, and the `kept` / `dropped` identifying values so a fabricated or non-discriminating id is visible instead of silently collapsing two rows into one.
+- `skipped_items` — array items dropped by a `skip_row` database; the field was already returned by the API but was missing from the output bundle.
+
 ### ⚠ BREAKING — per-prompt fields and schema-generation property count renamed
 
 - **Get Record** *Per-prompt details*: `prompt_used` is now `user_prompt` ("Prompt sent"), `system_prompt_used` is now `system_prompt` (`raw_response` unchanged). Scenarios mapping those fields must be re-mapped; the values are unchanged.
