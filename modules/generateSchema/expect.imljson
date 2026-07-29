@@ -15,19 +15,6 @@
     "advanced": true
   },
   {
-    "name": "generationStrategy",
-    "type": "select",
-    "label": "Strategy",
-    "help": "Generation pipeline: staged (small single-concern calls, small-model friendly) or monolithic (legacy single call). Auto uses the server default.",
-    "default": "auto",
-    "advanced": true,
-    "options": [
-      { "label": "Auto (server default)", "value": "auto" },
-      { "label": "Multi-step (staged)", "value": "staged" },
-      { "label": "Single call (monolithic)", "value": "monolithic" }
-    ]
-  },
-  {
     "name": "generateSemanticIds",
     "type": "boolean",
     "label": "Generate semantic IDs",

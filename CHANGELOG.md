@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed — Generate Schema "Strategy" field
+
+The single-call (monolithic) schema-generation pipeline was retired server-side; generation always uses the multi-step (staged) pipeline. The **Strategy** select is removed from **Generate Schema** and the `generation_strategy` request field no longer exists. Existing scenarios that had it set keep working — the stored value is simply ignored.
+
 ### Added — database sync outcome exposes dropped rows
 
 **Enrich Entity** and **Merge Results** now map three more fields under *Database sync outcome*:
