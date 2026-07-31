@@ -7,13 +7,14 @@
       "saved_schema_id": "c049fbaa-fe52-4598-8728-18cc9506b0d1",
       "schema_name": "VideoGame",
       "schema_content_hash": "8d7f2b3c4e5a6f708192a3b4c5d6e7f8091a2b3c4d5e6f708192a3b4c5d6e7f8",
+      "webhook_url": null,
       "linked_at": "2026-07-19T11:05:58Z"
     }
   ],
   "pending_deltas": 4,
   "require_complete": true,
+  "propagate_not_null": false,
   "purge_on_ack": false,
   "purge_entity_state": false,
-  "webhook_url": null,
   "created_at": "2026-07-19T11:05:58Z"
 }

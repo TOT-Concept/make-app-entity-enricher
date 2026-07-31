@@ -12,14 +12,15 @@
         { "name": "saved_schema_id", "type": "uuid", "label": "Schema ID" },
         { "name": "schema_name", "type": "text", "label": "Schema name" },
         { "name": "schema_content_hash", "type": "text", "label": "Schema content hash" },
+        { "name": "webhook_url", "type": "url", "label": "Webhook URL (per schema)" },
         { "name": "linked_at", "type": "date", "label": "Linked at" }
       ]
     }
   },
   { "name": "pending_deltas", "type": "number", "label": "Pending deltas" },
   { "name": "require_complete", "type": "boolean", "label": "Admission gate" },
+  { "name": "propagate_not_null", "type": "boolean", "label": "Enforce NOT NULL" },
   { "name": "purge_on_ack", "type": "boolean", "label": "Purge deltas on ack" },
   { "name": "purge_entity_state", "type": "boolean", "label": "Purge entity state" },
-  { "name": "webhook_url", "type": "url", "label": "Webhook URL" },
   { "name": "created_at", "type": "date", "label": "Created at" }
 ]
