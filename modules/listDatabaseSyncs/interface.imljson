@@ -20,6 +20,7 @@
   { "name": "pending_deltas", "type": "number", "label": "Pending deltas" },
   { "name": "require_complete", "type": "boolean", "label": "Admission gate" },
   { "name": "propagate_not_null", "type": "boolean", "label": "Enforce NOT NULL" },
+  { "name": "index_scalars", "type": "text", "label": "Index policy" },
   { "name": "purge_on_ack", "type": "boolean", "label": "Purge deltas on ack" },
   { "name": "purge_entity_state", "type": "boolean", "label": "Purge entity state" },
   { "name": "created_at", "type": "date", "label": "Created at" }
