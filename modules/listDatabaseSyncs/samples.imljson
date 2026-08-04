@@ -8,6 +8,7 @@
       "schema_name": "VideoGame",
       "schema_content_hash": "8d7f2b3c4e5a6f708192a3b4c5d6e7f8091a2b3c4d5e6f708192a3b4c5d6e7f8",
       "webhook_url": null,
+      "enrichment_enabled": true,
       "linked_at": "2026-07-19T11:05:58Z"
     }
   ],

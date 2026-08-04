@@ -13,6 +13,7 @@
         { "name": "schema_name", "type": "text", "label": "Schema name" },
         { "name": "schema_content_hash", "type": "text", "label": "Schema content hash" },
         { "name": "webhook_url", "type": "url", "label": "Webhook URL (per schema)" },
+        { "name": "enrichment_enabled", "type": "boolean", "label": "Enrichment enabled" },
         { "name": "linked_at", "type": "date", "label": "Linked at" }
       ]
     }
