@@ -29,11 +29,12 @@
     "label": "Database sync outcome (when the schema has a registered database)",
     "spec": [
       { "name": "saved", "type": "boolean", "label": "Saved to the entity layer (false = will NOT reach your database)" },
-      { "name": "reason", "type": "text", "label": "Rejection reason (when not saved)" },
+      { "name": "status", "type": "text", "label": "Write status: saved | partial (some rows dropped, nothing re-sends them) | rejected" },
+      { "name": "reason", "type": "text", "label": "Why the write was not whole (rejection cause, or what was dropped when partial)" },
       {
         "name": "missing_fields",
         "type": "array",
-        "label": "Required fields that came back empty",
+        "label": "Required fields that came back empty (the cause of the rejection, or of every dropped item)",
         "spec": { "type": "text" }
       },
       {

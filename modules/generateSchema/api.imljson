@@ -7,6 +7,7 @@
     "generate_semantic_ids": "{{ifempty(parameters.generateSemanticIds, false)}}",
     "sample_commonality_threshold": "{{ifempty(parameters.commonalityThreshold, 0.5)}}",
     "extra_instructions": "{{parameters.extraInstructions}}",
+    "language": "{{parameters.language}}",
     "timeout_seconds": "{{ifempty(parameters.timeoutSeconds, 300)}}"
   }
 }

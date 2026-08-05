@@ -38,6 +38,13 @@
     "advanced": true
   },
   {
+    "name": "language",
+    "type": "text",
+    "label": "Schema language (optional)",
+    "help": "Language the schema describes ITSELF in \u2014 type names, entity/property descriptions, expertise names and descriptions (e.g. 'fr'). Property names always come from the samples and are never translated. Leave empty to follow the language the sample's property names are written in.",
+    "advanced": true
+  },
+  {
     "name": "timeoutSeconds",
     "type": "uinteger",
     "label": "Timeout (seconds)",

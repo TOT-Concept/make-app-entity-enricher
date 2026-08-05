@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 The single-call (monolithic) schema-generation pipeline was retired server-side; generation always uses the multi-step (staged) pipeline. The **Strategy** select is removed from **Generate Schema** and the `generation_strategy` request field no longer exists. Existing scenarios that had it set keep working — the stored value is simply ignored.
 
+### Added — database sync outcome tells a partial write from a whole one
+
+*Database sync outcome* now maps a **`status`** field: `saved` (everything the run produced was written), `partial`, or `rejected`. **`partial`** means the entity landed but some of its rows did not — items dropped by a `skip_row` database (`skipped_items`) or dropped as duplicate identities (`key_collisions`) — and *nothing re-sends them*: the rows stay missing until the schema is fixed and the entity re-enriched. A router filtering on `saved = true` treated that case as a clean success; filter on `status` instead. `reason` and `missing_fields` are now filled on a partial write too (the unfilled non-nullable path is the schema gap that caused each drop), and their labels changed accordingly.
+
 ### Added — database sync outcome exposes dropped rows
 
 **Enrich Entity** and **Merge Results** now map three more fields under *Database sync outcome*:

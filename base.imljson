@@ -12,7 +12,7 @@
     "error": {
       "400": {
         "type": "DataError",
-        "message": "Bad request: {{body.detail}}"
+        "message": "Bad request: {{ifempty(body.detail.detail, body.detail)}}"
       },
       "401": {
         "type": "InvalidCredentials",
