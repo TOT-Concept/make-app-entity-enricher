@@ -19,6 +19,7 @@
   "output_tokens": 252,
   "cost_usd": 0.00043461,
   "prompt_count": 3,
+  "retries": 0,
   "prompts": [
     {
       "id": "11111111-2222-3333-4444-555555555555",
@@ -36,6 +37,7 @@
       "success": true,
       "error_message": null,
       "attempts": 1,
+      "retries": 0,
       "web_search_calls": 0
     }
   ],

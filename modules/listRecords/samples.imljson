@@ -15,7 +15,7 @@
   "cancelled": false,
   "prompt_count": 3,
   "web_search_calls": 0,
-  "attempts": 3,
+  "retries": 0,
   "output_channel": "native",
   "saved_schema_id": "ffd7d371-c313-4599-9594-5cff654bbdc1",
   "strategy": "multi_expertise",

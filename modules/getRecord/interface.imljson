@@ -17,6 +17,7 @@
   { "name": "output_tokens", "type": "uinteger", "label": "Output tokens" },
   { "name": "cost_usd", "type": "number", "label": "Cost (USD)" },
   { "name": "prompt_count", "type": "uinteger", "label": "Prompt count" },
+  { "name": "retries", "type": "uinteger", "label": "LLM retries (attempts beyond the first per prompt)" },
   {
     "name": "prompts",
     "type": "array",
@@ -39,6 +40,7 @@
         { "name": "success", "type": "boolean", "label": "Success" },
         { "name": "error_message", "type": "text", "label": "Error message" },
         { "name": "attempts", "type": "uinteger", "label": "Attempts" },
+        { "name": "retries", "type": "uinteger", "label": "Retries (attempts - 1)" },
         { "name": "web_search_calls", "type": "uinteger", "label": "Web search calls" }
       ]
     }

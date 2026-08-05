@@ -15,7 +15,7 @@
   { "name": "cancelled", "type": "boolean", "label": "Cancelled" },
   { "name": "prompt_count", "type": "uinteger", "label": "Prompt count" },
   { "name": "web_search_calls", "type": "uinteger", "label": "Web-search calls" },
-  { "name": "attempts", "type": "uinteger", "label": "LLM attempts (retries when > prompt count)" },
+  { "name": "retries", "type": "uinteger", "label": "LLM retries (attempts beyond the first per prompt)" },
   { "name": "output_channel", "type": "text", "label": "Output channel (native | tool | prompted | text | mixed)" },
   { "name": "saved_schema_id", "type": "uuid", "label": "Saved schema ID" },
   { "name": "strategy", "type": "text", "label": "Strategy" },

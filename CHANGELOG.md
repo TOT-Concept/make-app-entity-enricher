@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed — record-level `attempts` replaced by `retries`
+
+**List Records** no longer maps `attempts` (total LLM call attempts); it maps **`retries`** instead — the attempts beyond the first per prompt (`0` when every call succeeded first try), now computed server-side. A scenario that mapped `attempts` should map `retries` (or `prompt_count + retries` to reconstruct the old total). **Get Record** gains the same record-level `retries` field plus a per-prompt `retries` next to the unchanged per-prompt `attempts`.
+
 ### Removed — Generate Schema "Strategy" field
 
 The single-call (monolithic) schema-generation pipeline was retired server-side; generation always uses the multi-step (staged) pipeline. The **Strategy** select is removed from **Generate Schema** and the `generation_strategy` request field no longer exists. Existing scenarios that had it set keep working — the stored value is simply ignored.
