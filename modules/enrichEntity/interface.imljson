@@ -201,6 +201,11 @@
         }
       },
       {
+        "name": "entity_keys",
+        "type": "any",
+        "label": "Stored key column values of the saved row (correlate by these, not by input text)"
+      },
+      {
         "name": "entity_count",
         "type": "uinteger",
         "label": "Entities written"
