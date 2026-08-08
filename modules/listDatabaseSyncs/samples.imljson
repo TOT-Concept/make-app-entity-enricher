@@ -13,6 +13,7 @@
     }
   ],
   "pending_deltas": 4,
+  "entity_count": 1287,
   "require_complete": true,
   "propagate_not_null": false,
   "index_scalars": "filterable",

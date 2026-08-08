@@ -19,6 +19,7 @@
     }
   },
   { "name": "pending_deltas", "type": "number", "label": "Pending deltas" },
+  { "name": "entity_count", "type": "number", "label": "Entity count" },
   { "name": "require_complete", "type": "boolean", "label": "Admission gate" },
   { "name": "propagate_not_null", "type": "boolean", "label": "Enforce NOT NULL" },
   { "name": "index_scalars", "type": "text", "label": "Index policy" },
