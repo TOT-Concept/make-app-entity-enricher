@@ -17,6 +17,7 @@
   "require_complete": true,
   "propagate_not_null": false,
   "index_scalars": "filterable",
+  "pattern_index_localized_keys": false,
   "purge_on_ack": false,
   "purge_entity_state": false,
   "created_at": "2026-07-19T11:05:58Z"
