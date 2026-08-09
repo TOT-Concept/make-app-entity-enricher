@@ -10,7 +10,7 @@
     "name": "schemaId",
     "type": "select",
     "label": "Schema",
-    "help": "Saved schema that defines the enrichment output structure. Create or edit schemas at the [Schema editor](https://entityenricher.ai/schema-editor).",
+    "help": "Saved schema that defines the enrichment output structure. Create or edit schemas at the [Workflow Editor](https://entityenricher.ai/workflow-editor).",
     "required": true,
     "options": {
       "store": "rpc://getSchemas",
