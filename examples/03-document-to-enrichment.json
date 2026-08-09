@@ -1,0 +1,110 @@
+{
+  "name": "Entity Enricher · 03 — PDF in, structured entity out",
+  "flow": [
+    {
+      "id": 1,
+      "module": "http:ActionGetFile",
+      "version": 3,
+      "parameters": {
+        "handleErrors": false,
+        "useNewZLibDeCompress": true
+      },
+      "mapper": {
+        "url": "https://example.com/reports/annual-report-2025.pdf",
+        "serializeUrl": false,
+        "shareCookies": false,
+        "gzip": true,
+        "followRedirect": true,
+        "rejectUnauthorized": true,
+        "headers": [],
+        "qs": []
+      },
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0,
+          "name": "Get the PDF (or swap for Google Drive ▸ Download a File)"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "module": "entity-enricher:uploadAttachment",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "data": "{{1.data}}",
+        "fileName": "{{1.fileName}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 330,
+          "y": 0,
+          "name": "Upload Attachment — returns id + mode"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "module": "entity-enricher:enrichEntity",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "entityData": "{\"name\": \"Novartis AG\"}",
+        "schemaId": "PASTE_YOUR_SCHEMA_ID",
+        "models": [],
+        "attachmentIds": ["{{2.id}}"],
+        "languages": ["en", "fr"],
+        "strategy": "auto",
+        "enableWebSearch": "off",
+        "enableResponseSchema": "on",
+        "enableStrictStructuredOutput": "off",
+        "timeoutSeconds": "600",
+        "includePerModelResults": false,
+        "includeProfileLimits": false
+      },
+      "metadata": {
+        "designer": {
+          "x": 660,
+          "y": 0,
+          "name": "Enrich Entity — the PDF is the source material"
+        }
+      }
+    },
+    {
+      "id": 4,
+      "module": "entity-enricher:deleteAttachment",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "attachmentId": "{{2.id}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 990,
+          "y": 0,
+          "name": "Delete Attachment — cleanup (optional)"
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "designer": {
+      "orphans": []
+    },
+    "scenario": {
+      "dlq": false,
+      "slots": null,
+      "dataloss": false,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "roundtrips": 1,
+      "sequential": false,
+      "confidential": false,
+      "freshVariables": false,
+      "autoCommitTriggerLast": true
+    }
+  }
+}

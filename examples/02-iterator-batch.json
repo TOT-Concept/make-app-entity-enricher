@@ -1,0 +1,73 @@
+{
+  "name": "Entity Enricher · 02 — Iterator batch (one operation per entity)",
+  "flow": [
+    {
+      "id": 1,
+      "module": "builtin:BasicFeeder",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "array": [
+          { "symbol": "C", "name": "Carbon" },
+          { "symbol": "O", "name": "Oxygen" },
+          { "symbol": "He", "name": "Helium" },
+          { "symbol": "Si", "name": "Silicon" },
+          { "symbol": "Al", "name": "Aluminium" }
+        ]
+      },
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0,
+          "name": "Iterator — literal array (replace with your source)"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "module": "entity-enricher:enrichEntity",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "entityData": "{\"symbol\": \"{{1.symbol}}\", \"name\": \"{{1.name}}\"}",
+        "schemaId": "PASTE_YOUR_SCHEMA_ID",
+        "models": [],
+        "attachmentIds": [],
+        "languages": ["en", "fr"],
+        "strategy": "auto",
+        "enableWebSearch": "off",
+        "enableResponseSchema": "on",
+        "enableStrictStructuredOutput": "off",
+        "timeoutSeconds": "300",
+        "includePerModelResults": false,
+        "includeProfileLimits": false
+      },
+      "metadata": {
+        "designer": {
+          "x": 330,
+          "y": 0,
+          "name": "Enrich Entity — one operation per entity"
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "designer": {
+      "orphans": []
+    },
+    "scenario": {
+      "dlq": false,
+      "slots": null,
+      "dataloss": false,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "roundtrips": 1,
+      "sequential": false,
+      "confidential": false,
+      "freshVariables": false,
+      "autoCommitTriggerLast": true
+    }
+  }
+}

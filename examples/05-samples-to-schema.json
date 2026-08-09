@@ -1,0 +1,72 @@
+{
+  "name": "Entity Enricher · 05 — 3 samples → a saved schema (scenario-001 authoring)",
+  "flow": [
+    {
+      "id": 1,
+      "module": "entity-enricher:generateSample",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "entityType": "Chemical element",
+        "sampleCount": 3,
+        "typicalObjects": ["Gold", "Iron", "Carbon"],
+        "fields": [],
+        "namingConvention": "snake_case",
+        "attachmentIds": [],
+        "extraInstructions": "Every property must be a settled, public fact a reference work states for ANY well-known instance of this type — never operational or time-varying data (prices, stock, opening hours, current staff). Leave a property null in a sample when that instance legitimately lacks it, so the schema marks it nullable instead of required. Include: two identifying properties on the root, one multilingual free-text description, one array of strings, one array of objects owned by this entity (its parts — e.g. isotopes), and at least two nested objects describing things that exist independently and recur across instances (a discoverer, a laboratory, a category), each with its own identifying field. Nest at least three levels deep.",
+        "enableWebSearch": "off",
+        "language": "en",
+        "model": "auto",
+        "timeoutSeconds": "600"
+      },
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0,
+          "name": "Generate Sample — 3 distinct instances, one field set"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "module": "entity-enricher:generateSchema",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "entitySamples": "{{toString(1.samples)}}",
+        "model": "auto",
+        "generateSemanticIds": true,
+        "commonalityThreshold": 0.5,
+        "extraInstructions": "",
+        "language": "",
+        "timeoutSeconds": "600"
+      },
+      "metadata": {
+        "designer": {
+          "x": 330,
+          "y": 0,
+          "name": "Generate Schema — union of the 3 samples, auto-saved"
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "designer": {
+      "orphans": []
+    },
+    "scenario": {
+      "dlq": false,
+      "slots": null,
+      "dataloss": false,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "roundtrips": 1,
+      "sequential": false,
+      "confidential": false,
+      "freshVariables": false,
+      "autoCommitTriggerLast": true
+    }
+  }
+}

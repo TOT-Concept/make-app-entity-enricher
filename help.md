@@ -1,8 +1,20 @@
 # Entity Enricher for Make
 
-Drop a single Make module into any scenario, map an entity from a previous step, and receive a structured, schema-validated, multi-model-fused JSON object — with multilingual output in 40 languages produced in a single LLM pass. 7 first-class modules with dynamic dropdowns and plan-limit-aware error handling, designed for Make's per-operation billing model.
+Drop a single Make module into any scenario, map an entity from a previous step, and receive a structured, schema-validated, multi-model-fused JSON object — with multilingual output in 40 languages produced in a single LLM pass. 14 first-class modules — enrichment, schema authoring, document & image attachments, and the SQL delta feed that keeps your own database in sync — with dynamic dropdowns and plan-limit-aware error handling, designed for Make's per-operation billing model.
 
 ![Demo: enriching an entity inside a Make scenario](https://entityenricher.ai/docs/demo-single-enrichment-make-connector.gif)
+
+---
+
+## Enrichments Become a Real Database — Yours
+
+The enrichment is the easy half. What you normally end up building yourself — the tables to hold the results, the DDL, the migration when the shape changes, and a loader that keeps it consistent — is what a **database sync** does for you:
+
+- **A designed schema, not a JSON dump.** Register a database on a schema and Entity Enricher derives the relational model from it: a table per entity type, primary keys, real foreign keys, child tables for the parts an entity owns, junction tables for entities it merely references, typed columns, and indexes on what a list screen actually filters and sorts on.
+- **Migrations you don't write.** Edit the schema and publish: the change is diffed against what each database has already shipped and travels down the same feed as the data — additive DDL applied silently, riskier transforms (a re-key, a type change, a renamed column) held for your confirmation.
+- **Synced by an open-source client you run.** `ee-database` is an MIT-licensed Go binary that lives next to *your* PostgreSQL, MySQL or SQLite. It connects **outward** over WSS and **your connection string never leaves the machine** — Entity Enricher never holds a credential to your database. Releases are Sigstore-signed and verified at install.
+
+This app exposes the same feed to Make (**List Database Syncs**, **Fetch Database Deltas**, **Acknowledge Database Deltas**) for when a CLI can't run where your database lives, or when the deltas should fan out somewhere else entirely.
 
 ---
 
@@ -58,7 +70,7 @@ The Make app source lives in the [public TOT-Concept repository](https://github.
 1. Sign in to your Make organisation as a developer.
 2. Go to **Apps → Create a new app → Custom App**.
 3. Either upload the `make-app-entity-enricher/` directory as a `.zip`, or paste each `.json` / `.imljson` file into its tab in the editor.
-4. Add an **API Key connection** using a key from Entity Enricher → Settings → API Keys (format `ent_XXXXXXXXXXXX`). The connection auto-tests against `/api/enrichment/options`.
+4. Add a connection — either **Entity Enricher OAuth 2.0** (sign in and authorize; acts on your behalf with your own role, revocable under *API Keys → Connected Apps*), or an **API Key connection** using a key from Entity Enricher → Settings → API Keys (format `ent_XXXXXXXXXXXX`), which auto-tests against `/api/enrichment/options` and is the durable choice for service-to-service scenarios.
 
 ![API Key connection setup form](https://entityenricher.ai/docs/make-connector-connection-setup.png)
 
@@ -93,17 +105,30 @@ When 2+ models are selected, the result is automatically fused server-side. The 
 
 ## Available Modules
 
-7 modules across 4 categories. Search modules emit one bundle per result for downstream Iterator/Aggregator chains; Action modules emit a single bundle.
+14 modules across 7 categories. Search modules emit one bundle per result for downstream Iterator/Aggregator chains; Action modules emit a single bundle.
 
 | Category | Module | Description |
 |---|---|---|
 | **Enrichment** | Enrich Entity | Single-call enrichment with multi-model fusion. Returns the final fused (or best-single-model) result. Auto-cancels on classification warning. |
 | **Schemas** | List Schemas | Returns one Make bundle per saved schema, ready for Iterator/Aggregator chains. |
 | **Schemas** | Get Schema Details | Full schema content including expertise domains, properties, and search keys. |
+| **Schemas** | Generate Sample | Generate 1..N realistic sample objects of one entity type in one blocking call — the entry point of schema authoring. The first sample defines the field set; the rest are same-field instance variants. Attach a document or photo to sample from it instead. |
+| **Schemas** | Generate Schema | Generate and auto-save a JSON schema from 1..N samples of the same entity type — union of fields, nullable where a field is missing in some sample, real observed values as examples. |
 | **Records** | List Records | Search past enrichment records with filters (type, success, free-text). |
 | **Records** | Get Record | Retrieve a single enrichment result with full per-prompt metrics. |
 | **Fusion** | Merge Results | Re-merge multiple enrichment results, optionally with a different LLM arbiter. |
+| **Attachments** | Upload Attachment | Upload a file (mapped as a buffer from an upstream module, e.g. HTTP ▸ Get a File) and return its attachment ID for use in Enrich Entity or Generate Sample. |
+| **Attachments** | Delete Attachment | Delete an attachment by ID — a handy post-enrichment cleanup step. |
+| **Database Sync** | List Database Syncs | The database syncs registered on a schema, with their pending delta counts. |
+| **Database Sync** | Fetch Database Deltas | The next FIFO window of SQL deltas for a database sync. With Claim enabled the rows are leased and must be acknowledged; otherwise the read is replayable. |
+| **Database Sync** | Acknowledge Database Deltas | Acknowledges applied deltas up to an ID — releases the lease and, per sync options, purges delivered copies. |
 | **Configuration** | Get Options | Available models, languages, strategies, and the org's plan limits. |
+
+**Documents & images:** upload once, then map the attachment ID into Enrich Entity (source material for the enrichment) or Generate Sample (source mode — transcribe the document, or describe visible photo attributes). The upload response's `mode` says whether the file reaches the model as extracted text (`inline_text`, any model) or as original bytes (`binary`, needs the capability named in `requires_capability`).
+
+**Database Sync:** Fetch Database Deltas → apply the window's `sql` **as one transaction** (a window never splits an enrichment's batch, and the projected tables carry deferred foreign keys) → Acknowledge only after it commits. Deltas of `kind: "schema"` are DDL migrations and arrive before the data rows that need them.
+
+Importable example scenarios for all of the above — including PDF-in, photo-in, and the full schema → database-sync arc — are in the [`examples/` folder of the app repository](https://github.com/TOT-Concept/make-app-entity-enricher/tree/main/examples).
 
 ---
 
@@ -131,7 +156,7 @@ Make scenarios bill per operation. Instead of porting the n8n connector's Batch 
 
 - **Multilingual in 40 Languages.** A single Enrich Entity call populates every multilingual property in all selected languages — produced in one LLM pass, not N sequential round-trips. Map any language directly: `{{result.names.primary.fr}}`.
 - **One-Call Enrichment.** A dedicated `POST /api/single/enrich/sync` endpoint wraps the streaming flow server-side. One Make operation = one bundle. No polling, no two-module patterns.
-- **Dynamic Dropdowns (RPCs).** 7 RPCs fetch schemas, models, languages, strategies, classification/arbitration models, and web-search options at configuration time — pinned schemas surface first, model labels include pricing.
+- **Dynamic Dropdowns (RPCs).** 10 RPCs fetch schemas, database syncs, models, languages, strategies, classification/arbitration models, and the capability options (web search, response schema, strict structured output) at configuration time — pinned schemas surface first, model labels include pricing.
 - **Multi-Model Auto-Fusion.** Pick 2+ models and the result is automatically fused. The output bundle includes `is_fused`, `source_models[]`, and a `fusion: {agreed_fields, conflicted_fields, total_fields}` summary.
 - **Pre-Flight Classification.** Optional cheap classifier model verifies the entity matches the schema's expected type before enrichment runs. Mismatches produce a typed `DataError` instead of hallucinated data.
 - **Plan-Limit & Credit Awareness.** HTTP 402 errors (plan limits or insufficient credits) become typed Make `OutOfMoneyError`. The message echoes the backend's human-readable detail (with a billing top-up URL when credits are out) plus a machine-readable code — branch the scenario error handler on the code to alert humans, fall back to cheaper models, or pause.

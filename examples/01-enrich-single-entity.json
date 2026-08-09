@@ -1,0 +1,51 @@
+{
+  "name": "Entity Enricher · 01 — Enrich one entity (multilingual, auto model)",
+  "flow": [
+    {
+      "id": 1,
+      "module": "entity-enricher:enrichEntity",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "entityData": "{\"symbol\": \"Au\", \"name\": \"Gold\"}",
+        "schemaId": "PASTE_YOUR_SCHEMA_ID",
+        "models": [],
+        "attachmentIds": [],
+        "languages": ["en", "fr", "de", "ja"],
+        "strategy": "auto",
+        "enableWebSearch": "off",
+        "enableResponseSchema": "on",
+        "enableStrictStructuredOutput": "off",
+        "timeoutSeconds": "300",
+        "includePerModelResults": false,
+        "includeProfileLimits": false
+      },
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0,
+          "name": "Enrich Entity — one call, 4 languages"
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "designer": {
+      "orphans": []
+    },
+    "scenario": {
+      "dlq": false,
+      "slots": null,
+      "dataloss": false,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "roundtrips": 1,
+      "sequential": false,
+      "confidential": false,
+      "freshVariables": false,
+      "autoCommitTriggerLast": true
+    }
+  }
+}

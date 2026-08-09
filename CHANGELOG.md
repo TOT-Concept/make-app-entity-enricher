@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added — `examples/` blueprints, and docs that match the app
+
+Six importable scenario blueprints under [`examples/`](examples/), with a walkthrough README: single enrichment, the Iterator batch, **a PDF as source material**, **a photo → sample → schema**, three samples → a saved schema, and draining the delta feed into your own PostgreSQL (the Make counterpart of the platform's end-to-end sync test). They ship with placeholders instead of ids and no connection, and reference the published `entity-enricher:` module namespace — sideloaded copies need it renamed to `app#entity-enricher-<suffix>:` before importing.
+
+The README and the in-app documentation (`help.md`) were refreshed to the app as it stands: they still described the 1.0 app (7 modules, 4 categories, API-key connection only) and said nothing about schema authoring, attachments, auto model selection, the database-sync trio, or the `database` outcome block on Enrich Entity / Merge Results.
+
 ### Changed — record-level `attempts` replaced by `retries`
 
 **List Records** no longer maps `attempts` (total LLM call attempts); it maps **`retries`** instead — the attempts beyond the first per prompt (`0` when every call succeeded first try), now computed server-side. A scenario that mapped `attempts` should map `retries` (or `prompt_count + retries` to reconstruct the old total). **Get Record** gains the same record-level `retries` field plus a per-prompt `retries` next to the unchanged per-prompt `attempts`.

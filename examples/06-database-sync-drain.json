@@ -1,0 +1,103 @@
+{
+  "name": "Entity Enricher · 06 — Drain the delta feed into your own database",
+  "flow": [
+    {
+      "id": 1,
+      "module": "entity-enricher:fetchDatabaseDeltas",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "schemaId": "PASTE_YOUR_SCHEMA_ID",
+        "databaseId": "PASTE_YOUR_DATABASE_ID",
+        "since": 0,
+        "claim": true
+      },
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0,
+          "name": "Fetch Database Deltas — claim (lease) the window"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "module": "builtin:TextAggregator",
+      "version": 1,
+      "parameters": {
+        "feeder": 1,
+        "rowSeparator": "\n"
+      },
+      "mapper": {
+        "value": "{{1.sql}}",
+        "group": "{{1.next_cursor}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 330,
+          "y": 0,
+          "name": "Text aggregator — one window = one SQL script (Group by: Next cursor)"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "module": "util:SetVariable2",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "name": "ee_delta_batch",
+        "scope": "roundtrip",
+        "value": "BEGIN;\n{{2.text}}\nCOMMIT;"
+      },
+      "metadata": {
+        "designer": {
+          "x": 660,
+          "y": 0,
+          "name": "▶ REPLACE ME with PostgreSQL ▸ Execute a query (one transaction)"
+        }
+      }
+    },
+    {
+      "id": 4,
+      "module": "entity-enricher:ackDatabaseDeltas",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "schemaId": "PASTE_YOUR_SCHEMA_ID",
+        "databaseId": "PASTE_YOUR_DATABASE_ID",
+        "upToId": "{{2.key}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 990,
+          "y": 0,
+          "name": "Acknowledge — only after the transaction committed"
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "designer": {
+      "orphans": []
+    },
+    "scenario": {
+      "dlq": false,
+      "slots": null,
+      "dataloss": false,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "roundtrips": 1,
+      "sequential": true,
+      "confidential": false,
+      "freshVariables": false,
+      "autoCommitTriggerLast": true
+    }
+  },
+  "scheduling": {
+    "type": "indefinitely",
+    "interval": 900
+  }
+}

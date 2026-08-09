@@ -1,0 +1,131 @@
+{
+  "name": "Entity Enricher · 04 — Photo in, schema out (image → sample → schema)",
+  "flow": [
+    {
+      "id": 1,
+      "module": "http:ActionGetFile",
+      "version": 3,
+      "parameters": {
+        "handleErrors": false,
+        "useNewZLibDeCompress": true
+      },
+      "mapper": {
+        "url": "https://example.com/photos/mineral-specimen.jpg",
+        "serializeUrl": false,
+        "shareCookies": false,
+        "gzip": true,
+        "followRedirect": true,
+        "rejectUnauthorized": true,
+        "headers": [],
+        "qs": []
+      },
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0,
+          "name": "Get the photo (or Google Drive / Dropbox / a webhook file)"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "module": "entity-enricher:uploadAttachment",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "data": "{{1.data}}",
+        "fileName": "{{1.fileName}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 330,
+          "y": 0,
+          "name": "Upload Attachment — mode=binary, requires a vision model"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "module": "entity-enricher:generateSample",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "entityType": "Mineral specimen photographed for a catalogue",
+        "sampleCount": 1,
+        "typicalObjects": [],
+        "fields": [],
+        "namingConvention": "snake_case",
+        "attachmentIds": ["{{2.id}}"],
+        "extraInstructions": "Describe only what is visible in the photograph — colour, habit, lustre, matrix, visible dimensions, packaging or label text. Do not invent provenance, price or ownership.",
+        "enableWebSearch": "off",
+        "language": "en",
+        "model": "auto",
+        "timeoutSeconds": "300"
+      },
+      "metadata": {
+        "designer": {
+          "x": 660,
+          "y": 0,
+          "name": "Generate Sample — source mode (attachment ⇒ sample count 1)"
+        }
+      }
+    },
+    {
+      "id": 4,
+      "module": "entity-enricher:generateSchema",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "entitySamples": "{{toString(3.samples)}}",
+        "model": "auto",
+        "generateSemanticIds": false,
+        "commonalityThreshold": 0.5,
+        "extraInstructions": "",
+        "language": "",
+        "timeoutSeconds": "300"
+      },
+      "metadata": {
+        "designer": {
+          "x": 990,
+          "y": 0,
+          "name": "Generate Schema — saved and reusable"
+        }
+      }
+    },
+    {
+      "id": 5,
+      "module": "entity-enricher:deleteAttachment",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "attachmentId": "{{2.id}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 1320,
+          "y": 0,
+          "name": "Delete Attachment — cleanup (optional)"
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "designer": {
+      "orphans": []
+    },
+    "scenario": {
+      "dlq": false,
+      "slots": null,
+      "dataloss": false,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "roundtrips": 1,
+      "sequential": false,
+      "confidential": false,
+      "freshVariables": false,
+      "autoCommitTriggerLast": true
+    }
+  }
+}
