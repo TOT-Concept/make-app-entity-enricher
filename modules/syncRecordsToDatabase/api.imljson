@@ -1,0 +1,16 @@
+{
+  "url": "api/records/sync-to-database",
+  "method": "POST",
+  "body": {
+    "items": [
+      {
+        "record_id": "{{parameters.recordId}}",
+        "saved_schema_id": "{{parameters.savedSchemaId}}",
+        "structured_output": "{{parameters.structuredOutput}}"
+      }
+    ]
+  },
+  "response": {
+    "output": "{{body.results[1]}}"
+  }
+}

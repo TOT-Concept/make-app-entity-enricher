@@ -73,6 +73,7 @@ Exposes Entity Enricher's REST API as **14 first-class Make modules** with dynam
 | **Schemas** | Generate Schema | `POST /api/schema/generate/sync` | Action |
 | **Records** | List Records | `GET /api/records` | Search |
 | **Records** | Get Record | `GET /api/records/{id}` | Action |
+| **Records** | Inject Records into Database | `POST /api/records/sync-to-database` | Action |
 | **Fusion** | Merge Results | `POST /api/fusion/merge` | Action |
 | **Attachments** | Upload Attachment | `POST /api/attachments` (multipart) | Action |
 | **Attachments** | Delete Attachment | `DELETE /api/attachments/{id}` | Action |
@@ -327,6 +328,7 @@ Learn more: [entityenricher.ai](https://entityenricher.ai) · [Documentation](ht
 - **Inbox to structured data** — Email attachment or Drive drop → Upload Attachment → Enrich Entity → your database, with the document deleted at the end of the run.
 - **Photo intake** — A field photo hits a webhook → Upload Attachment → Generate Sample → Generate Schema the first time, Enrich Entity every time after.
 - **Conditional re-arbitration** — Run rule-based fusion first; if `conflicted_fields > 5`, re-merge with an LLM arbiter via *Merge Results* — without re-running the costly enrichment.
+- **Human-in-the-loop database writes** — Enrich with *Database Sync* off, route the output through a review step (Slack approval, a spreadsheet edit), then send the approved version with *Inject Records into Database*. The edited output becomes its own record, so the audit trail shows what was actually stored.
 - **Replica keeper** — Scheduled scenario: Fetch Database Deltas → apply in one transaction → Acknowledge, with a Slack alert whenever a `kind: "schema"` migration delta shows up.
 - **Partial-write watchdog** — Route on `database.status`: `partial` or `rejected` bundles go to a review queue with their `missing_fields`, instead of being counted as successes.
 - **Plan-limit routing** — On `OutOfMoneyError`, alert a human in Slack and pause the scenario until the quota window resets.

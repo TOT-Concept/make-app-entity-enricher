@@ -18,7 +18,8 @@
     "label": "Records",
     "modules": [
       "listRecords",
-      "getRecord"
+      "getRecord",
+      "syncRecordsToDatabase"
     ]
   },
   {

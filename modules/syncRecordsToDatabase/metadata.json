@@ -1,0 +1,9 @@
+{
+  "name": "syncRecordsToDatabase",
+  "label": "Inject Records into Database",
+  "description": "Send a stored (or transformed) enrichment output to its schema's database sync. Re-validated against the schema's published contract, then passed through the admission gate — the same checks an enrichment goes through.",
+  "connection": "apiKey",
+  "altConnection": "oauth2",
+  "typeId": 4,
+  "actionType": "create"
+}

@@ -1,0 +1,173 @@
+[
+  {
+    "name": "status",
+    "type": "text",
+    "label": "Outcome: saved | partial (some rows dropped) | rejected | skipped (nothing attempted)"
+  },
+  {
+    "name": "reason",
+    "type": "text",
+    "label": "Why it was rejected or skipped, or what a partial write dropped"
+  },
+  {
+    "name": "record_id",
+    "type": "uuid",
+    "label": "Record the outcome belongs to (the NEW record when a modified output minted one)"
+  },
+  {
+    "name": "source_record_id",
+    "type": "uuid",
+    "label": "Record the modified output was derived from (empty when no record was minted)"
+  },
+  {
+    "name": "created_record",
+    "type": "boolean",
+    "label": "A new record was minted (the output differed from the stored one)"
+  },
+  {
+    "name": "validation_errors",
+    "type": "array",
+    "label": "Schema-validation errors against the current published contract (non-empty = refused before the admission gate)",
+    "spec": {
+      "type": "text"
+    }
+  },
+  {
+    "name": "database",
+    "type": "collection",
+    "label": "Database sync outcome (when the schema has a registered database)",
+    "spec": [
+      {
+        "name": "saved",
+        "type": "boolean",
+        "label": "Saved to the entity layer (false = will NOT reach your database)"
+      },
+      {
+        "name": "status",
+        "type": "text",
+        "label": "Write status: saved | partial (some rows dropped, nothing re-sends them) | rejected"
+      },
+      {
+        "name": "reason",
+        "type": "text",
+        "label": "Why the write was not whole (rejection cause, or what was dropped when partial)"
+      },
+      {
+        "name": "missing_fields",
+        "type": "array",
+        "label": "Required fields that came back empty (the cause of the rejection, or of every dropped item)",
+        "spec": {
+          "type": "text"
+        }
+      },
+      {
+        "name": "skipped_items",
+        "type": "array",
+        "label": "Array items dropped by a skip_row database (own required fields empty)",
+        "spec": {
+          "type": "text"
+        }
+      },
+      {
+        "name": "key_collisions",
+        "type": "array",
+        "label": "List items that claimed a database key an earlier sibling already had (only the first was written)",
+        "spec": {
+          "type": "collection",
+          "spec": [
+            {
+              "name": "entity_type",
+              "type": "text",
+              "label": "Entity type"
+            },
+            {
+              "name": "path",
+              "type": "text",
+              "label": "Path of the dropped item"
+            },
+            {
+              "name": "kept",
+              "type": "any",
+              "label": "Identifying values of the item kept"
+            },
+            {
+              "name": "dropped",
+              "type": "any",
+              "label": "Identifying values of the item dropped"
+            }
+          ]
+        }
+      },
+      {
+        "name": "shared_entity_conflicts",
+        "type": "array",
+        "label": "Shared rows this run overwrote while another parent still links to them",
+        "spec": {
+          "type": "collection",
+          "spec": [
+            {
+              "name": "entity_type",
+              "type": "text",
+              "label": "Entity type"
+            },
+            {
+              "name": "path",
+              "type": "text",
+              "label": "Path of the shared child"
+            },
+            {
+              "name": "keys",
+              "type": "any",
+              "label": "Identifying values of the shared row"
+            },
+            {
+              "name": "other_parents",
+              "type": "uinteger",
+              "label": "Other entities linking to that row"
+            },
+            {
+              "name": "fields",
+              "type": "array",
+              "label": "Overwritten properties",
+              "spec": {
+                "type": "collection",
+                "spec": [
+                  {
+                    "name": "property",
+                    "type": "text",
+                    "label": "Property"
+                  },
+                  {
+                    "name": "previous",
+                    "type": "text",
+                    "label": "Value stored by the other parent"
+                  },
+                  {
+                    "name": "incoming",
+                    "type": "text",
+                    "label": "Value written over it"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "entity_keys",
+        "type": "any",
+        "label": "Stored key column values of the saved row (correlate by these, not by input text)"
+      },
+      {
+        "name": "entity_count",
+        "type": "uinteger",
+        "label": "Entities written"
+      },
+      {
+        "name": "delta_count",
+        "type": "uinteger",
+        "label": "SQL deltas queued"
+      }
+    ]
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "recordId",
+    "type": "uuid",
+    "label": "Record ID",
+    "help": "Stored record to send \u2014 map it from an Enrich Entity module's record_id. Only an enrichment record or the fusion of one can be sent; any other record type is skipped. Leave empty to send a Structured Output that came from somewhere else (a Schema is then required)."
+  },
+  {
+    "name": "structuredOutput",
+    "type": "any",
+    "label": "Structured output (optional)",
+    "help": "Replacement output to send instead of the record's stored one \u2014 the transform round-trip (enrich with Database Sync off, reshape it, send it here). Leave empty to send the record unchanged. A modified output mints a NEW record, because records are immutable audit rows."
+  },
+  {
+    "name": "savedSchemaId",
+    "type": "select",
+    "label": "Schema",
+    "help": "Schema whose published contract validates the output and whose linked databases receive it. Required only when no Record ID is given; otherwise the record's own schema is used.",
+    "options": {
+      "store": "rpc://getSchemas",
+      "label": "name",
+      "value": "id",
+      "placeholder": "Select a schema"
+    }
+  }
+]
