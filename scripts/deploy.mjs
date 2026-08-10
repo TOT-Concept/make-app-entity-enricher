@@ -145,6 +145,26 @@ if (existsSync(join(ROOT, "help.md"))) {
 
 console.log("\n─── Connections ───");
 
+// Accepted values of the `type` body field on
+// POST /sdk/apps/{name}/connections. Make validates server-side and answers a
+// bare `Value not found in options in parameter 'type'` 400 — and `make-cli
+// sdk-connections create --help` advertises `oauth2`, which is NOT in the enum
+// (OAuth 2.0 with a `refresh` directive is `oauth-refresh`, without one
+// `oauth`). Checked here so a typo in metadata.json fails before the call,
+// with the valid list. Make reports `oauth-refresh` back as `oauth` in
+// `sdk-connections list` — that's normalization, not a rejected type; re-runs
+// match on label anyway, so the connection is never re-created.
+const CONNECTION_TYPES = [
+  "oauth",
+  "oauth-refresh",
+  "oauth-resowncre",
+  "oauth-clicre",
+  "oauth-1",
+  "apikey",
+  "basic",
+  "other",
+];
+
 const existingConnsRaw = mk(
   ["sdk-connections", "list", `--app-name=${APP_NAME}`],
   { capture: true },
@@ -167,6 +187,13 @@ for (const localName of listSubdirs(join(ROOT, "connections"))) {
     makeName = existing.name;
     console.log(`  · "${localName}" exists as ${makeName}`);
   } else {
+    if (!CONNECTION_TYPES.includes(meta.type)) {
+      console.error(
+        `  ✗ connection "${localName}" declares type="${meta.type}", which ` +
+          `Make does not accept.\n    Valid types: ${CONNECTION_TYPES.join(", ")}`,
+      );
+      process.exit(1);
+    }
     const created = mk(
       [
         "sdk-connections",
