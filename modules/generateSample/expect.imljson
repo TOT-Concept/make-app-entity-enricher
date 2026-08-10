@@ -85,8 +85,8 @@
     "name": "language",
     "type": "text",
     "label": "Language",
-    "help": "Output language code for field names AND values (e.g. 'en', 'fr').",
-    "default": "en",
+    "help": "Output language code for field names AND values (e.g. 'en', 'fr'). 'auto' (default) follows the language the Entity Type and Typical Objects are written in, else the attached document's, else English.",
+    "default": "auto",
     "advanced": true
   },
   {

@@ -10,7 +10,7 @@
     "attachment_ids": "{{parameters.attachmentIds}}",
     "extra_instructions": "{{parameters.extraInstructions}}",
     "enable_web_search": "{{ifempty(parameters.enableWebSearch, 'off') == 'on'}}",
-    "language": "{{ifempty(parameters.language, 'en')}}",
+    "language": "{{ifempty(parameters.language, 'auto')}}",
     "model": "{{ifempty(parameters.model, 'auto')}}",
     "timeout_seconds": "{{ifempty(parameters.timeoutSeconds, 300)}}"
   }

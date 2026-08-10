@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed — Generate Sample: **Language** defaults to `auto`
+
+The **Language** field of Generate Sample was `en`, so every generated sample came back in English whatever language the scenario was written in. It now defaults to `auto`, which the API reads as "no language requested": it infers the language from the **Entity Type** and **Typical Objects** you wrote (else the attached document's, else English) — field names and values alike — and the schema built from that sample follows the sample's own property names. An explicit code (`en`, `fr`, …) still forces one language as before.
+
 ### Added — `examples/` blueprints, and docs that match the app
 
 Six importable scenario blueprints under [`examples/`](examples/), with a walkthrough README: single enrichment, the Iterator batch, **a PDF as source material**, **a photo → sample → schema**, three samples → a saved schema, and draining the delta feed into your own PostgreSQL (the Make counterpart of the platform's end-to-end sync test). They ship with placeholders instead of ids and no connection, and reference the published `entity-enricher:` module namespace — sideloaded copies need it renamed to `app#entity-enricher-<suffix>:` before importing.
