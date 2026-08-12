@@ -146,6 +146,41 @@
         }
       },
       {
+        "name": "identity_merges",
+        "type": "array",
+        "label": "Objects identified as an existing concept minted from different text (a root entity here OWNS that row)",
+        "spec": {
+          "type": "collection",
+          "spec": [
+            {
+              "name": "json_path",
+              "type": "text",
+              "label": "Path of the object (empty for the enriched entity itself)"
+            },
+            {
+              "name": "text",
+              "type": "text",
+              "label": "Identity text this object composed"
+            },
+            {
+              "name": "matched_text",
+              "type": "text",
+              "label": "Canonical text of the concept it joined"
+            },
+            {
+              "name": "similarity",
+              "type": "number",
+              "label": "Similarity of the match"
+            },
+            {
+              "name": "concept_id",
+              "type": "text",
+              "label": "Concept ID"
+            }
+          ]
+        }
+      },
+      {
         "name": "shared_entity_conflicts",
         "type": "array",
         "label": "Shared rows this run overwrote while another parent still links to them",

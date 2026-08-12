@@ -239,6 +239,7 @@ Every enrichment also reports what reached the entity layer, in the **Database s
 | `entity_keys` | The **stored** key column values of the row — correlate with your replica on these, not on your input text, which the model may canonicalize. |
 | `key_collisions` | List items that claimed a database key an earlier sibling already had; only the first is written. |
 | `shared_entity_conflicts` | Shared rows this run overwrote while another parent still links to them — usually a sign the relationship should be marked owned. |
+| `identity_merges` | Objects whose semantic ID resolved to a concept minted from *different* text. On the enriched entity itself (`json_path` empty) that means this run took over an existing row and overwrote it — check the two texts name the same thing. |
 | `skipped_items` | Array items dropped by a `skip_row` database. |
 
 Nothing re-sends dropped rows: fix the schema, then re-enrich.

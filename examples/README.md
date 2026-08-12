@@ -66,6 +66,7 @@ what will reach your database:
 | `reason`, `missing_fields` | Why the write wasn't whole — the unfilled non-nullable path |
 | `entity_keys` | The **stored** key column values. Correlate rows by these, not by your input text |
 | `key_collisions`, `shared_entity_conflicts`, `skipped_items` | Rows silently dropped or overwritten |
+| `identity_merges` | Objects folded into an existing concept — on the entity itself, this run took over that row |
 
 A router filtering on `saved = true` treats a partial write as a clean success — filter on `status`.
 Nothing re-sends the dropped rows: fix the schema, re-enrich.
