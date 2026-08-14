@@ -170,7 +170,7 @@
             {
               "name": "similarity",
               "type": "number",
-              "label": "Similarity of the match"
+              "label": "Similarity of the match (empty for a deterministic code/token match)"
             },
             {
               "name": "concept_id",
