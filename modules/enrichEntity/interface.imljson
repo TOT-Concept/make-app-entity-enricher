@@ -76,6 +76,16 @@
         "name": "total_fields",
         "type": "uinteger",
         "label": "Total fields"
+      },
+      {
+        "name": "method",
+        "type": "text",
+        "label": "How conflicts were resolved: llm | rule_based (rule_based despite an arbitration model = that call failed and the deterministic rules stood)"
+      },
+      {
+        "name": "arbitration_model",
+        "type": "text",
+        "label": "Model whose arbitration decisions were applied (empty on a purely rule-based merge)"
       }
     ]
   },
@@ -111,6 +121,14 @@
         "name": "skipped_items",
         "type": "array",
         "label": "Array items dropped by a skip_row database (own required fields empty)",
+        "spec": {
+          "type": "text"
+        }
+      },
+      {
+        "name": "detached_references",
+        "type": "array",
+        "label": "Shared 1-1 references detached by a skip_row database (target's own required fields empty — target not written, saved row links to nothing there)",
         "spec": {
           "type": "text"
         }
@@ -231,6 +249,41 @@
                   }
                 ]
               }
+            }
+          ]
+        }
+      },
+      {
+        "name": "identity_underidentifies",
+        "type": "array",
+        "label": "Namesake overwrites: every compared value disagreed with the stored row — the identity keys do not tell these objects apart",
+        "spec": {
+          "type": "collection",
+          "spec": [
+            {
+              "name": "entity_type",
+              "type": "text",
+              "label": "Entity type"
+            },
+            {
+              "name": "path",
+              "type": "text",
+              "label": "Path of the shared child"
+            },
+            {
+              "name": "keys",
+              "type": "any",
+              "label": "Identity values both objects share"
+            },
+            {
+              "name": "semantic_id",
+              "type": "text",
+              "label": "Concept now holding both objects' state"
+            },
+            {
+              "name": "compared_fields",
+              "type": "uinteger",
+              "label": "Fields both payloads answered — all disagreed"
             }
           ]
         }

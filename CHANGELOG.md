@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added — `identity_underidentifies` on the database sync outcome
+
+Enrich Entity, Merge Results and Sync Records to Database map a new `identity_underidentifies` array: shared-row overwrites in which **every** value both objects answered disagreed with the stored row. That pattern is not an update — it is a *different* real-world object wearing the same identity text (five stadiums all named "Olympic Stadium" collapsing onto one row), and its values just replaced the stored object's. The write still goes through (last write wins); each entry names the `entity_type`, `path`, the shared `keys`, the `semantic_id` concept now holding both objects' state, and the `compared_fields` count. The fix is identity, not data: compose a disambiguating property into the schema's identity (`semantic_source_keys`), or curate the concept on the Semantic IDs page. Ordinary partial disagreements keep reporting as `shared_entity_conflicts` only.
+
+### Added — `detached_references` on the database sync outcome
+
+A `skip_row` database used to refuse an entity outright when a **shared 1-1 reference** it points at was itself incomplete — one unknown field on a reused entity discarded the whole enrichment. Such a reference is now **detached** instead: the entity is written, the referenced target is neither written nor updated, and the saved row's foreign key is NULL. Enrich Entity, Merge Results and Sync Records to Database map the new `detached_references` array, and `status` reads `partial` for it exactly as it does for `skipped_items` — a different loss from a dropped row (the row IS there, the link is not), so it is mapped as its own field rather than folded in.
+
+### Added — Enrich Entity / Merge Results say which model arbitrated
+
+Enrich Entity's **Fusion summary** carried only the three counters, so a scenario that set an **Arbitration Model** could not tell whether that model actually decided the conflicts. It now also maps `method` (`llm` | `rule_based`) and `arbitration_model` — `rule_based` on a run that requested an arbiter means that call failed and the deterministic rules stood. Merge Results likewise exposes `arbitration_model_used`, which the API already returned but the module never mapped.
+
 ### Changed — Generate Sample: **Language** defaults to `auto`
 
 The **Language** field of Generate Sample was `en`, so every generated sample came back in English whatever language the scenario was written in. It now defaults to `auto`, which the API reads as "no language requested": it infers the language from the **Entity Type** and **Typical Objects** you wrote (else the attached document's, else English) — field names and values alike — and the schema built from that sample follows the sample's own property names. An explicit code (`en`, `fr`, …) still forces one language as before.

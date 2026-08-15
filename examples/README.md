@@ -62,10 +62,10 @@ what will reach your database:
 
 | Field | Meaning |
 |---|---|
-| `status` | `saved` (everything written), `partial` (entity landed, some rows dropped), `rejected` |
+| `status` | `saved` (everything written), `partial` (entity landed, some rows dropped or references detached), `rejected` |
 | `reason`, `missing_fields` | Why the write wasn't whole — the unfilled non-nullable path |
 | `entity_keys` | The **stored** key column values. Correlate rows by these, not by your input text |
-| `key_collisions`, `shared_entity_conflicts`, `skipped_items` | Rows silently dropped or overwritten |
+| `key_collisions`, `shared_entity_conflicts`, `skipped_items`, `detached_references` | Rows silently dropped or overwritten, references silently cut |
 | `identity_merges` | Objects folded into an existing concept — on the entity itself, this run took over that row |
 
 A router filtering on `saved = true` treats a partial write as a clean success — filter on `status`.

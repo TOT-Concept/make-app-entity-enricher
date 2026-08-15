@@ -69,6 +69,14 @@
         }
       },
       {
+        "name": "detached_references",
+        "type": "array",
+        "label": "Shared 1-1 references detached by a skip_row database (target's own required fields empty — target not written, saved row links to nothing there)",
+        "spec": {
+          "type": "text"
+        }
+      },
+      {
         "name": "key_collisions",
         "type": "array",
         "label": "List items that claimed a database key an earlier sibling already had (only the first was written)",
@@ -149,6 +157,41 @@
                   }
                 ]
               }
+            }
+          ]
+        }
+      },
+      {
+        "name": "identity_underidentifies",
+        "type": "array",
+        "label": "Namesake overwrites: every compared value disagreed with the stored row — the identity keys do not tell these objects apart",
+        "spec": {
+          "type": "collection",
+          "spec": [
+            {
+              "name": "entity_type",
+              "type": "text",
+              "label": "Entity type"
+            },
+            {
+              "name": "path",
+              "type": "text",
+              "label": "Path of the shared child"
+            },
+            {
+              "name": "keys",
+              "type": "any",
+              "label": "Identity values both objects share"
+            },
+            {
+              "name": "semantic_id",
+              "type": "text",
+              "label": "Concept now holding both objects' state"
+            },
+            {
+              "name": "compared_fields",
+              "type": "uinteger",
+              "label": "Fields both payloads answered — all disagreed"
             }
           ]
         }
