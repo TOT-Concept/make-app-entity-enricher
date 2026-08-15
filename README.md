@@ -62,7 +62,7 @@ deltas should fan out somewhere else entirely — see [Keep your own database in
 
 ## What this app does
 
-Exposes Entity Enricher's REST API as **14 first-class Make modules** with dynamic dropdowns, plan-limit-aware error handling, and **one-call enrichment** (no SSE plumbing on the Make side).
+Exposes Entity Enricher's REST API as **15 first-class Make modules** with dynamic dropdowns, plan-limit-aware error handling, and **one-call enrichment** (no SSE plumbing on the Make side).
 
 | Category | Module | Endpoint | Type |
 |---|---|---|---|
