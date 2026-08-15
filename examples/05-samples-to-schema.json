@@ -37,7 +37,6 @@
         "model": "auto",
         "generateSemanticIds": true,
         "commonalityThreshold": 0.5,
-        "extraInstructions": "",
         "language": "",
         "timeoutSeconds": "600"
       },

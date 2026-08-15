@@ -31,13 +31,6 @@
     "advanced": true
   },
   {
-    "name": "extraInstructions",
-    "type": "text",
-    "label": "Extra instructions (optional)",
-    "help": "Free-form guidance appended to the prompt.",
-    "advanced": true
-  },
-  {
     "name": "language",
     "type": "text",
     "label": "Schema language (optional)",

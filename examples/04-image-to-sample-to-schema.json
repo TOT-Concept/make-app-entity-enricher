@@ -80,7 +80,6 @@
         "model": "auto",
         "generateSemanticIds": false,
         "commonalityThreshold": 0.5,
-        "extraInstructions": "",
         "language": "",
         "timeoutSeconds": "300"
       },

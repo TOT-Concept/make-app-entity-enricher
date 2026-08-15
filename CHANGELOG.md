@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed — Generate Schema: **Extra instructions**
+
+The API no longer accepts `extra_instructions` on schema generation, so the field is gone from Generate Schema. The schema's structure is derived deterministically from the input samples, and per-property flags come from dedicated classification calls — free-form guidance had nothing left to steer and could only fight those rules. To shape the schema's *content*, put the guidance on **Generate Sample** (its Extra instructions field stays); to localize specific properties, set `multilingual` on them after generation in the schema editor. A scenario that had filled the field keeps running — the value is simply no longer sent.
+
 ### Added — `identity_underidentifies` on the database sync outcome
 
 Enrich Entity, Merge Results and Sync Records to Database map a new `identity_underidentifies` array: shared-row overwrites in which **every** value both objects answered disagreed with the stored row. That pattern is not an update — it is a *different* real-world object wearing the same identity text (five stadiums all named "Olympic Stadium" collapsing onto one row), and its values just replaced the stored object's. The write still goes through (last write wins); each entry names the `entity_type`, `path`, the shared `keys`, the `semantic_id` concept now holding both objects' state, and the `compared_fields` count. The fix is identity, not data: compose a disambiguating property into the schema's identity (`semantic_source_keys`), or curate the concept on the Semantic IDs page. Ordinary partial disagreements keep reporting as `shared_entity_conflicts` only.
