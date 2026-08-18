@@ -15,7 +15,7 @@
   "pending_deltas": 4,
   "quarantined_deltas": 0,
   "entity_count": 1287,
-  "require_complete": true,
+  "on_gaps": "skip_children",
   "propagate_not_null": false,
   "index_scalars": "filterable",
   "pattern_index_localized_keys": false,

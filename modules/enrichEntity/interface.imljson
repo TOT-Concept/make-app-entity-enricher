@@ -120,7 +120,7 @@
       {
         "name": "skipped_items",
         "type": "array",
-        "label": "Array items dropped by a skip_row database (own required fields empty)",
+        "label": "Array items dropped by a skip_children database (own required fields empty)",
         "spec": {
           "type": "text"
         }
@@ -128,7 +128,7 @@
       {
         "name": "detached_references",
         "type": "array",
-        "label": "Shared 1-1 references detached by a skip_row database (target's own required fields empty — target not written, saved row links to nothing there)",
+        "label": "Shared 1-1 references detached by a skip_children database (target's own required fields empty — target not written, saved row links to nothing there)",
         "spec": {
           "type": "text"
         }

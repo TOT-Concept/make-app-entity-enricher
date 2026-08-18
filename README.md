@@ -241,8 +241,8 @@ Every enrichment also reports what reached the entity layer, in the **Database s
 | `shared_entity_conflicts` | Shared rows this run overwrote while another parent still links to them — usually a sign the relationship should be marked owned. |
 | `identity_underidentifies` | Namesake overwrites: every value both objects answered disagreed with the stored row, so a *different* real-world object with the same identity replaced it. The identity keys don't tell these objects apart — compose a disambiguating property into `semantic_source_keys`, or curate the concept. |
 | `identity_merges` | Objects whose semantic ID resolved to a concept minted from *different* text. On the enriched entity itself (`json_path` empty) that means this run took over an existing row and overwrote it — check the two texts name the same thing. |
-| `skipped_items` | Array items dropped by a `skip_row` database. |
-| `detached_references` | Shared 1-1 references a `skip_row` database detached because the referenced entity was itself incomplete: the entity landed, the target was neither written nor updated, and the saved row links to nothing there. |
+| `skipped_items` | Array items dropped by a `skip_children` database. |
+| `detached_references` | Shared 1-1 references a `skip_children` database detached because the referenced entity was itself incomplete: the entity landed, the target was neither written nor updated, and the saved row links to nothing there. |
 
 Nothing re-sends dropped rows or reattaches detached references: fix the schema, then re-enrich.
 

@@ -21,7 +21,7 @@
   { "name": "pending_deltas", "type": "number", "label": "Pending deltas" },
   { "name": "quarantined_deltas", "type": "number", "label": "Quarantined deltas" },
   { "name": "entity_count", "type": "number", "label": "Entity count" },
-  { "name": "require_complete", "type": "boolean", "label": "Admission gate" },
+  { "name": "on_gaps", "type": "text", "label": "Admission gate (reject_entity | skip_children | accept_partial)" },
   { "name": "propagate_not_null", "type": "boolean", "label": "Enforce NOT NULL" },
   { "name": "index_scalars", "type": "text", "label": "Index policy" },
   { "name": "pattern_index_localized_keys", "type": "boolean", "label": "Pattern-match index on localized identity/label columns" },
