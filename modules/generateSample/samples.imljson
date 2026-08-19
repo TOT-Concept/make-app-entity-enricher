@@ -18,7 +18,7 @@
   "input_tokens": 1120,
   "output_tokens": 940,
   "processing_time_ms": 18230,
-  "determinism_report": {
+  "ambiguity_report": {
     "analyzed_count": 12,
     "findings": []
   },

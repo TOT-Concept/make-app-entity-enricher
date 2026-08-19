@@ -25,7 +25,7 @@
     "output_tokens": 184,
     "cost_usd": 0.00276
   },
-  "non_determinism_enabled": true,
+  "ambiguity_check_enabled": true,
   "created_at": "2026-03-12T10:14:00Z",
   "updated_at": "2026-05-08T15:42:00Z"
 }

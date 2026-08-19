@@ -44,9 +44,9 @@
     "label": "Processing time (ms)"
   },
   {
-    "name": "determinism_report",
+    "name": "ambiguity_report",
     "type": "collection",
-    "label": "Determinism report (template sample only)",
+    "label": "Ambiguity report (template sample only)",
     "spec": [
       { "name": "analyzed_count", "type": "uinteger", "label": "Analyzed property count" },
       {
