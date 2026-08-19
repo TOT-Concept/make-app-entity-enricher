@@ -421,9 +421,14 @@
         "label": "Monthly prompt limit"
       },
       {
-        "name": "max_record_results",
+        "name": "max_record_retention_days",
         "type": "uinteger",
-        "label": "Max record results"
+        "label": "Max record retention (days)"
+      },
+      {
+        "name": "max_delta_retention_days",
+        "type": "uinteger",
+        "label": "Max delta retention (days)"
       },
       {
         "name": "max_concurrent_jobs",

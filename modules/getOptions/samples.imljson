@@ -54,7 +54,8 @@
     "daily_prompt_limit": 500,
     "weekly_prompt_limit": 2500,
     "monthly_prompt_limit": 10000,
-    "max_record_results": 1000,
+    "max_record_retention_days": 180,
+    "max_delta_retention_days": 30,
     "max_concurrent_jobs": 5,
     "max_models_per_enrichment": 5,
     "max_languages": 10

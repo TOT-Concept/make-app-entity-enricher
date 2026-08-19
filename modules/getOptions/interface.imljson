@@ -45,7 +45,8 @@
       { "name": "daily_prompt_limit", "type": "uinteger", "label": "Daily prompt limit" },
       { "name": "weekly_prompt_limit", "type": "uinteger", "label": "Weekly prompt limit" },
       { "name": "monthly_prompt_limit", "type": "uinteger", "label": "Monthly prompt limit" },
-      { "name": "max_record_results", "type": "uinteger", "label": "Max record results" },
+      { "name": "max_record_retention_days", "type": "uinteger", "label": "Max record retention (days)" },
+      { "name": "max_delta_retention_days", "type": "uinteger", "label": "Max delta retention (days)" },
       { "name": "max_concurrent_jobs", "type": "uinteger", "label": "Max concurrent jobs" },
       { "name": "max_models_per_enrichment", "type": "uinteger", "label": "Max models per enrichment" },
       { "name": "max_languages", "type": "uinteger", "label": "Max languages" }
