@@ -6,7 +6,7 @@
       "name": "Film",
       "description": "A feature film",
       "properties": {
-        "title": { "type": "string", "is_key": true, "expertise": "film_analyst" },
+        "title": { "type": "string", "identifying": true, "expertise": "film_analyst" },
         "release_year": { "type": "integer", "expertise": "film_analyst", "examples": ["1999", "1995"] },
         "box_office_usd": { "type": "number", "nullable": true, "expertise": "film_analyst" }
       }

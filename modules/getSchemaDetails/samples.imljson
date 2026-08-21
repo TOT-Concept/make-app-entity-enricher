@@ -8,7 +8,7 @@
       "name": "Movie",
       "description": "A motion picture work",
       "properties": [
-        { "name": "title", "type": "multilingual", "is_key": true },
+        { "name": "title", "type": "multilingual", "identifying": true },
         { "name": "releaseYear", "type": "string" },
         { "name": "genres", "type": "multilingual_array" }
       ]

@@ -152,7 +152,7 @@ fill), nullable where an instance legitimately lacks the property, and a shape w
 plus recurring third parties.
 
 **Set `Generate semantic IDs = true` before generating** when the schema will feed a database sync —
-it is on in this blueprint. Without semantic IDs every table keys on whatever `is_key` property
+it is on in this blueprint. Without semantic IDs every table keys on whatever `identifying` property
 generation happened to pick (a name, a website), which drifts between runs and mints duplicate rows.
 Adding them afterwards means hand-editing every object. It needs an organization embedding model
 (Settings ▸ Organization) and adds embedding cost.
