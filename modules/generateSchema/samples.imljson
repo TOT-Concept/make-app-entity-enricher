@@ -29,5 +29,6 @@
   "cost_usd": 0.00087,
   "input_tokens": 2210,
   "output_tokens": 1470,
-  "processing_time_ms": 21870
+  "processing_time_ms": 21870,
+  "warnings": null
 }

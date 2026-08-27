@@ -59,5 +59,11 @@
     "name": "processing_time_ms",
     "type": "uinteger",
     "label": "Processing time (ms)"
+  },
+  {
+    "name": "warnings",
+    "type": "array",
+    "label": "Warnings",
+    "spec": { "type": "text" }
   }
 ]
