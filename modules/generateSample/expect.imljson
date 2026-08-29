@@ -1,10 +1,10 @@
 [
   {
-    "name": "entityType",
+    "name": "request",
     "type": "text",
-    "label": "Entity type",
-    "help": "What kind of entity to sample, e.g. 'Pharmaceutical Company'. 📖 [Full module guide](https://entityenricher.ai/docs/integrations/make)",
-    "required": true
+    "label": "Request",
+    "help": "What the sample should contain, in free text: the kind of entity, the properties to include, size/depth budgets, structural preferences — binding for the generation. Required unless Attachment IDs is set, where the document is the request and this text only narrows it. 📖 [Full module guide](https://entityenricher.ai/docs/integrations/make)",
+    "multiline": true
   },
   {
     "name": "sampleCount",
@@ -26,17 +26,6 @@
     "spec": {
       "type": "text",
       "label": "Instance"
-    }
-  },
-  {
-    "name": "fields",
-    "type": "array",
-    "label": "Fields (optional)",
-    "help": "Field names the sample must include. The model may add other relevant fields.",
-    "advanced": true,
-    "spec": {
-      "type": "text",
-      "label": "Field name"
     }
   },
   {
@@ -63,13 +52,6 @@
     }
   },
   {
-    "name": "extraInstructions",
-    "type": "text",
-    "label": "Extra instructions (optional)",
-    "help": "Free-form guidance appended to the prompt.",
-    "advanced": true
-  },
-  {
     "name": "enableWebSearch",
     "type": "select",
     "label": "Web search",
@@ -85,7 +67,7 @@
     "name": "language",
     "type": "text",
     "label": "Language",
-    "help": "Output language code for field names AND values (e.g. 'en', 'fr'). 'auto' (default) follows the language the Entity Type and Typical Objects are written in, else the attached document's, else English.",
+    "help": "Output language code for field names AND values (e.g. 'en', 'fr'). 'auto' (default) follows the language the Request and Typical Instances are written in, else the attached document's, else English.",
     "default": "auto",
     "advanced": true
   },

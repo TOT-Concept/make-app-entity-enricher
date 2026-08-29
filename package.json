@@ -1,6 +1,6 @@
 {
 	"name": "make-app-entity-enricher",
-	"version": "2.1.0",
+	"version": "3.0.0",
 	"private": true,
 	"description": "Make.com Custom App for Entity Enricher — enrich entities with multi-model LLM fusion, multilingual output, and expertise-driven strategies",
 	"keywords": [

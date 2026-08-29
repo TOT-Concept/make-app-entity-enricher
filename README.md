@@ -191,7 +191,7 @@ Blueprints: [`03-document-to-enrichment.json`](examples/03-document-to-enrichmen
 
 ## Author schemas without leaving Make
 
-**Generate Sample** invents realistic sample objects of an entity type; **Generate Schema** turns samples into a saved, reusable schema. Together they replace the hand-written JSON that used to be a prerequisite for the first enrichment.
+**Generate Sample** invents realistic sample objects from a free-text request; **Generate Schema** turns samples into a saved, reusable schema. Together they replace the hand-written JSON that used to be a prerequisite for the first enrichment.
 
 ```
 Generate Sample (Sample count = 3)  ─►  Generate Schema  ─►  Enrich Entity

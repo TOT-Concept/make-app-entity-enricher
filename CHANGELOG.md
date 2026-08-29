@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed — Generate Sample takes one **Request** instead of Entity type + Fields + Extra instructions
+
+Generate Sample used to split what you wanted across three parameters: a required **Entity type**, an optional **Fields** list, and free-form **Extra instructions** appended to the prompt. The API now takes a single free-text `request` — the kind of entity, the properties to include, any size or depth budget, structural preferences — and the module exposes it as one multi-line **Request** field. It is binding for the generation: an explicit budget beats the generator's default exhaustiveness, a requested shape beats its default choice (the split was exactly what let a budget lose to the defaults). The kind of entity is now derived by the model from the request and returned as `object_type` in the response. **Request** is required unless **Attachment IDs** is set — there the document is the request and the text only narrows what to extract. Since the module runs a blocking call, an ambiguous request is resolved with its most standard reading rather than paused on (the web UI and MCP clients get asked instead).
+
+**Migration:** put the old Entity type on the first line of Request, then the former Extra instructions below it; name any must-have fields in the text. A scenario that still maps the removed parameters has them ignored; an empty Request without attachments fails with a clear error.
+
 ### Changed — the schema flag `is_key` is now `identifying`
 
 The property-level flag naming the values that identify an object was called `is_key`, which read as "primary key" — the one thing it is not. It never enforced uniqueness (that is `unique_group`), it is not the database row key (that is `database_key`), and it is not caller-owned (that is `preserve`). What it actually selects is the subset of properties whose values *match one instance of a thing to another* — across input and output items, across models during fusion, and against the semantic-ID concept registry. It is now spelled **`identifying`**, beside `database_key` (row identity) and `semantic_id` (concept identity).

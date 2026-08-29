@@ -119,7 +119,7 @@ HTTP ▸ Get a File  →  Upload Attachment  →  Generate Sample  →  Generate
 The fastest way to get a schema for something you can only photograph. Attachments switch **Generate
 Sample** into *source mode*: it transcribes the document or describes **visible** attributes only,
 and **Sample count is forced to 1** (there is one document to describe, not three instances to
-invent). The `extraInstructions` in the blueprint fence it in further — no invented provenance or
+invent). The `request` in the blueprint fences it in further — no invented provenance or
 price.
 
 Images are `binary` attachments, so the sample-generation model must accept images; leave **Model**
@@ -146,7 +146,7 @@ required, and the distinct observed values become the property `examples`. Namin
 **Typical instances** anchors them; leave slots empty and the model names the rest itself, in one
 pass, so they stay distinct.
 
-The `extraInstructions` carry the rules that decide whether the schema is usable downstream: settled
+The `request` carries the rules that decide whether the schema is usable downstream: settled
 public facts only (an operational or time-varying property becomes a required field nobody can
 fill), nullable where an instance legitimately lacks the property, and a shape with parts of its own
 plus recurring third parties.
