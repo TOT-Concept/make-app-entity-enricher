@@ -3,7 +3,7 @@
     "name": "request",
     "type": "text",
     "label": "Request",
-    "help": "What the sample should contain, in free text: the kind of entity, the properties to include, size/depth budgets, structural preferences — binding for the generation. Required unless Attachment IDs is set, where the document is the request and this text only narrows it. 📖 [Full module guide](https://entityenricher.ai/docs/integrations/make)",
+    "help": "What the sample should contain, in free text: the kind of entity, the properties to include, size/depth budgets, structural preferences — binding for the generation. How many samples to produce is Sample Count, never part of this text — each sample is exactly one instance. Required unless Attachment IDs is set, where the document is the request and this text only narrows it. 📖 [Full module guide](https://entityenricher.ai/docs/integrations/make)",
     "multiline": true
   },
   {
