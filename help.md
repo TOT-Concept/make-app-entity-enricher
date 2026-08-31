@@ -2,7 +2,7 @@
 
 Drop a single Make module into any scenario, map an entity from a previous step, and receive a structured, schema-validated, multi-model-fused JSON object — with multilingual output in 40 languages produced in a single LLM pass. 14 first-class modules — enrichment, schema authoring, document & image attachments, and the SQL delta feed that keeps your own database in sync — with dynamic dropdowns and plan-limit-aware error handling, designed for Make's per-operation billing model.
 
-![Demo: enriching an entity inside a Make scenario](https://entityenricher.ai/docs/demo-single-enrichment-make-connector.gif)
+![Demo: enriching an entity inside a Make scenario](https://entityenricher.ai/docs/make/demo-single-enrichment.gif)
 
 ---
 
@@ -59,7 +59,7 @@ Result of one Enrich Entity call with `languages = ["en", "fr", "de", "ja"]`:
 
 Downstream Make modules can map any language directly: `{{enrichEntity.result.names.primary.fr}}`. The Languages dropdown surfaces the full 40-language list, with a plan-limit notice when your organisation's profile caps the number of selectable languages.
 
-![Languages multi-select dropdown showing 40 supported languages](https://entityenricher.ai/docs/make-connector-languages.png)
+![Languages multi-select dropdown showing 40 supported languages](https://entityenricher.ai/docs/make/languages.png)
 
 ---
 
@@ -72,7 +72,7 @@ The Make app source lives in the [public TOT-Concept repository](https://github.
 3. Either upload the `make-app-entity-enricher/` directory as a `.zip`, or paste each `.json` / `.imljson` file into its tab in the editor.
 4. Add a connection — either **Entity Enricher OAuth 2.0** (sign in and authorize; acts on your behalf with your own role, revocable under *API Keys → Connected Apps*), or an **API Key connection** using a key from Entity Enricher → Settings → API Keys (format `ent_XXXXXXXXXXXX`), which auto-tests against `/api/enrichment/options` and is the durable choice for service-to-service scenarios.
 
-![API Key connection setup form](https://entityenricher.ai/docs/make-connector-connection-setup.png)
+![API Key connection setup form](https://entityenricher.ai/docs/make/connection-setup.png)
 
 ---
 
@@ -80,7 +80,7 @@ The Make app source lives in the [public TOT-Concept repository](https://github.
 
 Every selectable field in the Make modules is populated by an RPC that hits the Entity Enricher API at configuration time. Pinned schemas surface first (marked with 📌), model labels include per-million-token pricing, and plan-limited orgs see a notice when their quota is reached.
 
-![Schemas dropdown open with pinned schemas at the top](https://entityenricher.ai/docs/make-connector-schemas.png)
+![Schemas dropdown open with pinned schemas at the top](https://entityenricher.ai/docs/make/schemas.png)
 
 ---
 
@@ -95,11 +95,11 @@ Every selectable field in the Make modules is populated by an RPC that hits the 
 
 The central module exposes 11 input fields with dynamic dropdowns: schema, models (multi-select), languages (multi-select), strategy, optional classification & arbitration models, web search, timeout, and metadata toggles. Map an entity from any previous module via the `Entity data` field.
 
-![Configuring the Enrich Entity module](https://entityenricher.ai/docs/make-connector-add.gif)
+![Configuring the Enrich Entity module](https://entityenricher.ai/docs/make/add.gif)
 
 When 2+ models are selected, the result is automatically fused server-side. The Make output panel shows `is_fused: true`, the list of `source_models`, and a `fusion` summary counting agreed and conflicted fields:
 
-![Make output panel: multi-model fused enrichment result](https://entityenricher.ai/docs/make-connector-multimodel.png)
+![Make output panel: multi-model fused enrichment result](https://entityenricher.ai/docs/make/multimodel.png)
 
 ---
 
@@ -148,7 +148,7 @@ Make scenarios bill per operation. Instead of porting the n8n connector's Batch 
 [downstream: upsert to CRM / database]
 ```
 
-![Iterator pattern for multi-entity enrichment](https://entityenricher.ai/docs/make-connector-batch-entichment.gif)
+![Iterator pattern for multi-entity enrichment](https://entityenricher.ai/docs/make/batch-enrichment.gif)
 
 ---
 
@@ -170,7 +170,7 @@ Make scenarios bill per operation. Instead of porting the n8n connector's Batch 
 
 Every status the backend can return is mapped to a typed Make error so scenario error handlers can branch on the failure mode rather than parsing strings.
 
-![Error handler branching on OutOfMoneyError](https://entityenricher.ai/docs/make-connector-error-handling.png)
+![Error handler branching on OutOfMoneyError](https://entityenricher.ai/docs/make/error-handling.png)
 
 | HTTP | Make error type | When it fires |
 |---|---|---|

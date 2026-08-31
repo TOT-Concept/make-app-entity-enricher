@@ -6,7 +6,7 @@ A [Make.com](https://www.make.com) Custom App for [**Entity Enricher**](https://
 
 > Drop a single Make module into any scenario, map an entity from a previous step, and receive a structured, schema-validated, multi-model-fused JSON object — with multilingual output produced in a single LLM pass. No SSE handling, no retry plumbing, no prompt engineering.
 
-![Demo: enriching an entity inside a Make scenario](https://entityenricher.ai/docs/demo-single-enrichment-make-connector.gif)
+![Demo: enriching an entity inside a Make scenario](https://entityenricher.ai/docs/make/demo-single-enrichment.gif)
 
 The app covers the whole loop, not just the enrichment call:
 
@@ -105,7 +105,7 @@ Make scenarios bill **per operation**. To process N entities, use Make's built-i
 
 The **Base URL** defaults to `https://entityenricher.ai` and only needs to change for self-hosted deployments. Self-hosted OAuth additionally needs a seeded confidential client (`AUTH_OAUTH_SEED_CLIENTS`, redirect URI `https://www.integromat.com/oauth/cb/app`) whose ID/secret go in the connection's advanced fields.
 
-![API Key connection setup form](https://entityenricher.ai/docs/make-connector-connection-setup.png)
+![API Key connection setup form](https://entityenricher.ai/docs/make/connection-setup.png)
 
 ### Marketplace install
 
@@ -129,7 +129,7 @@ Drop one **Enrich Entity** module into a scenario, configure schema + models + l
 
 Models is optional — leave it empty for **Auto**: Entity Enricher uses your organization's best-scoring model (a pinned organization default wins when set; single model, no fusion). When 2+ models are selected, the result is **automatically fused** server-side. The Make output bundle includes `is_fused: true`, the list of `source_models`, and a `fusion: {agreed_fields, conflicted_fields, total_fields}` summary.
 
-![Configuring the Enrich Entity module](https://entityenricher.ai/docs/make-connector-add.gif)
+![Configuring the Enrich Entity module](https://entityenricher.ai/docs/make/add.gif)
 
 **Import it instead:** [`examples/01-enrich-single-entity.json`](examples/01-enrich-single-entity.json).
 
@@ -161,7 +161,7 @@ Pick more than one language and Entity Enricher populates every multilingual pro
 
 Downstream Make modules can map any language directly: `{{enrichEntity.result.names.primary.fr}}`. 40 supported languages cover the major European, Asian, Middle Eastern, and African markets.
 
-![Languages multi-select dropdown showing 40 supported languages](https://entityenricher.ai/docs/make-connector-languages.png)
+![Languages multi-select dropdown showing 40 supported languages](https://entityenricher.ai/docs/make/languages.png)
 
 ---
 
@@ -254,7 +254,7 @@ Blueprint: [`06-database-sync-drain.json`](examples/06-database-sync-drain.json)
 
 Every selectable field is populated by one of the app's **10 RPCs**, which hit the Entity Enricher API at configuration time. Pinned schemas surface first (marked with 📌), model labels include your organization's benchmark score (★ overall plus a Quality/Speed/Cost breakdown, when scoring benchmarks are configured) and per-million-token pricing, and plan-limited orgs see a notice when their quota is reached. The capability dropdowns (web search, response schema, strict structured output) only offer "On" when a selected model actually declares the capability.
 
-![Schemas dropdown open with pinned schemas at the top](https://entityenricher.ai/docs/make-connector-schemas.png)
+![Schemas dropdown open with pinned schemas at the top](https://entityenricher.ai/docs/make/schemas.png)
 
 ---
 
@@ -274,7 +274,7 @@ Every selectable field is populated by one of the app's **10 RPCs**, which hit t
 
 Each iteration is independent — failures of one entity don't abort the others, and Make's per-operation billing reflects exactly how much was processed. The Iterator's *Array* field needs a real array: keep a literal array, or build one with **JSON ▸ Parse JSON** (`parseJSON()` is not callable in a mapping).
 
-![Iterator pattern for multi-entity enrichment](https://entityenricher.ai/docs/make-connector-batch-entichment.gif)
+![Iterator pattern for multi-entity enrichment](https://entityenricher.ai/docs/make/batch-enrichment.gif)
 
 Blueprint: [`02-iterator-batch.json`](examples/02-iterator-batch.json).
 
@@ -284,7 +284,7 @@ Blueprint: [`02-iterator-batch.json`](examples/02-iterator-batch.json).
 
 Profile-limited orgs see structured 402 errors when they exceed quota — Make surfaces these as typed `OutOfMoneyError` with the limit `code`, `used`, and `limit` fields. Branch on this in your scenario to fall back to a cheaper model, alert a human, or wait for the quota window to reset.
 
-![Error handler branching on OutOfMoneyError](https://entityenricher.ai/docs/make-connector-error-handling.png)
+![Error handler branching on OutOfMoneyError](https://entityenricher.ai/docs/make/error-handling.png)
 
 | HTTP | Make error type | When it fires |
 |---|---|---|
