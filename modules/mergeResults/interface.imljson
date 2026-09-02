@@ -53,14 +53,17 @@
       {
         "name": "key_collisions",
         "type": "array",
-        "label": "List items that claimed a database key an earlier sibling already had (only the first was written)",
+        "label": "List items dropped because a later sibling of the same list claimed their database key (last one wins); kind says whether values were lost",
         "spec": {
           "type": "collection",
           "spec": [
             { "name": "entity_type", "type": "text", "label": "Entity type" },
             { "name": "path", "type": "text", "label": "Path of the dropped item" },
+            { "name": "kept_path", "type": "text", "label": "Path of the sibling written in its place (the last claimant)" },
+            { "name": "kind", "type": "text", "label": "duplicate (same values, nothing lost) or conflicting (some non-key value differs and is lost — the key may need a discriminating property)" },
             { "name": "kept", "type": "any", "label": "Identifying values of the item kept" },
-            { "name": "dropped", "type": "any", "label": "Identifying values of the item dropped" }
+            { "name": "dropped", "type": "any", "label": "Identifying values of the item dropped" },
+            { "name": "differing_fields", "type": "array", "label": "Properties both items answered differently (empty on a duplicate)", "spec": { "type": "text" } }
           ]
         }
       },
