@@ -27,5 +27,7 @@
   { "name": "pattern_index_localized_keys", "type": "boolean", "label": "Pattern-match index on localized identity/label columns" },
   { "name": "purge_on_ack", "type": "boolean", "label": "Purge deltas on ack" },
   { "name": "purge_entity_state", "type": "boolean", "label": "Purge entity state" },
+  { "name": "purge_on_ack_delay_days", "type": "number", "label": "Delta purge delay (days)" },
+  { "name": "purge_entity_state_delay_days", "type": "number", "label": "Entity state purge delay (days)" },
   { "name": "created_at", "type": "date", "label": "Created at" }
 ]
