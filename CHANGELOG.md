@@ -5,11 +5,17 @@ All notable changes to the Entity Enricher Make.com app are documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [3.1.0] — 2026-09-07
+
+### Changed — new logo and theme color
+
+`icon.png` is the new Entity Enricher logo rendered as Make's monochrome mask (black geometry on transparency, 1024×1024), and `app.json`'s `theme` is the matching brand orange `#FF851B`. `pnpm run deploy` now uploads the logo and theme to the app before the sections (`--branding-only` stops there).
 
 ### Changed — key collisions: the last item wins, and each entry says whether anything was lost
 
 When two items of one list claim the same database key, the **last** one is now written and the earlier ones dropped — the same last-write-wins rule the entity layer applies between enrichments (it used to keep the first). Every `key_collisions` entry in the *Database sync outcome* gains `kept_path` (the sibling written instead), a `kind` — `duplicate` when both items agreed on every value they answered (nothing lost), `conflicting` when some non-key value differs — and `differing_fields` naming what a conflicting drop lost. A `conflicting` entry is either the model repeating one thing with a noisy value, or two real things behind one key value (a regional variant, an annual edition): the fix for the latter is marking the discriminating property `identifying` before publishing. The list is also stored on the record, so a `partial` write still says what it lost after the response is gone.
+
+## [3.0.0] — 2026-08-29
 
 ### Changed — Generate Sample takes one **Request** instead of Entity type + Fields + Extra instructions
 
@@ -53,13 +59,15 @@ The README and the in-app documentation (`help.md`) were refreshed to the app as
 
 **List Records** no longer maps `attempts` (total LLM call attempts); it maps **`retries`** instead — the attempts beyond the first per prompt (`0` when every call succeeded first try), now computed server-side. A scenario that mapped `attempts` should map `retries` (or `prompt_count + retries` to reconstruct the old total). **Get Record** gains the same record-level `retries` field plus a per-prompt `retries` next to the unchanged per-prompt `attempts`.
 
-### Removed — Generate Schema "Strategy" field
-
-The single-call (monolithic) schema-generation pipeline was retired server-side; generation always uses the multi-step (staged) pipeline. The **Strategy** select is removed from **Generate Schema** and the `generation_strategy` request field no longer exists. Existing scenarios that had it set keep working — the stored value is simply ignored.
-
 ### Added — database sync outcome tells a partial write from a whole one
 
 *Database sync outcome* now maps a **`status`** field: `saved` (everything the run produced was written), `partial`, or `rejected`. **`partial`** means the entity landed but some of its rows did not — items dropped by a `skip_row` database (`skipped_items`) or dropped as duplicate identities (`key_collisions`) — and *nothing re-sends them*: the rows stay missing until the schema is fixed and the entity re-enriched. A router filtering on `saved = true` treated that case as a clean success; filter on `status` instead. `reason` and `missing_fields` are now filled on a partial write too (the unfilled non-nullable path is the schema gap that caused each drop), and their labels changed accordingly.
+
+## [2.1.0] — 2026-07-29
+
+### Removed — Generate Schema "Strategy" field
+
+The single-call (monolithic) schema-generation pipeline was retired server-side; generation always uses the multi-step (staged) pipeline. The **Strategy** select is removed from **Generate Schema** and the `generation_strategy` request field no longer exists. Existing scenarios that had it set keep working — the stored value is simply ignored.
 
 ### Added — database sync outcome exposes dropped rows
 
@@ -68,6 +76,8 @@ The single-call (monolithic) schema-generation pipeline was retired server-side;
 - `key_collisions` — list items that claimed a database key an earlier sibling already had. Only the first is written (one key = one row downstream), and each entry names the `entity_type`, the `path` of the dropped item, and the `kept` / `dropped` identifying values so a fabricated or non-discriminating id is visible instead of silently collapsing two rows into one.
 - `shared_entity_conflicts` — shared (non-owned) rows whose stored values this run overwrote while at least one *other* parent still links to them. Each entry names the `entity_type`, `path`, `keys` and `other_parents` count plus every overwritten `property` with its `previous` / `incoming` value. Usually it means the nested object holds per-parent data (a rating measured for *this* entity) and the relationship should be marked owned.
 - `skipped_items` — array items dropped by a `skip_row` database; the field was already returned by the API but was missing from the output bundle.
+
+## [2.0.0] — 2026-07-27
 
 ### ⚠ BREAKING — per-prompt fields and schema-generation property count renamed
 

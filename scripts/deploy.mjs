@@ -15,7 +15,7 @@
  * move to a committed config so the GitHub Actions workflow uses a shared
  * dev app.
  *
- * Usage: pnpm run deploy
+ * Usage: pnpm run deploy [--branding-only]
  */
 
 import { spawnSync } from "node:child_process";
@@ -27,6 +27,7 @@ import {
 } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { homedir } from "node:os";
 
 // ---------------------------------------------------------------------------
 // Config
@@ -67,12 +68,12 @@ if (!APP_NAME) {
 // ---------------------------------------------------------------------------
 
 function mk(args, { capture = false, allowFail = false } = {}) {
-  console.log(`▸ make-cli ${args.join(" ")}`);
+  console.log(`▸ make-cli ${args.map((arg) => /^(--body|--common|--docs)=/.test(arg) ? `${arg.split("=")[0]}=[file contents]` : arg).join(" ")}`);
   const result = spawnSync("pnpm", ["exec", "make-cli", ...args], {
     cwd: ROOT,
     encoding: "utf-8",
   });
-  process.stdout.write(result.stdout || "");
+  // Responses may contain app common data; return only to callers that need it.
   process.stderr.write(result.stderr || "");
   if (result.status !== 0) {
     if (allowFail) return null;
@@ -98,6 +99,55 @@ function listSubdirs(parent) {
 }
 
 console.log(`Deploying to app "${APP_NAME}" version ${APP_VERSION}\n`);
+
+// The CLI exposes colors, but not the binary logo endpoint. Use the same credentials.
+async function deployBranding() {
+  const meta = readMetadata(join(ROOT, "app.json"));
+  const icon = readFileSync(join(ROOT, meta.icon));
+  if (icon.length > 500_000 || icon.subarray(0, 8).toString("hex") !== "89504e470d0a1a0a") {
+    throw new Error("Make logo must be a PNG under 500 kB");
+  }
+  const width = icon.readUInt32BE(16);
+  const height = icon.readUInt32BE(20);
+  if (width !== height || width < 512 || width > 2048) {
+    throw new Error("Make logo must be square, between 512 and 2048 pixels");
+  }
+  const configRoot = process.platform === "win32"
+    ? process.env.APPDATA || homedir()
+    : process.env.XDG_CONFIG_HOME || join(homedir(), ".config");
+  const configPath = join(configRoot, "make-cli", "config.json");
+  const saved = existsSync(configPath) ? readMetadata(configPath) : {};
+  const apiKey = process.env.MAKE_API_KEY || saved.apiKey;
+  const zone = process.env.MAKE_ZONE || saved.zone;
+  if (!apiKey || !zone) throw new Error("Configure make-cli login or MAKE_API_KEY / MAKE_ZONE");
+  if (!/^(eu[12]|us[12])\.make\.(com|celonis\.com)$/.test(zone)) {
+    throw new Error("Expected a Make API zone hostname");
+  }
+  console.log("─── App logo and theme ───");
+  mk(["sdk-apps", "update", `--name=${APP_NAME}`, `--version=${APP_VERSION}`, `--theme=${meta.theme}`]);
+  const url = `https://${zone}/api/v2/sdk/apps/${encodeURIComponent(APP_NAME)}/${encodeURIComponent(APP_VERSION)}/icon`;
+  const response = await fetch(url, {
+    method: "PUT",
+    headers: { Authorization: `Token ${apiKey}`, "Content-Type": "image/png" },
+    body: icon,
+    signal: AbortSignal.timeout(30_000),
+  });
+  if (!response.ok) throw new Error(`Make logo upload failed: HTTP ${response.status}`);
+  const result = await response.json();
+  console.log(`✓ Logo uploaded (${width}×${height}, ${icon.length} bytes); theme ${meta.theme}; changed=${result.changed}`);
+}
+
+try {
+  await deployBranding();
+} catch (error) {
+  console.error(error instanceof Error ? error.message : "Logo deployment failed");
+  process.exit(1);
+}
+if (process.argv.includes("--branding-only")) {
+  console.log("✓ Branding deployment complete");
+  process.exit(0);
+}
+
 
 // ---------------------------------------------------------------------------
 // 1. App-level sections
