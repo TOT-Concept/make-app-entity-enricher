@@ -176,7 +176,7 @@ Every status the backend can return is mapped to a typed Make error so scenario 
 |---|---|---|
 | `400` | `DataError` | Schema not found, missing search keys, invalid models or languages. |
 | `401` | `InvalidCredentials` | Bad or missing API key. |
-| `402` | `OutOfMoneyError` | Plan limit exceeded OR insufficient credits. Message = `body.detail.detail` (human-readable, includes a top-up URL for `insufficient_credits`) + `body.detail.code` (machine-readable). Branch on the code: `insufficient_credits`, `model_limit_exceeded`, `language_limit_exceeded`, `concurrent_job_limit_reached`, `daily`/`weekly`/`monthly_prompt_limit_exceeded`. |
+| `402` | `OutOfMoneyError` | Plan limit exceeded OR insufficient credits. Message = `body.detail.detail` (human-readable, includes a top-up URL for `insufficient_credits`) + `body.detail.code` (machine-readable). Branch on the code: `insufficient_credits`, `model_limit_exceeded`, `language_limit_exceeded`, `concurrent_job_limit_reached`, `prompt_limit_reached`. |
 | `403` | `AccessDeniedError` | Role or scope insufficient. |
 | `404` | `InvalidConfigurationError` | Schema or record not found. |
 | `422` | `DataError` | Classification warning. `body.detail.classification` carries status, reasoning, confidence, entity_description. |
