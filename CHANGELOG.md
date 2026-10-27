@@ -5,6 +5,12 @@ All notable changes to the Entity Enricher Make.com app are documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.0] — 2026-10-27
+
+### Added — the sample run on the schema's Monitor timeline
+
+Generate Sample returns `record_id`, the sample run's record. Generate Schema takes it as the optional *Sample record ID* (`sample_record_id`): the run is then linked to the saved schema, so the schema's Monitor timeline opens with the sample generation that seeded it.
+
 ## [3.1.0] — 2026-09-07
 
 ### Changed — new logo and theme color

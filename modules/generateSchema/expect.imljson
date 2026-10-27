@@ -7,6 +7,13 @@
     "required": true
   },
   {
+    "name": "sampleRecordId",
+    "type": "text",
+    "label": "Sample record ID (optional)",
+    "help": "The Record ID a Generate Sample module returned for these samples. The sample run is then linked to the saved schema, so the schema's Monitor timeline opens with it.",
+    "advanced": true
+  },
+  {
     "name": "model",
     "type": "text",
     "label": "Model",

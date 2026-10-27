@@ -4,6 +4,7 @@
   "body": {
     "entity_samples": "{{parseJSON(parameters.entitySamples)}}",
     "model": "{{ifempty(parameters.model, 'auto')}}",
+    "sample_record_id": "{{ifempty(parameters.sampleRecordId, null)}}",
     "generate_semantic_ids": "{{ifempty(parameters.generateSemanticIds, false)}}",
     "sample_commonality_threshold": "{{ifempty(parameters.commonalityThreshold, 0.5)}}",
     "language": "{{parameters.language}}",

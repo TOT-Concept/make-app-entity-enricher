@@ -5,6 +5,11 @@
     "label": "Success"
   },
   {
+    "name": "record_id",
+    "type": "text",
+    "label": "Record ID (name it to Generate Schema as the sample record)"
+  },
+  {
     "name": "samples",
     "type": "array",
     "label": "Generated samples",
