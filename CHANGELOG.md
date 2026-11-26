@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed — Get Record returns each call's account, not its texts
+
+The `prompts` of *Get Record* no longer carry `user_prompt`, `system_prompt`, `raw_response` and `structured_output`: a record's texts are read one call at a time (`GET /api/records/{record_id}/prompts/{prompt_id}`), which keeps a sixteen-step schema generation's record from weighing hundreds of kilobytes. Each call keeps its expertise, metrics, outcome and error message.
+
+### Fixed — List Schemas counts properties
+
+*List Schemas* returned `property_count` 0 for every schema; it now counts the root entity's top-level properties.
+
+### Changed — Get Schema Details omits an in-sync published contract
+
+`published_content` is no longer returned when `publish_state` is `in_sync`: the published contract is then `schema_content` itself.
+
 ### Added — SQL Server replicas
 
 A database sync can be registered on SQL Server (2022 or later) beside PostgreSQL; `dialect` on *List Database Syncs* says which, and the deltas come in that SQL. The README explains how to apply a SQL Server window (one batch per delta, in one transaction) and what to change in a scenario when the target database of a sync changes.
