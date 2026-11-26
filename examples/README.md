@@ -10,7 +10,7 @@ can run as-is once you point it at your own schema and connection.
 | 03 | [03-document-to-enrichment.json](03-document-to-enrichment.json) | **PDF in** → Upload Attachment → enrichment sourced from the document |
 | 04 | [04-image-to-sample-to-schema.json](04-image-to-sample-to-schema.json) | **Photo in** → sample → saved schema, without writing any JSON by hand |
 | 05 | [05-samples-to-schema.json](05-samples-to-schema.json) | 3 samples of one type → a saved, relational-ready schema |
-| 06 | [06-database-sync-drain.json](06-database-sync-drain.json) | The delta feed → your own PostgreSQL, leased and acknowledged |
+| 06 | [06-database-sync-drain.json](06-database-sync-drain.json) | The delta feed → your own PostgreSQL or SQL Server, leased and acknowledged |
 
 Blueprints 05 → 06 are the Make version of the platform's end-to-end sync test
 (`scenario-tests/scenarios/001`): author a schema from generated samples, register a database on
@@ -169,7 +169,9 @@ Fetch Database Deltas (claim)  →  Text aggregator  →  [your DB module]  → 
 ```
 
 Register the database on the schema first (**Database Sync** page in the app, or `create_database_sync`
-over MCP), then publish the schema — a linked-but-unpublished schema queues nothing.
+over MCP), then publish the schema — a linked-but-unpublished schema queues nothing. Create an empty
+database, download the sync's snapshot and apply it there before the first run: it creates the tables,
+which the feed does not ([the commands](../README.md#keep-your-own-database-in-sync)).
 
 How the feed works: **Fetch** returns the next FIFO window, one bundle per delta. With **Claim**
 enabled the window is *leased* and stays unacknowledged until you acknowledge it; with claim off the
@@ -179,19 +181,25 @@ sync's options) purges delivered rows.
 Two rules the blueprint encodes, both easy to get wrong:
 
 1. **Apply a whole window in one transaction.** All deltas of one enrichment share a batch and the
-   projected tables carry `DEFERRABLE INITIALLY DEFERRED` foreign keys — splitting a batch across
-   transactions fails on the constraint. The window never splits a batch, so "one fetch = one
-   transaction" is the correct unit. That is what the **Text aggregator** is for: it joins the
-   window's `sql` into one script, wrapped in `BEGIN; … COMMIT;`.
+   window never splits a batch, so "one fetch = one transaction" is the correct unit. (On PostgreSQL
+   the projected tables carry `DEFERRABLE INITIALLY DEFERRED` foreign keys: a batch split across
+   transactions fails on the constraint.) That is what the **Text aggregator** is for: it joins the
+   window's `sql` into one script, wrapped in `BEGIN; … COMMIT;`. The blueprint is the PostgreSQL
+   form; on **SQL Server** each delta is a batch of its own, so the aggregator's text and the wrapping
+   differ: [the SQL Server form](../README.md#sql-server).
 2. **Acknowledge only after the commit.** Module 4 maps `Acknowledge up to ID` from the aggregated
    bundle's `key` — check the aggregator's **Group by** is set to module 1's `Next cursor` after
    import (that is what puts the cursor on the aggregated bundle). Ack before the apply and a failed
    transaction loses deltas permanently.
 
 Replace module 3 (a Set Variable placeholder holding the script) with your database module —
-**PostgreSQL ▸ Execute a query**, MySQL, or an HTTP call to your own applier. Deltas of
-`kind: "schema"` are DDL migrations and arrive **before** the data rows that need them; apply them in
+**PostgreSQL ▸ Execute a query**, the Microsoft SQL Server equivalent, or an HTTP call to your own
+applier. Deltas of `kind: "schema"` are DDL migrations and arrive **before** the data rows that need them; apply them in
 order, never filter them out.
+
+> **After "Change target database"**, the scenario still writes to the previous database until you
+> point that module at the new one and apply the new snapshot there:
+> [the steps](../README.md#when-the-target-database-of-a-sync-changes).
 
 > **Prefer the CLI when you can.** [`ee-database`](https://github.com/TOT-Concept/ee-database) pairs
 > to a database sync, bootstraps from the `.sql` snapshot, applies batches over a WebSocket and acks

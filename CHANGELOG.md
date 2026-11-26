@@ -5,6 +5,14 @@ All notable changes to the Entity Enricher Make.com app are documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added — SQL Server replicas
+
+A database sync can be registered on SQL Server (2022 or later) beside PostgreSQL; `dialect` on *List Database Syncs* says which, and the deltas come in that SQL. The README explains how to apply a SQL Server window (one batch per delta, in one transaction) and what to change in a scenario when the target database of a sync changes.
+
+*List Database Syncs* maps `snapshot_required` (the feed is paused until the snapshot is downloaded) and `target_generation` (how many times the target database was changed).
+
 ## [3.2.0] — 2026-10-27
 
 ### Added — the sample run on the schema's Monitor timeline

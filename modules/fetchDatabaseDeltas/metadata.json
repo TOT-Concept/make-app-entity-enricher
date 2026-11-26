@@ -1,7 +1,7 @@
 {
   "name": "fetchDatabaseDeltas",
   "label": "Fetch Database Deltas",
-  "description": "Returns the next FIFO window of SQL deltas for a database sync. With Claim enabled the rows are leased and must be acknowledged; otherwise the read is replayable.",
+  "description": "Returns the next FIFO window of SQL deltas for a database sync. With Claim enabled the rows are leased and must be acknowledged; otherwise the read is replayable. The SQL is that of the registered database type; on SQL Server each delta is a batch of its own.",
   "connection": "apiKey",
   "altConnection": "oauth2",
   "typeId": 9

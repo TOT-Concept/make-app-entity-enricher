@@ -4,7 +4,7 @@
   { "name": "op", "type": "text", "label": "Operation" },
   { "name": "entity_type", "type": "text", "label": "Entity type" },
   { "name": "revision", "type": "number", "label": "Revision" },
-  { "name": "sql", "type": "text", "label": "SQL" },
+  { "name": "sql", "type": "text", "label": "SQL (one batch, in the sync's database type)" },
   { "name": "payload", "type": "collection", "label": "Payload (JSON)" },
   { "name": "created_at", "type": "date", "label": "Created at" },
   { "name": "database_id", "type": "uuid", "label": "Database ID" },
